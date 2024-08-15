@@ -8,9 +8,9 @@ function sanitizeLocationInput(req: Request, res: Response, next: NextFunction) 
 
     req.body.sanitizeLocationInput = {
         name: req.body.name,
-        email: req.body.email,
-        pass: req.body.pass,
-        birthdate: req.body.birthdate,
+        address: req.body.address,
+        capacity: req.body.capacity,
+        description: req.body.description,
     }
 
     Object.keys(req.body.sanitizeLocationInput).forEach(key => {
@@ -39,9 +39,9 @@ function add(req: Request, res: Response) {
 
     const locationInput = new Location (
         input.name, 
-        input.email, 
-        input.pass, 
-        input.birthdate)
+        input.address, 
+        input.capacity, 
+        input.description)
 
     const location = repository.add(locationInput)
     return res.status(201).send({ message: "Location created", data: location })

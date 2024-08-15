@@ -11,7 +11,7 @@ const locations = [
     ),
 ]
 
-export class UserRepository implements Repository<Location> {
+export class LocationRepository implements Repository<Location> {
 
     public findAll(): Location[] | undefined {
         return locations
@@ -39,9 +39,9 @@ export class UserRepository implements Repository<Location> {
         const locationIdx = locations.findIndex((location) => location.id === item.id)
 
         if(locationIdx !== -1){
-            const deletedUsers = locations[locationIdx]
+            const deletedLocations = locations[locationIdx]
             locations.splice(locationIdx, 1)
-            return deletedUsers
+            return deletedLocations
         }
 
     }

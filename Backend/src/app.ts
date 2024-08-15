@@ -1,6 +1,7 @@
 import express from "express";
 import { userRouter } from "./user/user.routes.js";
 import { eventoRouter } from "./event/event.routes.js";
+import { categoryRouter } from "./category/category.routes.js";
 import cors from 'cors'
 
 const app = express()
@@ -9,6 +10,7 @@ app.use(cors());
 
 app.use("/api/users", userRouter)
 app.use("/api/evento", eventoRouter)
+app.use("/api/categories", categoryRouter)
 
 app.use((req, res) => {
     res.status(404).send({ message: "Resource not found" })

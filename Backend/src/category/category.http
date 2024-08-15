@@ -12,8 +12,8 @@ POST http://localhost:3000/api/categories
 Content-Type: application/json
 
 {
-    "name": "Salon de eventos Avellaneda",
-    "description": "El salón de eventos ideal para cualquier ocasión. Versátil, elegante y preparado para hacer de tu evento un momento único. ¡Tu celebración, nuestra pasión!"
+    "name": "Salon de eventos",
+    "description": "Versátil, elegante y amplio"
 }
 
 ### Modificar un categoria (PUT - recurso completo e idempotente)
@@ -23,7 +23,7 @@ Content-Type: application/json
 
 {
     "name": "Club Social",
-    "description": "¡Festejá tu cumpleaños a lo grande en nuestro club! Un espacio único con música, diversión y todo lo que necesitás para una noche inolvidable. ¡Vení a celebrar como se debe!"
+    "description": "Club de barrio, con campo de futbol y pileta"
 }
 
 ### Modificar un categoria (PATCH - recurso parcial)
@@ -32,7 +32,7 @@ PATCH  http://localhost:3000/api/categories/a02b91bc-3769-4221-beb1-d7a3aeba7daz
 Content-Type: application/json
 
 {
-    "description": "¡Festejá tu cumple en nuestro club! Además de música y diversión, podés armar un partidito de fútbol y disfrutar de una pileta olimpica con tus amigos. ¡Todo lo que necesitás para una celebración espectacular!"
+    "description": "Club de barrio, con campo de voley y parrilleros"
 }
 
 ### Borrar un categoria

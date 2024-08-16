@@ -35,7 +35,7 @@ Content-Type: application/json
 
 
 ### modificar un evento (PATCH - recurso parcial)
-PATCH http://localhost:3000/api/evento/123123
+PATCH http://localhost:3000/api/evento/a02f91bc-3769-4221-beb1-d7a3aeba7ads
 Content-Type: application/json
 
 {
@@ -45,4 +45,4 @@ Content-Type: application/json
 
 
 ### Borrar un evento
-DELETE http://localhost:3000/api/evento/345345
+DELETE http://localhost:3000/api/evento/a02f91bc-3769-4221-beb1-d7a3aeba7ads

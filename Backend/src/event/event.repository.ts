@@ -13,33 +13,35 @@ const eventos = [
 ]
 
 export class EventoRepository implements Repository<evento>{
-    public findAll(): evento[] | undefined{
-        return eventos
+    public async findAll(): Promise<evento[] | undefined> {
+        return await eventos
     }
 
-    public findOne (item: { id: string; }): evento | undefined {
-        return eventos.find((evento)=> evento.idEvento === item.id)
+    public async findOne (item: { id: string; }): Promise<evento | undefined> {
+        return await eventos.find((evento)=> evento.idEvento === item.id)
     }
 
-    public add(item: evento): evento | undefined {
-        eventos.push(item)
+    public async add(item: evento): Promise<evento | undefined> {
+        await eventos.push(item)
         return item
     }
 
-    public update(item: evento): evento | undefined {
-        const eventoIDx = eventos.findIndex((evento) => evento.idEvento === item.idEvento)
+    public async update(item: evento): Promise<evento | undefined> {
+        const eventoIDx = await eventos.findIndex((evento) => evento.idEvento === item.idEvento)
         if(eventoIDx !== -1){
             eventos[eventoIDx] = { ...eventos[eventoIDx], ...item }
         }
         return eventos[eventoIDx] 
     }
 
-    public delete (item: { id: string; }): evento | undefined {
-              const eventoIDx = eventos.findIndex((evento) => evento.idEvento === item.id)
-    if(eventoIDx !== -1) {
-        const deletedEventos = eventos[eventoIDx]
-        eventos.splice(eventoIDx, 1)
-        return deletedEventos
+    public async delete (item: { id: string; }): Promise<evento | undefined> {
+        const eventoIDx = await eventos.findIndex((evento) => evento.idEvento === item.id)
+
+        if(eventoIDx !== -1) {
+            const deletedEventos = eventos[eventoIDx]
+            eventos.splice(eventoIDx, 1)
+            return deletedEventos
         }
+
     }
 }

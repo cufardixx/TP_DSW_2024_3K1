@@ -23,12 +23,12 @@ function sanitizedEventoInput(req: Request, res: Response, next: NextFunction){
     next();
 }
 
-function findAll(req: Request,res: Response) {
-    return res.json({data:repository.findAll()})
+async function findAll(req: Request,res: Response) {
+    return res.json({data: await repository.findAll()})
 }
 
-function findOne(req: Request,res: Response) {
-    const nuevoEvento = repository.findOne({id:req.params.id}) 
+async function findOne(req: Request,res: Response) {
+    const nuevoEvento = await repository.findOne({id:req.params.id}) 
     if (!nuevoEvento) {
         return res.status(404).send({message: 'evento no encontrado'})
     }
@@ -36,7 +36,7 @@ function findOne(req: Request,res: Response) {
 }
 
 
-function add(req: Request,res: Response) {
+async function add(req: Request,res: Response) {
     const input = req.body.sanitizedInput
 
     const nuevoEventoInput = new evento(
@@ -47,14 +47,14 @@ function add(req: Request,res: Response) {
         input.fecha, 
         input.hora
     )
-    const nuevoEvento = repository.add(nuevoEventoInput)
+    const nuevoEvento = await repository.add(nuevoEventoInput)
     return res.status(201).send({message: 'Evento creado', data: nuevoEvento})
 }
     
 
-function update(req: Request, res: Response){
+async function update(req: Request, res: Response){
     req.body.sanitizedInput.idEvento = req.params.id
-    const nuevoEvento = repository.update(req.body.sanitizedInput)
+    const nuevoEvento = await repository.update(req.body.sanitizedInput)
     
     if(!nuevoEvento){
         return res.status(404).send({message: 'evento no encontrado'})
@@ -63,9 +63,9 @@ function update(req: Request, res: Response){
 }
 
 
-function remove(req: Request,res: Response) {
+async function remove(req: Request,res: Response) {
     const id = req.params.id
-    const nuevoEvento = repository.delete({id})
+    const nuevoEvento = await repository.delete({id})
 
     if(!nuevoEvento) {
         res.status(404).send({message:'Evento no encontrado'})

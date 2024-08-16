@@ -21,20 +21,20 @@ function sanitizeLocationInput(req: Request, res: Response, next: NextFunction) 
     next()
 }
 
-function findAll(req: Request, res: Response) {
-    return res.json({data: repository.findAll() })
+async function findAll(req: Request, res: Response) {
+    return res.json({data: await repository.findAll() })
 }
 
-function findOne (req: Request, res: Response) {
+async function findOne (req: Request, res: Response) {
     const id = req.params.id
-    const location = repository.findOne({id})
+    const location = await repository.findOne({id})
     if(!location){
        return res.status(404).send({ message:"Location not found" })
     }
     res.json({data: location})
 }
 
-function add(req: Request, res: Response) {
+async function add(req: Request, res: Response) {
     const input = req.body.sanitizeLocationInput
 
     const locationInput = new Location (
@@ -43,13 +43,13 @@ function add(req: Request, res: Response) {
         input.capacity, 
         input.description)
 
-    const location = repository.add(locationInput)
+    const location = await repository.add(locationInput)
     return res.status(201).send({ message: "Location created", data: location })
 }
 
-function update(req: Request, res: Response) {
+async function update(req: Request, res: Response) {
     req.body.sanitizeLocationInput.id = req.params.id
-    const location = repository.update(req.body.sanitizeLocationInput)
+    const location = await repository.update(req.body.sanitizeLocationInput)
 
     if(!location){
         return res.status(404).send({ message: "Location not found" })
@@ -58,9 +58,9 @@ function update(req: Request, res: Response) {
     return res.status(200).send({ message: "Location updated succesfully" ,data: location })
 }
 
-function remove(req: Request, res: Response) {
+async function remove(req: Request, res: Response) {
     const id = req.params.id
-    const location = repository.delete({id})
+    const location = await repository.delete({id})
 
     if(!location){
         res.status(404).send({ message: "Location not found" })

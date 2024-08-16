@@ -13,21 +13,21 @@ const users = [
 
 export class UserRepository implements Repository<User> {
 
-    public findAll(): User[] | undefined {
-        return users
+    public async findAll(): Promise<User[] | undefined> {
+        return await users
     }
 
-    public findOne(item: { id: string; }): User | undefined {
-        return users.find((user) => user.id === item.id)
+    public async findOne(item: { id: string; }): Promise<User | undefined> {
+        return await users.find((user) => user.id === item.id)
     }
 
-    public add(item: User): User | undefined {
-        users.push(item)
+    public async add(item: User): Promise<User | undefined> {
+        await users.push(item)
         return item
     }
 
-    public update(item: User): User | undefined {
-        const userIdx = users.findIndex((user) => user.id === item.id)
+    public async update(item: User): Promise<User | undefined> {
+        const userIdx = await users.findIndex((user) => user.id === item.id)
     
         if(userIdx !== -1){
             users[userIdx] = {...users[userIdx], ...item}
@@ -35,8 +35,8 @@ export class UserRepository implements Repository<User> {
         return users[userIdx]
     }
 
-    public delete(item: { id: string; }): User | undefined {
-        const userIdx = users.findIndex((user) => user.id === item.id)
+    public async delete(item: { id: string; }): Promise<User | undefined> {
+        const userIdx = await users.findIndex((user) => user.id === item.id)
 
         if(userIdx !== -1){
             const deletedUsers = users[userIdx]

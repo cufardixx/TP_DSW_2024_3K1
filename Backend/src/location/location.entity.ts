@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import crypto from "node:crypto"
 
 export class Location {
@@ -6,6 +7,7 @@ export class Location {
         public address:string, 
         public capacity: string, 
         public description: string,
-        public id = crypto.randomUUID()
+        public id = crypto.randomUUID(),
+        public _id?: ObjectId
     ){}
 }

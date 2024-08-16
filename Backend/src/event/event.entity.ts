@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import crypto from "node:crypto"
 
 export class evento{
@@ -7,6 +8,7 @@ export class evento{
         public cuposGral:number,
         public descripcion:string,
         public fecha:string, 
-        public hora:number, 
+        public hora:number,
+        public _id?: ObjectId 
     ) {}
 }

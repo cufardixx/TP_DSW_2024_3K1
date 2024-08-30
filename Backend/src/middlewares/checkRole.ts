@@ -1,6 +1,6 @@
 import { verifyToken } from "../lib/generateToken";
 import { Request, Response, NextFunction } from "express";
-import { User } from "../User/user.entity";
+import { User } from "../user/user.entity";
 
 export interface IPayload {
     id: string;

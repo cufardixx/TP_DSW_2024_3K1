@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { getEvent, getEvents, createEvent } from "../Event/event.controller"
+import { getEvent, getEvents, createEvent } from "../event/event.controller"
 import { createEventSchema } from "../schemas/schema.event"
 import { schemaValidation } from "../middlewares/schemaValidacion"
 

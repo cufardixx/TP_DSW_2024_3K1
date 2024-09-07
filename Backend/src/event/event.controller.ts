@@ -5,14 +5,16 @@ import { Request, Response } from "express"
 
 export const createEvent = async (req: Request, res: Response) => {
     try {
-        const { name, cupo, fecha, description, hora } = req.body;
+        const { name, cupo, fecha, description, hora, price } = req.body;
 
         const event = new Event();
+        event.price = price;
         event.name = name;
         event.cupo = cupo;
         event.fecha = fecha;
         event.hora = hora;
         event.description = description;
+
 
         await event.save();
         return res.status(201).json({ message: 'Evento creado con éxito', event });
@@ -46,3 +48,19 @@ export const getEvent = async (req: Request, res: Response) => {
         }
     }
 };
+
+export const delateEvent = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+      const result = await Event.delete({ id: parseInt(id) });
+  
+      if (result.affected === 0)
+        return res.status(404).json({ message: "User not found" });
+  
+      return res.sendStatus(204);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      }
+    }
+  };

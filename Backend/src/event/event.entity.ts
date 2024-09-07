@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany, ManyToOne, ManyToMany } from "typeorm"
+import { Ticket } from "../ticket/ticket.entity";
+import { User } from "../user/user.entity";
 
 @Entity()
 export class Event extends BaseEntity {
@@ -19,6 +21,9 @@ export class Event extends BaseEntity {
     hora: string;
 
     @Column()
+    price: number;
+
+    @Column()
     description: string;
 
     @Column({
@@ -31,4 +36,11 @@ export class Event extends BaseEntity {
 
     @UpdateDateColumn()
     updateAd: Date;
+    
+    @ManyToOne(() => User, usuario => usuario.eventos)
+    usuario: User;
+  
+    @OneToMany(() => Ticket, ticket => ticket.evento)
+    tickets: Ticket[];
+
 }

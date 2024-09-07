@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity, Unique } from "typeorm"
-
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity, Unique, OneToMany } from "typeorm"
+import { Event } from '../event/event.entity';
+import { Ticket } from "../ticket/ticket.entity";
 @Entity()
 @Unique(['email'])
 export class User extends BaseEntity{
@@ -35,5 +36,10 @@ export class User extends BaseEntity{
     @UpdateDateColumn()
     updateAd: Date;
 
+    @OneToMany(() => Event, evento => evento.usuario)
+    eventos: Event[];
+  
+    @OneToMany(() => Ticket, ticket => ticket.usuario)
+    tickets: Ticket[];
 
 }

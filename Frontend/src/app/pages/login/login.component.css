@@ -1,0 +1,12 @@
+.left{
+    padding: 55px;
+}
+
+.right{
+    background: rgb(13,110,253);
+    background: linear-gradient(0deg, rgba(13,110,253,1) 0%, rgba(105,230,216,1) 100%, rgba(255,255,255,1) 100%);
+}
+
+.box{
+    box-shadow: 8px 9px 34px -4px rgba(66, 68, 90, 0.47);
+}

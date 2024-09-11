@@ -5,29 +5,29 @@
 <div class=" d-flex justify-content-center align-items-center vh-100">
     <div class="row border w-75 box" >
       <div class="">
-        <form>
+        <form [formGroup]="formRegistro">
           <h3>Registrate a Eventlife</h3>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp"  required>
             <div id="emailHelp" class="form-text">No compartas tus datos con nadie.</div>
           </div>
 
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nombre</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="text" class="form-control" formControlName="firstname" aria-describedby="emailHelp"  required>
           </div>
 
 
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Apellido</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="text" class="form-control" formControlName="lastname"  aria-describedby="emailHelp" required>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" class="form-control" formControlName="password"  required>
           </div>
-          <button type="submit" class="btn btn-primary ">Registrarse</button>
+          <button type="button" class="btn btn-primary" (click)="registrarse()">Registrarse</button>
         </form>
       </div>
     </div>

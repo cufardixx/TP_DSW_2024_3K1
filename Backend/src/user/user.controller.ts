@@ -21,16 +21,6 @@ export const signupUser = async (req: Request, res: Response) => {
 
     await user.save();
 
-    // Generar token con el id del usuario
-    const token: string = jwt.sign(
-      { id: user.id },
-      process.env.SECRET_KEY || 'frasemegasecreta',
-      { expiresIn: '1h' }
-    );
-
-    // Enviar el token en el header y el usuario en la respuesta
-    res.header('token', token).json(user);
-
   } catch (error: any) {
     return res.status(500).json({ message: error.message || 'Internal server error' });
   }

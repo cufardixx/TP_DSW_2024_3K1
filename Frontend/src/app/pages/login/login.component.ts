@@ -12,6 +12,8 @@ import { Login } from '../../interfaces/Login';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
+
 export class LoginComponent {
   private AccesService = inject(AccesService);
   private router = inject(Router);
@@ -32,9 +34,9 @@ export class LoginComponent {
   
     this.AccesService.login(objeto).subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response); // Verifica la respuesta aquí
-        localStorage.setItem("token", response.TOKEN);
-        this.router.navigate(['/']);
+        //console.log('Respuesta del servidor:', response);
+        localStorage.setItem("token", response.token);
+        this.router.navigate(['/profile']);
       },
       error: (error) => {
         console.error('Error al iniciar sesión:', error);

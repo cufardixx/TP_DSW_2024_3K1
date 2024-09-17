@@ -9,12 +9,12 @@
           <h3>Bienvenido a Eventlife</h3>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
-            <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="email">
+            <input type="email" class="form-control" aria-describedby="emailHelp" formControlName="email" required>
             <div id="emailHelp" class="form-text">No compartas tus datos con nadie.</div>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" formControlName="password">
+            <input type="password" class="form-control" formControlName="password" required>
           </div>
           <button type="button" class="btn btn-primary" (click)="iniciarSesion()">Entrar</button>
         </form>

@@ -1,3 +1,3 @@
 export interface ResponseAcceso {
-    TOKEN: string
+    token: string
 }

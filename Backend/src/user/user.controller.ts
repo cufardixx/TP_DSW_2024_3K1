@@ -106,7 +106,7 @@ export const signinUser = async (req: Request, res: Response) => {
     // Generar token con id
     const tokenSession = await tokenSing(user)
 
-    return res.status(200).json({ "TOKEN:": tokenSession })
+    return res.status(200).json({ "token": tokenSession })
 
   } catch (error: any) {
     console.error('Login error:', error);

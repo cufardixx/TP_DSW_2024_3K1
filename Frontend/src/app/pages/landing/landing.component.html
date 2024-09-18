@@ -1,43 +1,51 @@
+<main class="main-first">
+
+  <app-header></app-header>
   
-  <main class="main-first">
-    <app-header></app-header>
-    <section class="section-firts">
-      <div class="container-first">
+  <section class="min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="container text-center">
 
-        <div>
-          <h1 class="display-4 font-weight-bold">Bienvenido a EventLife</h1>
-          <p class="lead text-muted">
-            Crea eventos inolvidables o encuentra las mejores entradas para los eventos más emocionantes.
-          </p>
-        </div>
-
-        <div class="container-form">
-          <form class="form-main">
-            <input type="text" class="form-control mr-2" placeholder="Buscar eventos" />
-            <button type="submit" class="btn btn-primary">
-              <i class="bi bi-search"></i> Buscar
-            </button>
-          </form>
-        </div>
-
+      
+      <div class="mb-5">
+        <h1 class="display-4 font-weight-bold text-primary">EventLife</h1>
+        <p class="lead text-muted">
+          Crea eventos inolvidables o encuentra las mejores entradas para los eventos más emocionantes.
+        </p>
       </div>
-    </section>
 
+      
+      <div class="d-flex justify-content-center">
+        <form class="form-inline w-100 d-flex">
+          <input
+            type="text"
+            class="form-control form-control-lg mr-2"
+            placeholder="Buscar eventos"
+          />
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-search"></i> Buscar
+          </button>
+        </form>
+      </div>
 
-    <app-popular-events></app-popular-events>
+    </div>
+  </section>
 
-    <section class="py-5 second">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <app-crear-event></app-crear-event>
-          </div>
-          <div class="col-lg-6">
-            <app-buy-ticket></app-buy-ticket>
-          </div>
+  <!-- Sección de eventos populares -->
+  <app-popular-events></app-popular-events>
+
+  <!-- Sección secundaria: Crear evento / Comprar tickets -->
+  <section class="min-vh-100 d-flex align-items-center justify-content-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <app-crear-event></app-crear-event>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <app-buy-ticket></app-buy-ticket>
         </div>
       </div>
-    </section>
-    <app-footer></app-footer>
-  </main>
- 
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</main>

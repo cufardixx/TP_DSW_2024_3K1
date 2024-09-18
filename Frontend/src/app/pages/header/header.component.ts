@@ -14,4 +14,10 @@ export class HeaderComponent {
   redirectToLogin(): void {
     this.router.navigate(['/login']);
   }
+
+  redirectToRegister(): void {
+    this.router.navigate(['/register']);
+  }
+
+  
 }

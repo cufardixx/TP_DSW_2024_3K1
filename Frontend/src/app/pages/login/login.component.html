@@ -14,15 +14,18 @@
 
         <form [formGroup]="formLogin" class="w-100">
           <h3 class="mb-4 text-primary">Bienvenido a EventLife</h3>
+
           <div class="mb-3">
             <label for="email" class="form-label">Correo electrónico</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email" required>
             <div id="emailHelp" class="form-text">No compartas tus datos con nadie.</div>
           </div>
+
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <input type="password" class="form-control" id="password" formControlName="password" required>
           </div>
+          
           <button type="button" class="btn btn-primary w-100 mt-3" (click)="iniciarSesion()">Entrar</button>
         </form>
 

@@ -1,34 +1,55 @@
-<div class="containerr">
-    <a href=""><span class="title">EventLife</span></a>
-</div>
+<main>
 
-<div class=" d-flex justify-content-center align-items-center vh-100">
-    <div class="row border w-75 box" >
-      <div class="">
-        <form [formGroup]="formRegistro">
-          <h3>Registrate a Eventlife</h3>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
-            <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp"  required>
-            <div id="emailHelp" class="form-text">No compartas tus datos con nadie.</div>
-          </div>
-
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Nombre</label>
-            <input type="text" class="form-control" formControlName="firstname" aria-describedby="emailHelp"  required>
-          </div>
-
-
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Apellido</label>
-            <input type="text" class="form-control" formControlName="lastname"  aria-describedby="emailHelp" required>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" formControlName="password"  required>
-          </div>
-          <button type="button" class="btn btn-primary" (click)="registrarse()">Registrarse</button>
-        </form>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg border-bottom position-absolute top-0 w-100" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">EventLife</a>
     </div>
+  </nav>
+
+  <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    
+    <div class="row w-100 justify-content-center">
+
+      <div class="col-md-6 col-lg-4">
+
+        <form [formGroup]="formRegistro" class="p-4 border rounded shadow bg-white">
+
+          <h3 class="mb-4 text-center text-primary">Regístrate en Eventlife</h3>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp"
+              required>
+            <div id="emailHelp" class="form-text">Nunca compartas tus datos con nadie.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="firstname" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="firstname" formControlName="firstname" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="lastname" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="lastname" formControlName="lastname" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" formControlName="password" required>
+          </div>
+
+          <div class="d-grid">
+            <button type="button" class="btn btn-primary" (click)="registrarse()">Registrarse</button>
+          </div>
+          
+        </form>
+        
+      </div>
+
+    </div>
+
   </div>
+
+
+</main>

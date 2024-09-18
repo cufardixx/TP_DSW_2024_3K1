@@ -24,7 +24,10 @@ export class RegisterComponent {
     email: ['', Validators.required],
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', Validators.required],
+    phone:['', Validators.required],
+    location: ['', Validators.required],
+    birth: ['', Validators.required],
   });
 
   registrarse() {
@@ -34,8 +37,15 @@ export class RegisterComponent {
       email: this.formRegistro.value.email,
       firstname: this.formRegistro.value.firstname,
       lastname: this.formRegistro.value.lastname,
-      password: this.formRegistro.value.password
+      password: this.formRegistro.value.password,
+      phone: this.formRegistro.value.phone,
+      location: this.formRegistro.value.location,
+      birth: this.formRegistro.value.birth
     };
+
+    console.log(objeto);
+    
+    
 
     this.AccesService.registrarse(objeto).subscribe({
       next: (response) => {

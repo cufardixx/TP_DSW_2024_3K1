@@ -14,8 +14,8 @@ export class AccesService {
   private urlBase: string = "http://localhost:3000/api/user/"
   constructor() { }
 
-  registrarse(objeto: Usuario): Observable<ResponseAcceso> {
-    return this.http.post<ResponseAcceso>(`${this.urlBase}register`, objeto)
+  registrarse(objeto: Usuario){
+    return this.http.post(`${this.urlBase}register`, objeto)
   }
 
   login(objeto: Login): Observable<ResponseAcceso> {

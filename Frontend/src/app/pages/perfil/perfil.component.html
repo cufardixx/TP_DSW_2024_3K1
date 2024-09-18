@@ -1,1 +1,23 @@
-<p>perfil works!</p>
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-header bg-primary text-white">Perfil del Usuario</div>
+      <div class="card-body">
+        <div class="text-center mb-4">
+          <img src="https://via.placeholder.com/150" alt="Avatar" class="rounded-circle">
+          <h3>{{ userProfile.firstname }} {{ userProfile.lastname }}</h3>
+        </div>
+  
+        <ul class="list-unstyled">
+          <li><strong>Nombre:</strong> {{ userProfile.firstname }}</li>
+          <li><strong>Apellido:</strong> {{ userProfile.lastname }}</li>
+          <li><strong>Email:</strong> {{ userProfile.email }}</li>
+        </ul>
+  
+        <div class="text-center">
+          <button class="btn btn-primary" (click)="editProfile()">Editar Perfil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

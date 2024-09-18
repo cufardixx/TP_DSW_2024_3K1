@@ -128,7 +128,6 @@ export const profile = async (req: CustomRequest, res: Response) => {
 
 
     return res.json({
-      id: user.id,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,

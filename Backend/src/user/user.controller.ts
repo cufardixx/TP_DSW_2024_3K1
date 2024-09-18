@@ -8,12 +8,15 @@ import { CustomRequest } from "../middlewares/authToken";
 
 export const signupUser = async (req: Request, res: Response) => {
   try {
-    const { firstname, lastname, email, password } = req.body;
+    const { firstname, lastname, email, password,phone,location,birth } = req.body;
 
     // Encriptar password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User();
+    user.phone = phone
+    user.birth = birth
+    user.location = location
     user.firstname = firstname;
     user.lastname = lastname;
     user.email = email;
@@ -52,12 +55,15 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const { firstname, lastname, email, password, rol } = req.body
+    const { firstname, lastname, email, password, rol, phone, birth, location } = req.body
     const user = await User.findOneBy({ id: parseInt(req.params.id) })
 
     if (!user) return res.status(404).json({ message: "User does not exist" })
 
     user.firstname = firstname
+    user.phone = phone
+    user.birth = birth
+    user.location = location
     user.lastname = lastname
     user.email = email
     user.password = password

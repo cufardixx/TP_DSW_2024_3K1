@@ -57,9 +57,8 @@ export const updateUser = async (req: Request, res: Response) => {
   try {
     const { firstname, lastname, email, password, rol, phone, birth, location , imgPerfil } = req.body
     const user = await User.findOneBy({ id: parseInt(req.params.id) })
-
+   
     if (!user) return res.status(404).json({ message: "User does not exist" })
-
     user.firstname = firstname
     user.phone = phone
     user.birth = birth
@@ -135,6 +134,7 @@ export const profile = async (req: CustomRequest, res: Response) => {
 
 
     return res.json({
+      id: user.id,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,

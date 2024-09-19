@@ -23,6 +23,7 @@ export class PerfilComponent implements OnInit {
       if (token) {
         this.profileService.getProfile(token).subscribe({
           next: (data) => {
+            console.log(data);
             this.userProfile = data;
           },
           error: (err) => {
@@ -35,9 +36,10 @@ export class PerfilComponent implements OnInit {
       }
     }
   }
-
+  
+  
   editProfile() {
-    this.router.navigate(['/profile/edit']); // Asegúrate de configurar esta ruta en tu router
+    this.router.navigate([`/profile/${this.userProfile.id}`]); // Asegúrate de configurar esta ruta en tu router
   }
 
   logout() {

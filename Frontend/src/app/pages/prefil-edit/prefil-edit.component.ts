@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AccesService } from '../../services/acces.service';
@@ -8,7 +7,7 @@ import { UsuarioEdit } from '../../interfaces/UsuarioEdit';
 @Component({
   selector: 'app-prefil-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './prefil-edit.component.html',
   styleUrl: './prefil-edit.component.css'
 })
@@ -16,15 +15,14 @@ export class PrefilEditComponent implements OnInit {
   private AccesService = inject(AccesService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
-  
+
   public formEditarPerfil: FormGroup = this.formBuild.group({
-    email: ['', [Validators.required, Validators.email]],
-    firstname: ['', [Validators.required]],
-    lastname: ['', [Validators.required]],
-    password: ['', [Validators.minLength(6)]],
-    phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-    location: ['', [Validators.required]],
-    birth: ['', [Validators.required]],
+    imgPerfil: [''],
+    firstname: [''],
+    lastname: [''],
+    phone: ['',[Validators.pattern('[0-9]+')]],
+    location: [''],
+    birth: [''],
   });
 
   private userId: string | null = null;
@@ -40,32 +38,24 @@ export class PrefilEditComponent implements OnInit {
         next: (data) => {
           this.userId = data.id;  // Almacena el ID del usuario
           this.formEditarPerfil.patchValue({
-            email: data.email,
+            imgPerfil: data.imgPerfil,
             firstname: data.firstname,
             lastname: data.lastname,
             phone: data.phone,
             location: data.location,
-            birth: data.birth
+            birth: data.birth,
           });
         },
-        error: (err) => {
-          console.error('Error al obtener el perfil:', err);
-          this.router.navigate(['/login']);
-        }
       });
-    } else {
-      this.router.navigate(['/login']);
     }
   }
 
   actualizarPerfil() {
-    if (this.formEditarPerfil.valid && this.userId) { // Asegurarse de que el userId esté disponible
+    if (this.userId) { // Asegurarse de que el userId esté disponible
       const objeto: UsuarioEdit = {
-        id: Number(this.userId),  // Incluye el ID del usuario en el objeto a enviar
-        email: this.formEditarPerfil.value.email,
+        id: Number(this.userId),  
         firstname: this.formEditarPerfil.value.firstname,
         lastname: this.formEditarPerfil.value.lastname,
-        password: this.formEditarPerfil.value.password,
         phone: this.formEditarPerfil.value.phone.toString(),
         location: this.formEditarPerfil.value.location,
         birth: this.formEditarPerfil.value.birth,
@@ -86,13 +76,6 @@ export class PrefilEditComponent implements OnInit {
       } else {
         this.router.navigate(['/login']);
       }
-    } else {
-      Object.values(this.formEditarPerfil.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsTouched();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
+    } 
   }
 }

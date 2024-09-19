@@ -28,13 +28,10 @@ export class AccesService {
     return this.http.get(`${this.urlBase}profile`, { headers });
   }
 
-  update(objeto: UsuarioEdit): Observable<any> {
+  update(objeto: UsuarioEdit): Observable<UsuarioEdit> {
     const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('No se encontró el token');
-    }
-    const headers = new HttpHeaders().set('token', token);
-    return this.http.put(`${this.urlBase}${objeto.id}`, objeto, { headers });
+    const headers = new HttpHeaders().set('token', `${token}`);
+    return this.http.put<UsuarioEdit>(`${this.urlBase}profile/${objeto.id}`, objeto, { headers });
   }
 
 

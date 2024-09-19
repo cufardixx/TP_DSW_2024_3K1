@@ -1,106 +1,75 @@
 <main>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg border-bottom position-absolute top-0 w-100" style="background-color: #e3f2fd;">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">EventLife</a>
-      </div>
-    </nav>
-  
-    <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div class="row w-100 justify-content-center">
-        <div class="col-md-6 col-lg-8">
-  
-          <form [formGroup]="formEditarPerfil" class="p-4 rounded shadow bg-white">
-            <h3 class="mb-4 text-center text-primary">Editar Perfil</h3>
-            
-            <!-- Agrupación en dos columnas -->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Correo Electrónico</label>
-                  <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" required [ngClass]="{'is-invalid': formEditarPerfil.get('email')?.invalid && formEditarPerfil.get('email')?.touched}">
-                  <div id="emailHelp" class="form-text">Nunca compartas tus datos con nadie.</div>
-                  <div class="invalid-feedback" *ngIf="formEditarPerfil.get('email')?.invalid && formEditarPerfil.get('email')?.touched">
-                    Por favor, ingresa un correo electrónico válido.
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="firstname" class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="firstname" formControlName="firstname" required [ngClass]="{'is-invalid': formEditarPerfil.get('firstname')?.invalid && formEditarPerfil.get('firstname')?.touched}">
-                  <div class="invalid-feedback" *ngIf="formEditarPerfil.get('firstname')?.invalid && formEditarPerfil.get('firstname')?.touched">
-                    El nombre es requerido.
-                  </div>
-                </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg border-bottom position-absolute top-0 w-100" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">EventLife</a>
+    </div>
+  </nav>
+
+  <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="row w-100 justify-content-center">
+      <div class="col-md-6 col-lg-8">
+
+        <form [formGroup]="formEditarPerfil" class="p-4 rounded shadow bg-white">
+          <h3 class="mb-4 text-center text-primary">Editar Perfil</h3>
+
+          <!-- Agrupación en dos columnas -->
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="email" class="form-label">Imagen de Perfil</label>
+                <input type="text" class="form-control" formControlName="imgPerfil" aria-describedby="emailHelp">
               </div>
             </div>
-  
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="lastname" class="form-label">Apellido</label>
-                  <input type="text" class="form-control" id="lastname" formControlName="lastname" required [ngClass]="{'is-invalid': formEditarPerfil.get('lastname')?.invalid && formEditarPerfil.get('lastname')?.touched}">
-                  <div class="invalid-feedback" *ngIf="formEditarPerfil.get('lastname')?.invalid && formEditarPerfil.get('lastname')?.touched">
-                    El apellido es requerido.
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Teléfono</label>
-                  <input type="number" class="form-control" id="phone" formControlName="phone" required [ngClass]="{'is-invalid': formEditarPerfil.get('phone')?.invalid && formEditarPerfil.get('phone')?.touched}">
-                  <div class="invalid-feedback" *ngIf="formEditarPerfil.get('phone')?.invalid && formEditarPerfil.get('phone')?.touched">
-                    Por favor, ingresa un número de teléfono válido.
-                  </div>
-                </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="firstname" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="firstname" formControlName="firstname">
               </div>
             </div>
-  
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="location" class="form-label">Dirección</label>
-                  <input type="text" class="form-control" id="location" formControlName="location" required [ngClass]="{'is-invalid': formEditarPerfil.get('location')?.invalid && formEditarPerfil.get('location')?.touched}">
-                  <div class="invalid-feedback" *ngIf="formEditarPerfil.get('location')?.invalid && formEditarPerfil.get('location')?.touched">
-                    La dirección es requerida.
-                  </div>
-                </div>
-              </div>
-  
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="birth" class="form-label">Fecha de Nacimiento</label>
-                  <input type="date" class="form-control" id="birth" formControlName="birth" required [ngClass]="{'is-invalid': formEditarPerfil.get('birth')?.invalid && formEditarPerfil.get('birth')?.touched}">
-                  <div class="invalid-feedback" *ngIf="formEditarPerfil.get('birth')?.invalid && formEditarPerfil.get('birth')?.touched">
-                    La fecha de nacimiento es requerida.
-                  </div>
-                </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="lastname" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="lastname" formControlName="lastname">
               </div>
             </div>
-  
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="password" class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" id="password" formControlName="password" required [ngClass]="{'is-invalid': formEditarPerfil.get('password')?.invalid && formEditarPerfil.get('password')?.touched}">
-                  <div class="invalid-feedback" *ngIf="formEditarPerfil.get('password')?.invalid && formEditarPerfil.get('password')?.touched">
-                    La contraseña es requerida.
-                  </div>
-                </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input type="number" class="form-control" id="phone" formControlName="phone">
               </div>
             </div>
-  
-            <div class="d-grid">
-              <button type="button" class="btn btn-primary" (click)="actualizarPerfil()" [disabled]="formEditarPerfil.invalid">Actualizar</button>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="location" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="location" formControlName="location">
+              </div>
             </div>
-  
-          </form>
-  
-        </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="birth" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="birth" formControlName="birth">
+              </div>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button type="button" class="btn btn-primary" (click)="actualizarPerfil()">Actualizar</button>
+          </div>
+
+        </form>
+
       </div>
     </div>
-  </main>
-  
+  </div>
+</main>

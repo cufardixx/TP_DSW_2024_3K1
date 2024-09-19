@@ -8,14 +8,14 @@ import { checkRoleAuth } from "../middlewares/checkRole"
 const router = Router()
 
 //ruta protegida 
+router.put("/profile/:id", schemaValidation(updateUserSchema), updateUser)
 router.get("/profile", checkAuthToken, checkRoleAuth(["user"]), profile)
-
 
 router.post("/login", schemaValidation(signinUserSchema), signinUser)
 router.post("/register", schemaValidation(signupUserSchema), signupUser)
 router.get("/", getUsers)
 router.get("/:id", getUser)
-router.put("/:id", schemaValidation(updateUserSchema), updateUser)
+
 router.delete("/:id", delateUser)
 
 

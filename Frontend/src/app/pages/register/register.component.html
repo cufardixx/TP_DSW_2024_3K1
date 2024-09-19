@@ -1,5 +1,4 @@
 <main>
-
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg border-bottom position-absolute top-0 w-100" style="background-color: #e3f2fd;">
     <div class="container-fluid">
@@ -8,63 +7,78 @@
   </nav>
 
   <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    
     <div class="row w-100 justify-content-center">
+      <div class="col-md-6 col-lg-8">
 
-      <div class="col-md-6 col-lg-4">
-
-        <form [formGroup]="formRegistro" class="p-4 border rounded shadow bg-white">
-
+        <form [formGroup]="formRegistro" class="p-4  rounded shadow bg-white">
           <h3 class="mb-4 text-center text-primary">Regístrate en Eventlife</h3>
-
-          <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp"
-              required>
-            <div id="emailHelp" class="form-text">Nunca compartas tus datos con nadie.</div>
+          
+          <!-- Agrupación en dos columnas -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text">Nunca compartas tus datos con nadie.</div>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="firstname" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="firstname" formControlName="firstname" required>
+              </div>
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label for="firstname" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="firstname" formControlName="firstname" required>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="lastname" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="lastname" formControlName="lastname" required>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input type="number" class="form-control" id="phone" formControlName="phone" required>
+              </div>
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label for="lastname" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="lastname" formControlName="lastname" required>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="location" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="location" formControlName="location" required>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="birth" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="birth" formControlName="birth" required>
+              </div>
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label  class="form-label">Telefono</label>
-            <input type="number" class="form-control"  formControlName="phone" required>
-          </div>
-
-          <div class="mb-3">
-            <label  class="form-label">Dirección</label>
-            <input type="text" class="form-control"  formControlName="location" required>
-          </div>
-
-          <div class="mb-3">
-            <label  class="form-label">Nacimiento</label>
-            <input type="date" class="form-control" formControlName="birth" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" formControlName="password" required>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" formControlName="password" required>
+              </div>
+            </div>
           </div>
 
           <div class="d-grid">
             <button type="button" class="btn btn-primary" (click)="registrarse()">Registrarse</button>
           </div>
-          
+
         </form>
 
       </div>
-
     </div>
-
   </div>
-
-
 </main>

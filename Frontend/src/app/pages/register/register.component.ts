@@ -31,7 +31,9 @@ export class RegisterComponent {
   });
 
   registrarse() {
-    if (this.formRegistro.invalid) return;
+    if (this.formRegistro.valid){
+      
+      if (this.formRegistro.invalid) return;
 
     const objeto: Usuario = {
       email: this.formRegistro.value.email,
@@ -56,5 +58,9 @@ export class RegisterComponent {
         console.error('Error al registrar el usuario:', error);
       }
     });
+
+    }else{
+      this.formRegistro.markAllAsTouched();
+    }
   }
 }

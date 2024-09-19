@@ -4,6 +4,7 @@ import { Usuario } from '../interfaces/Usuario';
 import { Observable } from 'rxjs';
 import { ResponseAcceso } from '../interfaces/ResponseAcceso';
 import { Login } from '../interfaces/Login';
+import { UsuarioEdit } from '../interfaces/UsuarioEdit';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +28,13 @@ export class AccesService {
     return this.http.get(`${this.urlBase}profile`, { headers });
   }
 
-  updateProfile(token: string, userId: number, userData: any) {
-    const headers = { 'token': `${token}`, 'Content-Type': 'application/json' };
-    return this.http.put(`${this.urlBase}/${userId}`, userData, { headers });
+  update(objeto: UsuarioEdit): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token');
+    }
+    const headers = new HttpHeaders().set('token', token);
+    return this.http.put(`${this.urlBase}${objeto.id}`, objeto, { headers });
   }
 
 

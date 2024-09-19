@@ -37,7 +37,7 @@ export class PerfilComponent implements OnInit {
   }
 
   editProfile() {
-    this.router.navigate(['/editar-perfil']); // Asegúrate de configurar esta ruta en tu router
+    this.router.navigate(['/profile/edit']); // Asegúrate de configurar esta ruta en tu router
   }
 
   logout() {

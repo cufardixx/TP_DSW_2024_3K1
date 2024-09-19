@@ -23,6 +23,7 @@ export const updateUserSchema = z.object({
         phone: z.string().min(6, "phone must be at least 6 characters long"),
         location: z.string().min(1, "Lastname is required"),
         birth: z.string().refine(date => !isNaN(Date.parse(date)), "Fecha inválida"),
+        imgPerfil: z.string().optional(),
     }),
     params: z.object({
         id: z.string().min(1),

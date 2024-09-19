@@ -55,7 +55,7 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const { firstname, lastname, email, password, rol, phone, birth, location } = req.body
+    const { firstname, lastname, email, password, rol, phone, birth, location , imgPerfil } = req.body
     const user = await User.findOneBy({ id: parseInt(req.params.id) })
 
     if (!user) return res.status(404).json({ message: "User does not exist" })
@@ -64,6 +64,7 @@ export const updateUser = async (req: Request, res: Response) => {
     user.phone = phone
     user.birth = birth
     user.location = location
+    user.imgPerfil = imgPerfil
     user.lastname = lastname
     user.email = email
     user.password = password
@@ -140,6 +141,7 @@ export const profile = async (req: CustomRequest, res: Response) => {
       phone: user.phone,
       location: user.location,
       birth: user.birth,
+      imgPerfil: user.imgPerfil,
     });
   } catch (error) {
     return res.status(500).json({ message: 'Internal server error' });

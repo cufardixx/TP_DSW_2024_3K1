@@ -27,4 +27,6 @@ export class HeaderComponent {
       this.isLoggedIn = localStorage.getItem('token') !== null;
     }
   }
+
+  
 }

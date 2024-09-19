@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -19,5 +20,11 @@ export class HeaderComponent {
     this.router.navigate(['/register']);
   }
 
-  
+  isLoggedIn = false;
+
+  ngOnInit(): void {
+    if (typeof localStorage !== 'undefined') {
+      this.isLoggedIn = localStorage.getItem('token') !== null;
+    }
+  }
 }

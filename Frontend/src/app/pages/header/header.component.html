@@ -20,8 +20,16 @@
       </ul>
 
       <div class="d-grid gap-4 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary" type="submit" (click)="redirectToLogin()">Iniciar sesión</button>
-        <button class="btn btn-outline-primary" type="submit" (click)="redirectToRegister()">Registrarse</button>
+        <ng-container *ngIf="!isLoggedIn">
+          <button class="btn btn-primary" type="submit" (click)="redirectToLogin()">Iniciar sesión</button>
+          <button class="btn btn-outline-primary" type="submit" (click)="redirectToRegister()">Registrarse</button>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <a href="/profile">
+              <img src="https://via.placeholder.com/50" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;">
+          </a>
+        </ng-container>
       </div>
 
     </div>

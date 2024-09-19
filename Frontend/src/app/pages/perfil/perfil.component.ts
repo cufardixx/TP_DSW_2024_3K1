@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { AccesService } from '../../services/acces.service';
 import { Router } from '@angular/router';
-import { log } from 'console';
 
 @Component({
   selector: 'app-perfil',
@@ -39,5 +38,10 @@ export class PerfilComponent implements OnInit {
 
   editProfile() {
     this.router.navigate(['/editar-perfil']); // Asegúrate de configurar esta ruta en tu router
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }

@@ -137,6 +137,9 @@ export const profile = async (req: CustomRequest, res: Response) => {
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
+      phone: user.phone,
+      location: user.location,
+      birth: user.birth,
     });
   } catch (error) {
     return res.status(500).json({ message: 'Internal server error' });

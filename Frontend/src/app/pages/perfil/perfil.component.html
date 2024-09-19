@@ -1,23 +1,50 @@
-<div class="container mt-4">
-    <div class="card">
-      <div class="card-header bg-primary text-white">Perfil del Usuario</div>
-      <div class="card-body">
-        <div class="text-center mb-4">
-          <img src="https://via.placeholder.com/150" alt="Avatar" class="rounded-circle">
-          <h3>{{ userProfile.firstname }} {{ userProfile.lastname }}</h3>
-        </div>
-  
-        <ul class="list-unstyled">
-          <li><strong>Nombre:</strong> {{ userProfile.firstname }}</li>
-          <li><strong>Apellido:</strong> {{ userProfile.lastname }}</li>
-          <li><strong>Email:</strong> {{ userProfile.email }}</li>
+<main >
+
+  <nav class="navbar navbar-expand-lg top-0 w-100" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+
+      <h3 class="navbar-brand">Perfil del Usuario</h3>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
         </ul>
+      </div>
+
+      <div class="d-grid gap-4 d-md-flex justify-content-md-end">
+          <button class="btn btn-outline-secondary" type="button" (click)="logout()" >Cerrar sesión</button>
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+
+      <div class="p-3 d-flex align-items-center justify-content-center flex-column" >
+        <strong class="ms-2 fs-4 text-primary fw-bold">{{ userProfile.firstname }} {{ userProfile.lastname }}</strong>
+        <img src="https://via.placeholder.com/150" alt="Avatar" class="rounded-circle">
+      </div>
+
+      <div class="p-2">
+        <h5 class="border-bottom border-primary text-center">Detalles del Usuario</h5>
+        <p class=""><i class="pe-2 bi bi-envelope"></i><strong>Email:</strong> {{ userProfile.email }}</p>
+        <p class=""><i class="pe-2 bi bi-phone"></i><strong>Teléfono:</strong> {{ userProfile.phone }}</p>
+        <p class=""><i class="pe-2 bi bi-person"></i><strong>Nombre:</strong> {{ userProfile.firstname }}</p>
+        <p class=""><i class="pe-2 bi bi-person"></i><strong>Apellido:</strong> {{ userProfile.lastname }}</p>
+        <p class=""><i class="pe-2 bi bi-geo-alt"></i><strong>Dirección:</strong> {{ userProfile.location }}</p>
+        <p class=""><i class="pe-2 bi bi-calendar"></i><strong>Fecha nacimiento:</strong> {{ userProfile.birth }}</p>
   
-        <div class="text-center">
+        <div class="text-center mt-4">
           <button class="btn btn-primary" (click)="editProfile()">Editar Perfil</button>
         </div>
       </div>
-    </div>
+
   </div>
 
-
+</main>

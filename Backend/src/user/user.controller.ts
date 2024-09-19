@@ -23,7 +23,7 @@ export const signupUser = async (req: Request, res: Response) => {
     user.password = hashedPassword;
 
     await user.save();
-
+    res.status(201).json({ mensaje: 'Registro guardado correctamente' });
   } catch (error: any) {
     return res.status(500).json({ message: error.message || 'Internal server error' });
   }

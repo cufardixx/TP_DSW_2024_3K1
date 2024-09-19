@@ -25,7 +25,7 @@ export class RegisterComponent {
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
     password: ['', Validators.required],
-    phone:['', Validators.required],
+    phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
     location: ['', Validators.required],
     birth: ['', Validators.required],
   });
@@ -38,7 +38,7 @@ export class RegisterComponent {
       firstname: this.formRegistro.value.firstname,
       lastname: this.formRegistro.value.lastname,
       password: this.formRegistro.value.password,
-      phone: this.formRegistro.value.phone,
+      phone: this.formRegistro.value.phone.toString(),
       location: this.formRegistro.value.location,
       birth: this.formRegistro.value.birth
     };

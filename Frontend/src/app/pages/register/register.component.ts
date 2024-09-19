@@ -3,13 +3,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AccesService } from '../../services/acces.service';
 import { Router } from '@angular/router';
 import { Usuario } from '../../interfaces/Usuario';
-
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -21,10 +20,10 @@ export class RegisterComponent {
   public formBuild = inject(FormBuilder);
 
   public formRegistro: FormGroup = this.formBuild.group({
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
     location: ['', Validators.required],
     birth: ['', Validators.required],
@@ -49,18 +48,22 @@ export class RegisterComponent {
     
     
 
-    this.AccesService.registrarse(objeto).subscribe({
-      next: (response) => {
-        console.log('Usuario registrado:', response);
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Error al registrar el usuario:', error);
-      }
-    });
-
-    }else{
-      this.formRegistro.markAllAsTouched();
+      this.AccesService.registrarse(objeto).subscribe({
+        next: (response) => {
+          console.log('Usuario registrado:', response);
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Error al registrar el usuario:', error);
+        }
+      });
+    } else {
+      Object.values(this.formRegistro.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsTouched();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
     }
   }
 }

@@ -10,7 +10,7 @@
     <div class="row w-100 justify-content-center">
       <div class="col-md-6 col-lg-8">
 
-        <form [formGroup]="formRegistro" class="p-4  rounded shadow bg-white">
+        <form [formGroup]="formRegistro" class="p-4 rounded shadow bg-white">
           <h3 class="mb-4 text-center text-primary">Regístrate en Eventlife</h3>
           
           <!-- Agrupación en dos columnas -->
@@ -18,15 +18,21 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" required [ngClass]="{'is-invalid': formRegistro.get('email')?.invalid && formRegistro.get('email')?.touched}">
                 <div id="emailHelp" class="form-text">Nunca compartas tus datos con nadie.</div>
+                <div class="invalid-feedback" *ngIf="formRegistro.get('email')?.invalid && formRegistro.get('email')?.touched">
+                  Por favor, ingresa un correo electrónico válido.
+                </div>
               </div>
             </div>
             
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="firstname" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="firstname" formControlName="firstname" required>
+                <input type="text" class="form-control" id="firstname" formControlName="firstname" required [ngClass]="{'is-invalid': formRegistro.get('firstname')?.invalid && formRegistro.get('firstname')?.touched}">
+                <div class="invalid-feedback" *ngIf="formRegistro.get('firstname')?.invalid && formRegistro.get('firstname')?.touched">
+                  El nombre es requerido.
+                </div>
               </div>
             </div>
           </div>
@@ -35,14 +41,20 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="lastname" class="form-label">Apellido</label>
-                <input type="text" class="form-control" id="lastname" formControlName="lastname" required>
+                <input type="text" class="form-control" id="lastname" formControlName="lastname" required [ngClass]="{'is-invalid': formRegistro.get('lastname')?.invalid && formRegistro.get('lastname')?.touched}">
+                <div class="invalid-feedback" *ngIf="formRegistro.get('lastname')?.invalid && formRegistro.get('lastname')?.touched">
+                  El apellido es requerido.
+                </div>
               </div>
             </div>
             
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="phone" class="form-label">Teléfono</label>
-                <input type="number" class="form-control" id="phone" formControlName="phone" required>
+                <input type="number" class="form-control" id="phone" formControlName="phone" required [ngClass]="{'is-invalid': formRegistro.get('phone')?.invalid && formRegistro.get('phone')?.touched}">
+                <div class="invalid-feedback" *ngIf="formRegistro.get('phone')?.invalid && formRegistro.get('phone')?.touched">
+                  Por favor, ingresa un número de teléfono válido.
+                </div>
               </div>
             </div>
           </div>
@@ -51,14 +63,20 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="location" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="location" formControlName="location" required>
+                <input type="text" class="form-control" id="location" formControlName="location" required [ngClass]="{'is-invalid': formRegistro.get('location')?.invalid && formRegistro.get('location')?.touched}">
+                <div class="invalid-feedback" *ngIf="formRegistro.get('location')?.invalid && formRegistro.get('location')?.touched">
+                  La dirección es requerida.
+                </div>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="birth" class="form-label">Fecha de Nacimiento</label>
-                <input type="date" class="form-control" id="birth" formControlName="birth" required>
+                <input type="date" class="form-control" id="birth" formControlName="birth" required [ngClass]="{'is-invalid': formRegistro.get('birth')?.invalid && formRegistro.get('birth')?.touched}">
+                <div class="invalid-feedback" *ngIf="formRegistro.get('birth')?.invalid && formRegistro.get('birth')?.touched">
+                  La fecha de nacimiento es requerida.
+                </div>
               </div>
             </div>
           </div>
@@ -67,13 +85,16 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" formControlName="password" required>
+                <input type="password" class="form-control" id="password" formControlName="password" required [ngClass]="{'is-invalid': formRegistro.get('password')?.invalid && formRegistro.get('password')?.touched}">
+                <div class="invalid-feedback" *ngIf="formRegistro.get('password')?.invalid && formRegistro.get('password')?.touched">
+                  La contraseña es requerida.
+                </div>
               </div>
             </div>
           </div>
 
           <div class="d-grid">
-            <button type="button" class="btn btn-primary" (click)="registrarse()">Registrarse</button>
+            <button type="button" class="btn btn-primary" (click)="registrarse()" [disabled]="formRegistro.invalid">Registrarse</button>
           </div>
 
         </form>

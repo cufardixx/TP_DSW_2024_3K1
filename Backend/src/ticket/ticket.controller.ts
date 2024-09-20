@@ -17,8 +17,8 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
     const ticket = new Ticket()
     
     
-    ticket.usuario = user;
-    ticket.evento= eventID;
+    //ticket.usuario = user;
+    //ticket.evento= eventID;
     ticket.codigo_unico= codigoQR
   
 

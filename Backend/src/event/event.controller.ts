@@ -1,26 +1,31 @@
 import { Event } from "./event.entity"
 import { Request, Response } from "express"
+import { User } from "../user/user.entity";
+import { CustomRequest } from "../middlewares/authToken";
 
 
 
-export const createEvent = async (req: Request, res: Response) => {
+export const createEvent = async (req: CustomRequest, res: Response) => {
     try {
-        const { name, cupo, fecha, description, hora, price } = req.body;
-        //  ID del usuario está disponible en req.user.id
-        const userId = (req as any).user?.id;
+        const { title, capacity, date, description, time, price, location, organizer, image } = req.body;
 
-        if (!userId) {
-            return res.status(401).json({ message: 'Usuario no autenticado' });
-        }
+        const user = await User.findOneBy({ id: req.user!.id });
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        const userName = user.firstname;
 
         const event = new Event();
+        event.image = image;
+        event.location = location;
+        event.organizer = organizer;
         event.price = price;
-        event.name = name;
-        event.cupo = cupo;
-        event.fecha = fecha;
-        event.hora = hora;
+        event.title = title;
+        event.capacity = capacity;
+        event.date = date;
+        event.time = time;
         event.description = description;
-        event.usuario = userId; // Asignar el ID del usuario al evento
+        event.usuario = user; // Asignar el ID del usuario al evento
+        event.organizer = userName;
 
         await event.save();
         return res.status(201).json({ message: 'Evento creado con éxito', event });

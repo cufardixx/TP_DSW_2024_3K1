@@ -9,16 +9,27 @@ export class Event extends BaseEntity {
     id: number;
 
     @Column()
-    name: string;
+    title: string;
 
     @Column()
-    cupo: number;
+    location: string;
+
+    @Column()
+    organizer: string;
+
+    @Column({
+        default: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fes%2Fsearch%2Fevento%2Bnocturno&psig=AOvVaw1_855_855&ust=1721633000963000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPCF54uQ1IYDFQAAAAAdAAAAABAE"
+    })
+    image: string
+
+    @Column()
+    capacity: number;
 
     @Column({ type: 'date' })
-    fecha: Date;
+    date: Date;
 
     @Column({ type: "time" })
-    hora: string;
+    time: string;
 
     @Column()
     price: number;
@@ -40,5 +51,7 @@ export class Event extends BaseEntity {
     @ManyToOne(() => User, usuario => usuario.eventos)
     @JoinColumn({name: "user_id"})
     usuario: User;
+
+    //category como una clase? evento nocturno, evento musical, evento deportivo, cumpleaños, etc
 
 }

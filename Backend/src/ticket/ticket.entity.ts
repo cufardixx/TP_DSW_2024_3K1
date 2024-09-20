@@ -12,9 +12,4 @@ export class Ticket extends BaseEntity{
     @Column({ unique: true })
     codigo_unico: string;
 
-    @ManyToOne(() => User, usuario => usuario.tickets)
-    usuario: User;
-  
-    @ManyToOne(() => Event, evento => evento.tickets)
-    evento: Event;
 }

@@ -10,5 +10,8 @@ export const createEventSchema = z.object({
         fecha: z.string().refine(date => !isNaN(Date.parse(date)), "Fecha inválida"),
         hora: z.string().regex(timeRegex, "Invalid time format"),
         cupo: z.number().positive().min(1, "debe ser 1 como minimo"),
+    }),
+    query: z.object({
+        search: z.string().optional()
     })
 })

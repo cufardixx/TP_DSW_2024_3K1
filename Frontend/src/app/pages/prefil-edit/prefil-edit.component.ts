@@ -62,8 +62,7 @@ export class PrefilEditComponent implements OnInit {
         imgPerfil: this.formEditarPerfil.value.imgPerfil
       };
 
-      const token = localStorage.getItem('token');
-      if (token) {
+
         this.AccesService.update(objeto).subscribe({
           next: (response) => {
             console.log('Usuario Actualizado:', response);
@@ -73,9 +72,7 @@ export class PrefilEditComponent implements OnInit {
             console.error('Error al actualizar el usuario:', error);
           }
         });
-      } else {
-        this.router.navigate(['/login']);
-      }
+
     } 
   }
 }

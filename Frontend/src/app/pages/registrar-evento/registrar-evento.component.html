@@ -9,7 +9,7 @@
     <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
         <div class="row w-100 justify-content-center">
             <div class="col-md-6 col-lg-8">
-                <form class="p-4 bg-white">
+                <form class="p-4 bg-white" [formGroup]="formRegistroEvento" (ngSubmit)="createEvent()">
                     <h3 class="mb-4 text-center text-primary">Crea tu Evento</h3>
 
                     <!-- Agrupación en dos columnas -->
@@ -17,14 +17,14 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Nombre del Evento</label>
-                                <input type="text" class="form-control" aria-describedby="emailHelp" required>
+                                <input formControlName="title" type="text" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Descripción</label>
-                                <input type="text" class="form-control" required>
+                                <input formControlName="description" type="text" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -33,14 +33,14 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Capacidad</label>
-                                <input type="number" class="form-control" required>
+                                <input formControlName="capacity" type="number" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Ubicación</label>
-                                <input type="text" class="form-control" required>
+                                <input formControlName="location" type="text" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -49,13 +49,13 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Precio</label>
-                                <input type="number" class="form-control" required>
+                                <input formControlName="price" type="number" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Imagen</label>
-                                <input type="text" class="form-control" required>
+                                <input formControlName="image" type="text" class="form-control" required>
                             </div>
                         </div>  
                     </div>
@@ -64,21 +64,20 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Fecha</label>
-                                <input type="date" class="form-control" required>
+                                <input formControlName="date" type="date" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Hora</label>
-                                <input type="time" class="form-control" required>
+                                <input formControlName="time" type="time" class="form-control" required>
                             </div>
                         </div>
-                        
                     </div>
 
                     <div class="d-grid">
-                        <button type="button" class="btn btn-primary">Crear</button>
+                        <button type="submit" class="btn btn-primary">Crear</button>
                     </div>
                 </form>
             </div>

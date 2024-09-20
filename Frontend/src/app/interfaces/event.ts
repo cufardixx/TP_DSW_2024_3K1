@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export interface Evento {
     id?: number;
     title: string;
@@ -7,7 +9,7 @@ export interface Evento {
     organizer: string;
     capacity: number;
     price: number;
-    category: string;
-    image?: string;  
+    image: string;  
+    time: string,
 }
 

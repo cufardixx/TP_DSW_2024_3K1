@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-event',
@@ -9,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class CrearEventComponent {
 
+  constructor(private router: Router) { }
+
+  
+  crearEvento():void{
+    this.router.navigate(['/create-event']);
+  }
 }

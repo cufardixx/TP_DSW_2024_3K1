@@ -7,7 +7,7 @@ import { CustomRequest } from "../middlewares/authToken";
 
 export const createEvent = async (req: CustomRequest, res: Response) => {
     try {
-        const { title, capacity, date, description, time, price, location, organizer, image } = req.body;
+        const { title, capacity, date, description, time, price, location, image } = req.body;
 
         const user = await User.findOneBy({ id: req.user!.id });
         if (!user) return res.status(404).json({ message: "User not found" });
@@ -17,14 +17,13 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         const event = new Event();
         event.image = image;
         event.location = location;
-        event.organizer = organizer;
         event.price = price;
         event.title = title;
         event.capacity = capacity;
         event.date = date;
         event.time = time;
         event.description = description;
-        event.usuario = user; // Asignar el ID del usuario al evento
+        event.usuario = user; 
         event.organizer = userName;
 
         await event.save();

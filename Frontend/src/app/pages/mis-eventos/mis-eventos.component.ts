@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mis-eventos',
@@ -11,6 +12,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './mis-eventos.component.css'
 })
 export class MisEventosComponent implements OnInit {
+
+  private router = inject(Router);
+
+  
   eventos: Evento[] = [];
 
   constructor(private eventoService: EventServiceService) {}
@@ -26,6 +31,11 @@ export class MisEventosComponent implements OnInit {
 
     );
   }
+
+
+
+
+
 }
 
 

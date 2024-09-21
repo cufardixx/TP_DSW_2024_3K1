@@ -33,7 +33,20 @@ export class MisEventosComponent implements OnInit {
   }
 
 
+  editEvent(id: number): void {
+    this.router.navigate([`edit-event/${id}`]);
+  }
 
+  borrarEvent(id: number): void {
+    this.eventoService.borrarEvento(id).subscribe(
+      () => {
+        this.eventos = this.eventos.filter(evento => evento.id !== id);
+      },
+      (error) => {
+        console.error('Error al borrar evento:', error);
+      }
+    );
+  }
 
 
 }

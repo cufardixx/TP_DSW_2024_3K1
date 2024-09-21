@@ -53,7 +53,7 @@ export class PerfilComponent implements OnInit {
     this.eventoService.obtenerEventosUsuario().subscribe(
       (eventos) => {
         if (eventos.length > 0) {
-          this.router.navigate(['/mis-eventos']);
+          this.router.navigate(['/my-events']);
         } else {
           // Si no tiene eventos, redirigir a la página de creación
           this.router.navigate(['/create-event']);

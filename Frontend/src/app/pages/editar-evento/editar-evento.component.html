@@ -1,0 +1,87 @@
+
+<main>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg border-bottom position-absolute top-0 w-100" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">EventLife</a>
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+        <div class="row w-100 justify-content-center">
+            <div class="col-md-6 col-lg-8">
+                <form class="p-4 bg-white" [formGroup]="formEditarEvento" (ngSubmit)="updateEvent()">
+                    <h3 class="mb-4 text-center text-primary">Editar Evento</h3>
+
+                    <!-- Agrupación en dos columnas -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre del Evento</label>
+                                <input formControlName="title" type="text" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Descripción</label>
+                                <input formControlName="description" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Capacidad</label>
+                                <input formControlName="capacity" type="number" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Ubicación</label>
+                                <input formControlName="location" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Precio</label>
+                                <input formControlName="price" type="number" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Imagen</label>
+                                <input formControlName="image" type="text" class="form-control" required>
+                            </div>
+                        </div>  
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Fecha</label>
+                                <input formControlName="date" type="date" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Hora</label>
+                                <input formControlName="time" type="time" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

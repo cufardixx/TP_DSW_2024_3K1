@@ -27,6 +27,18 @@ export class EventServiceService {
 
     return this.http.get<Evento[]>(`${this.urlBase}`, { headers });
   }
+
+  obtenerEvento(id: number): Observable<Evento> {
+    return this.http.get<Evento>(`${this.urlBase}${id}`);
+  }
+
+  borrarEvento(id: number): Observable<Evento> {
+    return this.http.delete<Evento>(`${this.urlBase}${id}`);
+  }
+
+  actualizarEvento(id: number, objeto: Evento): Observable<Evento> {
+    return this.http.put<Evento>(`${this.urlBase}${id}`, objeto,);
+  }
 }
 
 

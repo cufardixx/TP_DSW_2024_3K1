@@ -36,6 +36,36 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
 };
 
 
+
+export const updateEvent = async (req: Request, res: Response) => {
+    try {
+        const { title, capacity, date, description, time, price, location, image } = req.body;
+      const event = await Event.findOneBy({ id: parseInt(req.params.id) })
+     
+      if (!event) return res.status(404).json({ message: "Event does not exist" })
+
+      event.title = title
+      event.capacity = capacity
+      event.date = date
+      event.description = description
+      event.time = time
+      event.price = price
+      event.location = location
+      event.image = image
+      
+  
+      await event.save()
+  
+      return res.status(200).json({ message: "Evento actualizado" })
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message })
+      }
+      return res.status(500).json({ message: "Error interno del servidor" })
+    }
+}
+
+
 export const getEventsByUser = async (req: CustomRequest, res: Response) => {
     try {
         const user = await User.findOneBy({ id: req.user!.id });

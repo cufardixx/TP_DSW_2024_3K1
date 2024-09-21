@@ -18,6 +18,6 @@ export const tokenSing = async (user: User) => {
             rol: user.rol
         },
         process.env.SECRET_KEY || 'frasemegasecreta',
-        { expiresIn: '1h' }
+        
     );
 }

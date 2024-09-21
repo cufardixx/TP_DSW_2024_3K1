@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event';
 import { CommonModule } from '@angular/common';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mis-eventos',
@@ -17,11 +16,15 @@ export class MisEventosComponent implements OnInit {
   constructor(private eventoService: EventServiceService) {}
 
   ngOnInit(): void {
-    this.eventoService.obtenerEventosUsuario().pipe(
-      tap((eventos) => {
+    this.eventoService.obtenerEventosUsuario().subscribe(
+      (eventos) => {
         this.eventos = eventos;
-      })
-    ).subscribe();
+      },
+      (error) => {
+        console.error('Error al obtener eventos:', error);
+      }
+
+    );
   }
 }
 

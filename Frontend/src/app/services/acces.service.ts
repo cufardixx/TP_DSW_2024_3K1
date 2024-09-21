@@ -34,5 +34,12 @@ export class AccesService {
     return this.http.put<UsuarioEdit>(`${this.urlBase}profile/${objeto.id}`, objeto, { headers });
   }
 
+  getUserById(id: number): Observable<Usuario> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('token', `${token}`);
+    return this.http.get<Usuario>(`${this.urlBase}${id}`, { headers });
+  }
+
+
 
 }

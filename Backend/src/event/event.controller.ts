@@ -36,15 +36,19 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
 };
 
 
-export const getEvents = async (req: Request, res: Response) => {
+export const getEventsByUser = async (req: CustomRequest, res: Response) => {
     try {
-        const events = await Event.find()
-        return res.status(200).json(events)
+        const user = await User.findOneBy({ id: req.user!.id });
+        if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
+        
+        const eventos = await Event.find({ where: { usuario: { id: user.id } } });
+        console.log('Eventos recuperados:', eventos);
+        res.json(eventos);
     } catch (error) {
-        return res.status(500).json({ message: error })
+        console.error('Error al obtener eventos:', error);
+        res.status(500).json({ message: 'Error al obtener eventos' });
     }
 }
-
 
 export const getEvent = async (req: Request, res: Response) => {
     try {

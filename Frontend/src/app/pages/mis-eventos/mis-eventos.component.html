@@ -1,1 +1,14 @@
-<p>mis-eventos works!</p>
+<div *ngIf="eventos.length > 0; else noEventos">
+    <ul>
+      <li *ngFor="let evento of eventos">
+        <h3>{{ evento.title }}</h3>
+        <p>Fecha: {{ evento.date }}</p>
+        <p>Lugar: {{ evento.location }}</p>
+      </li>
+    </ul>
+
+  </div>
+  
+  <ng-template #noEventos>
+    <p>No hay eventos disponibles.</p>
+  </ng-template>

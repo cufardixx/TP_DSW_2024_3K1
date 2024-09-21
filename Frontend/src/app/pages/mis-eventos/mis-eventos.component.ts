@@ -1,12 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventServiceService } from '../../services/event.service.service';
+import { Evento } from '../../interfaces/event';
+import { CommonModule } from '@angular/common';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mis-eventos',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './mis-eventos.component.html',
   styleUrl: './mis-eventos.component.css'
 })
-export class MisEventosComponent {
+export class MisEventosComponent implements OnInit {
+  eventos: Evento[] = [];
 
+  constructor(private eventoService: EventServiceService) {}
+
+  ngOnInit(): void {
+    this.eventoService.obtenerEventosUsuario().pipe(
+      tap((eventos) => {
+        this.eventos = eventos;
+      })
+    ).subscribe();
+  }
 }
+
+

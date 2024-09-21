@@ -20,5 +20,13 @@ export class EventServiceService {
 
     return this.http.post<Evento>(`${this.urlBase}new`, objeto, { headers });
   }
+
+  obtenerEventosUsuario(): Observable<Evento[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('token', `${token}`);
+
+    return this.http.get<Evento[]>(`${this.urlBase}`, { headers });
+  }
 }
+
 

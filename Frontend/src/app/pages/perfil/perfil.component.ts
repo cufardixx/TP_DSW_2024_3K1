@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { AccesService } from '../../services/acces.service';
 import { Router } from '@angular/router';
+import { EventServiceService } from '../../services/event.service.service';
+import { Evento } from '../../interfaces/event.js';
 
 @Component({
   selector: 'app-perfil',
@@ -15,7 +17,7 @@ import { Router } from '@angular/router';
 export class PerfilComponent implements OnInit {
   userProfile: any = {};
 
-  constructor(private profileService: AccesService, private router: Router) {}
+  constructor(private profileService: AccesService, private router: Router, private eventoService: EventServiceService) {}
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
@@ -45,5 +47,23 @@ export class PerfilComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
+  }
+
+  misEventos() {
+    this.eventoService.obtenerEventosUsuario().subscribe(
+      (eventos) => {
+        if (eventos.length > 0) {
+          this.router.navigate(['/mis-eventos']);
+        } else {
+          // Si no tiene eventos, redirigir a la página de creación
+          this.router.navigate(['/create-event']);
+        }
+      },
+      (error) => {
+        console.error('Error al obtener eventos:', error);
+        // En caso de error, redirigir a la página de creación por defecto
+        this.router.navigate(['/create-event']);
+      }
+    );
   }
 }

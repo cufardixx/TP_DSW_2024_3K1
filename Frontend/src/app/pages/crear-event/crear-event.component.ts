@@ -14,6 +14,12 @@ export class CrearEventComponent {
 
   
   crearEvento():void{
-    this.router.navigate(['/create-event']);
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/create-event']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
+
 }

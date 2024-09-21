@@ -45,9 +45,10 @@ export class RegistrarEventoComponent {
 
     this.EventService.crearEvento(objeto).subscribe({
       next: (resp) => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/perfil']);
       },
       error: (err) => {
+
         console.error('Error creating event:', err);
         // Optionally show an error message to the user
       }

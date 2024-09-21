@@ -9,7 +9,7 @@ export interface Evento {
     organizer: string;
     capacity: number;
     price: number;
-    image: string;  
+    image?: string;  
     time: string,
 }
 

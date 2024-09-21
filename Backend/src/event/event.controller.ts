@@ -13,6 +13,8 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         if (!user) return res.status(404).json({ message: "User not found" });
 
         const userName = user.firstname;
+        
+        
 
         const event = new Event();
         event.image = image;

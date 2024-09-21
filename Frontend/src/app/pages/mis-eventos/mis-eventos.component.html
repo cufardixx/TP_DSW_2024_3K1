@@ -10,8 +10,14 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
-            </ul>
+            </ul>    
           </div>
+
+          <div class="d-grid gap-4 d-md-flex justify-content-md-end">
+            <a href="/profile">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;" >
+            </a>
+      </div>
 
         </div>
       </nav>
@@ -34,7 +40,7 @@
           <td>{{ evento.date | date: 'mediumDate' }}</td>
           <td>{{ evento.location }}</td>
           <td>
-            <button class="btn btn-primary btn-sm" (click)="editEvent(evento.id!)">Editar</button>
+            <button class="btn btn-primary btn-sm me-2" (click)="editEvent(evento.id!)">Editar</button>
             <button class="btn btn-danger btn-sm" (click)="borrarEvent(evento.id!)">Eliminar</button>
           </td>
         </tr>

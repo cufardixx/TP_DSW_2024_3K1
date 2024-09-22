@@ -72,7 +72,7 @@ export const getEventsByUser = async (req: CustomRequest, res: Response) => {
         if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
         
         const eventos = await Event.find({ where: { usuario: { id: user.id } } });
-        console.log('Eventos recuperados:', eventos);
+        
         res.json(eventos);
     } catch (error) {
         console.error('Error al obtener eventos:', error);

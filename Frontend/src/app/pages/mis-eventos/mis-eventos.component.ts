@@ -48,6 +48,10 @@ export class MisEventosComponent implements OnInit {
     );
   }
 
+  verEvento(id: number): void {
+    this.router.navigate([`event/${id}`]);
+  }
+
 
 }
 

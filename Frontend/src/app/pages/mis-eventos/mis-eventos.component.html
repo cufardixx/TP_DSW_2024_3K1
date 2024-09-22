@@ -41,7 +41,10 @@
           <td>{{ evento.location }}</td>
           <td>
             <button class="btn btn-primary btn-sm me-2" (click)="editEvent(evento.id!)">Editar</button>
-            <button class="btn btn-danger btn-sm" (click)="borrarEvent(evento.id!)">Eliminar</button>
+            <button class="btn btn-danger btn-sm me-2" (click)="borrarEvent(evento.id!)">Eliminar</button>
+            <a class="btn btn-info btn-sm" title="Ver más información" (click)="verEvento(evento.id!)">
+              <i class="fas fa-info-circle"></i> Ver más
+            </a>
           </td>
         </tr>
       </tbody>

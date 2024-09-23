@@ -1,11 +1,12 @@
 import { Component, inject, Input } from '@angular/core';
 import { EventServiceService } from '../../services/event.service.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-evento',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './detalle-evento.component.html',
   styleUrl: './detalle-evento.component.css'
 })

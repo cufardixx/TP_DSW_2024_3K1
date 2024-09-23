@@ -25,20 +25,48 @@
         </div>
       </nav>
 
+    <section class="bg-light d-flex justify-content-center flex-column align-items-center p-5 mx-auto" style="width: 70%;">
+        
+        <div class="d-flex justify-content-center w-100">
+          <img src="{{ evento.image }}" alt="{{ evento.title }}" class="rounded-start w-100" style="max-height: 250px; object-fit: cover;">
+        </div>
 
-      <div class="card mb-3">
-        <div class="card-header">
-          <h5 class="card-title">{{ evento.title }}</h5>
+        <div class="row w-100 justify-content-center">
+          <div class="col-md-8">
+            <div class="card-body text-center  rounded p-4">
+              <h2 class="card-title fw-bold mb-4 text-primary">{{ evento.title }}</h2>
+              <p class="card-text lead mb-4">{{ evento.description }}</p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                  <span><i class="bi bi-calendar-event text-primary me-2"></i> Fecha evento:</span>
+                  <span class="fw-bold">{{ evento.date | date: 'dd/MM/yyyy' }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                  <span><i class="bi bi-clock text-primary me-2"></i> Hora de comienzo:</span>
+                  <span class="fw-bold">{{ evento.time }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                  <span><i class="bi bi-geo-alt text-primary me-2"></i> Ubicación:</span>
+                  <span class="fw-bold">{{ evento.location }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                  <span><i class="bi bi-person text-primary me-2"></i> Organizador:</span>
+                  <span class="fw-bold">{{ evento.organizer }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                  <span><i class="bi bi-people text-primary me-2"></i> Capacidad de personas:</span>
+                  <span class="fw-bold">{{ evento.capacity }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                  <span><i class="bi bi-tag text-primary me-2"></i> Precio entrada:</span>
+                  <span class="fw-bold text-success">${{ evento.price }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <p class="card-text"><strong>Fecha:</strong> {{ evento.date }}</p>
-          <p class="card-text"><strong>Ubicación:</strong> {{ evento.location }}</p>
-          <p class="card-text"><strong>Descripción:</strong> {{ evento.description }}</p>
-          <p class="card-text"><strong>Precio:</strong> {{ evento.price }}</p>  
-          <p class="card-text"><strong>Cupo:</strong> {{ evento.capacity }}</p>
-          <p class="card-text"><strong>Organizador:</strong> {{ evento.organizer }}</p>
-          
-        </div>
-      </div>
+    
+
+    </section>
 
 </main>

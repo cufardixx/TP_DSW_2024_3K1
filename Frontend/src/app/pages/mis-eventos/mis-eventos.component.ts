@@ -15,7 +15,6 @@ export class MisEventosComponent implements OnInit {
 
   private router = inject(Router);
 
-  
   eventos: Evento[] = [];
 
   constructor(private eventoService: EventServiceService) {}
@@ -24,14 +23,21 @@ export class MisEventosComponent implements OnInit {
     this.eventoService.obtenerEventosUsuario().subscribe(
       (eventos) => {
         this.eventos = eventos;
+        this.eventos = this.eventos.map(evento => {
+          return {
+            ...evento,
+            date: new Date(evento.date)
+          };
+        });
+    
       },
       (error) => {
         console.error('Error al obtener eventos:', error);
       }
 
     );
+      
   }
-
 
   editEvent(id: number): void {
     this.router.navigate([`edit-event/${id}`]);
@@ -61,7 +67,14 @@ export class MisEventosComponent implements OnInit {
     }
   }
 
+  ordenarPorTitulo(): void {
+    this.eventos.sort((a, b) => a.title.localeCompare(b.title));
+  }
 
+
+  ordenarPorFecha(): void {
+    this.eventos.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  }
 }
 
 

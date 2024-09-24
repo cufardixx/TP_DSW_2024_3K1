@@ -27,48 +27,83 @@
         </div>
       </nav>
 
-    <section class="bg-light d-flex justify-content-center flex-column align-items-center p-5 mx-auto" style="width: 70%;">
-        
-        <div class="d-flex justify-content-center w-100">
-          <img src="{{ evento.image }}" alt="{{ evento.title }}" class="rounded-start w-100" style="max-height: 250px; object-fit: cover;">
-        </div>
-
-        <div class="row w-100 justify-content-center">
-          <div class="col-md-8">
-            <div class="card-body text-center  rounded p-4">
-              <h2 class="card-title fw-bold mb-4 text-primary">{{ evento.title }}</h2>
-              <p class="card-text lead mb-4">{{ evento.description }}</p>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                  <span><i class="bi bi-calendar-event text-primary me-2"></i> Fecha evento:</span>
-                  <span class="fw-bold">{{ evento.date | date: 'dd/MM/yyyy' }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                  <span><i class="bi bi-clock text-primary me-2"></i> Hora de comienzo:</span>
-                  <span class="fw-bold">{{ evento.time }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                  <span><i class="bi bi-geo-alt text-primary me-2"></i> Ubicación:</span>
-                  <span class="fw-bold">{{ evento.location }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                  <span><i class="bi bi-person text-primary me-2"></i> Organizador:</span>
-                  <span class="fw-bold">{{ evento.organizer }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                  <span><i class="bi bi-people text-primary me-2"></i> Capacidad de personas:</span>
-                  <span class="fw-bold">{{ evento.capacity }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-                  <span><i class="bi bi-tag text-primary me-2"></i> Precio entrada:</span>
-                  <span class="fw-bold text-success">${{ evento.price }}</span>
-                </li>
-              </ul>
+      <div class="container py-6 mt-5" style="width: 70%;">
+        <div class="card">
+          <img src="{{ evento.image }}" alt="{{ evento.title }}" class="card-img-top" style="height: 300px; object-fit: cover;" />
+          <div class="card-body mt-4">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <p class="text-muted mb-0">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
+                <h1 class="display-5 mb-0 fw-bold ">{{ evento.title | uppercase }}</h1>
+                <h2 class="h5 mt-5">Acerca de este evento</h2>
+                <p class="mt-2">{{ evento.description }}</p>
+              </div>
+              <button class="btn btn-primary">Seguir</button>
             </div>
+
+            <div class="mt-4 rounded p-3" style="background-color: #e3f2fd;">
+              <h2 class="h5 border-bottom pb-2 border-primary">Organizado</h2>
+              <div class="d-flex align-items-center p-2 bg-white rounded shadow-sm">
+
+                <div class="flex-shrink-0">
+                <img src="https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg" alt="Organizer" class="rounded-circle me-2" style="width: 50px; height: 50px;">
+                </div>
+
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-0"><span class="opacity-50">Por</span> {{ evento.organizer }}</h6>
+                </div>
+
+                <div class="ms-3">
+                  <button class="btn btn-primary">Contactar</button>
+                </div>
+
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <h6 class="h5">Fecha y hora</h6>
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-calendar-event text-primary"></i>
+                <span class="ms-2">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}, - {{ evento.time }} hs</span>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <h6 class="h5">Ubicación</h6>
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-geo-alt text-primary"></i>
+                <span class="ms-2">{{ evento.location }}</span>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <h6 class="h5">Capacidad de entradas</h6>
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-people text-primary"></i>
+                <span class="ms-2">{{ evento.capacity }}</span>
+              </div>
+            </div>
+
           </div>
         </div>
-    
-
-    </section>
+      
+        <div class="card mt-5 mb-5">
+          <div class="card-body">
+            <h2 class="h5 mb-4">Entradas</h2>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <p class="fw-bold">Costo de la entrada</p>
+                <p class="text-muted">{{ evento.price }} $</p>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100 mt-4">Reservar un lugar</button>
+          </div>
+        </div>
+      </div>
 
 </main>
+
+
+
+
+

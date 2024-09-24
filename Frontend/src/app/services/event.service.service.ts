@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Evento } from '../interfaces/event';
 import { Observable } from 'rxjs';
@@ -38,6 +38,11 @@ export class EventServiceService {
 
   actualizarEvento(id: number, objeto: Evento): Observable<Evento> {
     return this.http.put<Evento>(`${this.urlBase}${id}`, objeto,);
+  }
+
+  searchEventsByName(searchTerm: string): Observable<any> {
+    const params = new HttpParams().set('search', searchTerm);
+    return this.http.get(`${this.urlBase}/search`, { params });
   }
 
   

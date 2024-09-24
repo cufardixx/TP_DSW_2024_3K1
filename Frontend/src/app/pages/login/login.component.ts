@@ -6,10 +6,11 @@ import { Login } from '../../interfaces/Login';
 import { CommonModule } from '@angular/common';
 
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,6 +20,7 @@ export class LoginComponent {
   private AccesService = inject(AccesService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
+ 
 
   public formLogin: FormGroup = this.formBuild.group({
     email: ['', [Validators.required, Validators.email]],
@@ -31,7 +33,7 @@ export class LoginComponent {
         email: this.formLogin.value.email,
         password: this.formLogin.value.password
       };
-    
+
       this.AccesService.login(objeto).subscribe({
         next: (response) => {
           localStorage.setItem("token", response.token);
@@ -45,4 +47,6 @@ export class LoginComponent {
       this.formLogin.markAllAsTouched();
     }
   }
+
+  
 }

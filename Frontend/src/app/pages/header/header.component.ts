@@ -28,5 +28,14 @@ export class HeaderComponent {
     }
   }
 
+  crearEvento(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/create-event']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
   
 }

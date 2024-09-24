@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AccesService } from '../../services/acces.service';
 import { Router } from '@angular/router';
 import { UsuarioEdit } from '../../interfaces/UsuarioEdit';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-prefil-edit',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './prefil-edit.component.html',
   styleUrl: './prefil-edit.component.css'
 })
@@ -15,7 +16,8 @@ export class PrefilEditComponent implements OnInit {
   private AccesService = inject(AccesService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
-
+  feedbackMessage: string = '';
+  feedbackSuccess: boolean = false;
   public formEditarPerfil: FormGroup = this.formBuild.group({
     imgPerfil: [''],
     firstname: [''],
@@ -46,6 +48,9 @@ export class PrefilEditComponent implements OnInit {
             birth: data.birth,
           });
         },
+        error: (error) => {
+          this.mostrarFeedback('Error al cargar los datos del usuario', false);
+        }
       });
     }
   }
@@ -62,17 +67,27 @@ export class PrefilEditComponent implements OnInit {
         imgPerfil: this.formEditarPerfil.value.imgPerfil
       };
 
-
-        this.AccesService.update(objeto).subscribe({
-          next: (response) => {
-            console.log('Usuario Actualizado:', response);
+      this.AccesService.update(objeto).subscribe({
+        next: (response) => {
+          this.mostrarFeedback('Perfil actualizado con éxito', true);
+          setTimeout(() => {
             this.router.navigate(['/profile']);
-          },
-          error: (error) => {
-            console.error('Error al actualizar el usuario:', error);
-          }
-        });
+          }, 900);
+        },
+        error: (error) => {
+          this.mostrarFeedback('Error al actualizar el perfil', false);
+          console.error('Error al actualizar el usuario:', error);
+        }
+      });
+    } else {
+      this.mostrarFeedback('Error: ID de usuario no disponible', false);
+    }
+  } 
 
-    } 
+  private mostrarFeedback(mensaje: string, esExito: boolean) {
+    this.feedbackMessage = mensaje;
+    this.feedbackSuccess = esExito;
   }
+    
 }
+

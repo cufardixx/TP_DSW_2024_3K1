@@ -52,6 +52,15 @@ export class MisEventosComponent implements OnInit {
     this.router.navigate([`event/${id}`]);
   }
 
+  crearEvento(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/create-event']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
 
 }
 

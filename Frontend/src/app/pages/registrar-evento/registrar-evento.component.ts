@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registrar-evento',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './registrar-evento.component.html',
   styleUrls: ['./registrar-evento.component.css']  // Changed to styleUrls
 })
@@ -15,6 +16,8 @@ export class RegistrarEventoComponent {
   private EventService = inject(EventServiceService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
+  public feedbackMessage: string = '';
+  public feedbackSuccess: boolean = false;
 
   public formRegistroEvento: FormGroup = this.formBuild.group({
     title: ['', Validators.required],
@@ -24,8 +27,8 @@ export class RegistrarEventoComponent {
     location: ['', Validators.required],
     image: ['', Validators.required],
     price: ['', Validators.required],
-    organizer: ['', Validators.required], // Added this line
-    capacity: ['', Validators.required]    // Added this line
+    organizer: ['', Validators.required], 
+    capacity: ['', Validators.required]    
   });
 
   createEvent() {
@@ -45,13 +48,20 @@ export class RegistrarEventoComponent {
 
     this.EventService.crearEvento(objeto).subscribe({
       next: (resp) => {
-        this.router.navigate(['/profile']);
+        this.mostrarFeedback('Evento creado con éxito', true);
+        setTimeout(() => {
+          this.router.navigate(['/profile']);
+        }, 1050);
       },
       error: (err) => {
 
         console.error('Error creating event:', err);
-        // Optionally show an error message to the user
       }
     });
+  }
+
+  private mostrarFeedback(mensaje: string, esExito: boolean) {
+    this.feedbackMessage = mensaje;
+    this.feedbackSuccess = esExito;
   }
 }

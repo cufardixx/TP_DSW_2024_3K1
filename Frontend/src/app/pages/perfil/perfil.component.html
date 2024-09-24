@@ -1,12 +1,10 @@
 <main >
 
   <nav class="navbar navbar-expand-lg top-0 w-100" style="background-color: #e3f2fd;">
-    <div class="container-fluid">
+    <div class="container-fluid ">
 
       <h3 class="navbar-brand">Perfil del Usuario</h3>
 
-
-      
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -16,7 +14,8 @@
       </div>
 
       <div class="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
-          <a class="nav-link active" aria-current="page" (click)="misEventos()" style="cursor: pointer;">Mis Eventos</a>
+        <a class="nav-link active" aria-current="page" (click)="misEventos()" style="cursor: pointer;">Mis Eventos</a>
+          <a class="nav-link active mx-auto" aria-current="page" style="cursor: pointer;" (click)="crearEvento()">Crear Evento<i class="bi bi-plus-lg text-primary ms-1"></i></a>
           <button class="btn btn-outline-secondary" type="button" (click)="logout()" >Cerrar sesión</button>
       </div>
 
@@ -33,12 +32,12 @@
 
       <div class="p-2">
         <h5 class="border-bottom border-primary text-center">Detalles del Usuario</h5>
-        <p class=""><i class="pe-2 bi bi-envelope"></i><strong>Email:</strong> {{ userProfile.email }}</p>
-        <p class=""><i class="pe-2 bi bi-phone"></i><strong>Teléfono:</strong> {{ userProfile.phone }}</p>
-        <p class=""><i class="pe-2 bi bi-person"></i><strong>Nombre:</strong> {{ userProfile.firstname }}</p>
-        <p class=""><i class="pe-2 bi bi-person"></i><strong>Apellido:</strong> {{ userProfile.lastname }}</p>
-        <p class=""><i class="pe-2 bi bi-geo-alt"></i><strong>Dirección:</strong> {{ userProfile.location }}</p>
-        <p class=""><i class="pe-2 bi bi-calendar"></i><strong>Fecha nacimiento:</strong> {{ userProfile.birth }}</p>
+        <p class=""><i class="pe-2 bi bi-envelope text-primary "></i><strong>Email:</strong> {{ userProfile.email }}</p>
+        <p class=""><i class="pe-2 bi bi-phone text-primary"></i><strong>Teléfono:</strong> {{ userProfile.phone }}</p>
+        <p class=""><i class="pe-2 bi bi-person text-primary"></i><strong>Nombre:</strong> {{ userProfile.firstname }}</p>
+        <p class=""><i class="pe-2 bi bi-person text-primary"></i><strong>Apellido:</strong> {{ userProfile.lastname }}</p>
+        <p class=""><i class="pe-2 bi bi-geo-alt text-primary"></i><strong>Dirección:</strong> {{ userProfile.location }}</p>
+        <p class=""><i class="pe-2 bi bi-calendar text-primary"></i><strong>Fecha nacimiento:</strong> {{ userProfile.birth }}</p>
   
         <div class="text-center mt-4">
           <button class="btn btn-primary" (click)="editProfile()">Editar Perfil</button>

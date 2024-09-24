@@ -39,6 +39,8 @@ export class EventServiceService {
   actualizarEvento(id: number, objeto: Evento): Observable<Evento> {
     return this.http.put<Evento>(`${this.urlBase}${id}`, objeto,);
   }
+
+  
 }
 
 

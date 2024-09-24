@@ -25,7 +25,7 @@ export class LandingComponent {
 
   buscarEventos(): void {
     this.data = this.eventService.searchEventsByName(this.src).pipe(
-      map((response: any) => response)
+      map((response: any) => response.slice(0, 5))
     );
   }
 

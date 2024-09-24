@@ -19,6 +19,10 @@ export class DetalleEventoComponent {
 
   ngOnInit(): void {
 
+    if (typeof localStorage !== 'undefined') {
+      this.isLoggedIn = localStorage.getItem('token') !== null;
+    }
+
     this.eventId = this.route.snapshot.paramMap.get('id');
     
     if (this.eventId) {
@@ -27,6 +31,10 @@ export class DetalleEventoComponent {
       });
     }
   }
+
+  isLoggedIn = false;
+
+ 
 
   evento: any; // Definir la propiedad evento
 }

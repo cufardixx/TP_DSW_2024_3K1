@@ -14,6 +14,7 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
 
         const userName = user.firstname;
         
+        const userId  = user.id;
         
 
         const event = new Event();
@@ -25,8 +26,9 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         event.date = date;
         event.time = time;
         event.description = description;
-        event.usuario = user; 
+        event.usuario = user;
         event.organizer = userName;
+        event.user_id = userId;
 
         await event.save();
         return res.status(201).json({ message: 'Evento creado con éxito', event });

@@ -71,6 +71,7 @@ export class EditarEventoComponent {
 
   updateEvent() {
     const objeto: Evento = {
+      user_id: this.formEditarEvento.value.user_id,
       title: this.formEditarEvento.value.title,
       description: this.formEditarEvento.value.description,
       date: this.formEditarEvento.value.date,

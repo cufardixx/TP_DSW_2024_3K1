@@ -28,6 +28,10 @@ export class AccesService {
     return this.http.get(`${this.urlBase}profile`, { headers });
   }
 
+  obtenerImagenUsuario(id: number): Observable<UsuarioEdit> {
+    return this.http.get<UsuarioEdit>(`${this.urlBase}/${id}`);
+  }
+
   update(objeto: UsuarioEdit): Observable<UsuarioEdit> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('token', `${token}`);

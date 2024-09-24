@@ -1,6 +1,7 @@
 
 
 export interface Evento {
+    user_id: number;
     id?: number;
     title: string;
     description: string;

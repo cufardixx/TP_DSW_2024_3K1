@@ -42,7 +42,7 @@ export class EventServiceService {
 
   searchEventsByName(searchTerm: string): Observable<any> {
     const params = new HttpParams().set('search', searchTerm);
-    return this.http.get(`${this.urlBase}/search`, { params });
+    return this.http.get<any>(`${this.urlBase}/search`, { params });
   }
 
   

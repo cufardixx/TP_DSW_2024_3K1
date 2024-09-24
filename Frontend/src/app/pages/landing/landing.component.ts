@@ -4,42 +4,32 @@ import { PopularEventsComponent } from '../popular-events/popular-events.compone
 import { CrearEventComponent } from '../crear-event/crear-event.component';
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
 import { FooterComponent } from '../footer/footer.component';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { EventServiceService } from '../../services/event.service.service';
 import { FormsModule } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [HeaderComponent, PopularEventsComponent,CrearEventComponent,BuyTicketComponent, FooterComponent, CommonModule, FormsModule],
+  imports: [HeaderComponent, PopularEventsComponent, CrearEventComponent, BuyTicketComponent, FooterComponent, CommonModule, FormsModule, AsyncPipe],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent {
-  constructor(private eventService: EventServiceService) {}
+  constructor(private eventService: EventServiceService, private router: Router) {}
 
-  terminoBusqueda: string = '';
-  events: any[] = [];
-  errorMessage: string = '';
+  src: string = '';
+  public data: any;
 
-  buscarEventos() {
-    if (this.terminoBusqueda.trim()) {
-      this.eventService.searchEventsByName(this.terminoBusqueda).subscribe({
-        next: (data) => {
-          this.events = data;
-          this.errorMessage = '';
-        },
-        error: (err) => {
-          if (err.status === 404) {
-            this.events = [];
-            this.errorMessage = 'No se encontraron eventos';
-          } else {
-            this.errorMessage = 'Error al buscar eventos';
-          }
-        }
-      });
-    } else {
-      this.errorMessage = 'Por favor ingrese un término de búsqueda';
-    }
+  buscarEventos(): void {
+    this.data = this.eventService.searchEventsByName(this.src).pipe(
+      map((response: any) => response)
+    );
+  }
+
+  navigateToEvent(id: string): void {
+    this.router.navigate(['/event', id]);
   }
 }

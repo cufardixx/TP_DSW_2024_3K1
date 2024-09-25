@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buy-ticket',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './buy-ticket.component.css'
 })
 export class BuyTicketComponent {
+  private router: Router = inject(Router);
+
+  explorarEventos() {
+    this.router.navigate(['/events']);
+  }
 
 }

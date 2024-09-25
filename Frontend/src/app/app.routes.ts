@@ -8,6 +8,7 @@ import { RegistrarEventoComponent } from './pages/registrar-evento/registrar-eve
 import { MisEventosComponent } from './pages/mis-eventos/mis-eventos.component';
 import { EditarEventoComponent } from './pages/editar-evento/editar-evento.component';
 import { DetalleEventoComponent } from './pages/detalle-evento/detalle-evento.component';
+import { ExploradorEventosComponent } from './pages/explorador-eventos/explorador-eventos.component';
 
 export const routes: Routes = [
     { path: "", component: LandingComponent , title: 'Home'},
@@ -19,5 +20,6 @@ export const routes: Routes = [
     { path: "my-events", component: MisEventosComponent, title: 'Mis Eventos' },
     { path: "edit-event/:id", component: EditarEventoComponent, title: 'Editar Evento' },
     { path: "event/:id", component: DetalleEventoComponent, title: 'Ver Evento' },
+    { path: "events", component: ExploradorEventosComponent, title: 'Explorar Eventos' },
     { path: "**", redirectTo: "", pathMatch: "full" }
 ];

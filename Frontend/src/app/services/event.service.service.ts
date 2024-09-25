@@ -45,6 +45,10 @@ export class EventServiceService {
     return this.http.get<any>(`${this.urlBase}/search`, { params });
   }
 
+  obtenerEventos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${this.urlBase}/explore`);
+  }
+
   
 }
 

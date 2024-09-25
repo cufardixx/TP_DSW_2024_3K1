@@ -98,6 +98,18 @@ export const getEvent = async (req: Request, res: Response) => {
 };
 
 
+export const getEvents = async (req: Request, res: Response) => {
+    try {
+        const events = await Event.find();
+        return res.json(events);
+    } catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
+}
+
+    
 
 export const getEventByName = async (req: Request, res: Response) => {
     const { search } = req.query;

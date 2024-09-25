@@ -55,6 +55,13 @@ export class Event extends BaseEntity {
     @Column()
     user_id: number;
 
+    @Column({
+        default: false
+    })
+    destacado: boolean;
+
+ 
+
 
     //category como una clase? evento nocturno, evento musical, evento deportivo, cumpleaños, etc
 

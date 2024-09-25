@@ -17,6 +17,7 @@ export class ExploradorEventosComponent {
   eventos: Evento[] = [];
 
 
+
   ngOnInit(): void {
     this.eventoService.obtenerEventos().subscribe((eventos) => {
       this.eventos = eventos;
@@ -27,7 +28,9 @@ export class ExploradorEventosComponent {
 
 
 
-
+  verEvento(id: number): void {
+    this.router.navigate([`event/${id}`]);
+  }
 
 
   crearEvento(): void {

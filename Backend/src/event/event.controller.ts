@@ -54,7 +54,6 @@ export const updateEvent = async (req: Request, res: Response) => {
       event.price = price
       event.location = location
       event.image = image
-      
   
       await event.save()
   

@@ -33,6 +33,7 @@ export class RegistrarEventoComponent {
 
   createEvent() {
     const objeto: Evento = {
+      destacado: this.formRegistroEvento.value.destacado,
       user_id: this.formRegistroEvento.value.user_id,
       title: this.formRegistroEvento.value.title,
       description: this.formRegistroEvento.value.description,

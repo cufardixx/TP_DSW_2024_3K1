@@ -2,56 +2,68 @@
 
     <nav class="navbar navbar-expand-lg top-0 w-100" style="background-color: #e3f2fd;">
         <div class="container-fluid">
-    
-          <h3 class="navbar-brand">Explorador de Eventos</h3>
-    
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-            </ul>
-          </div>
-          
-          <div class="d-flex align-items-center">
-            <a class="nav-link active" aria-current="page" (click)="misEventos()" style="cursor: pointer;">Mis Eventos</a>
-            <a class="nav-link active mx-auto ms-3" aria-current="page" style="cursor: pointer;"
-              (click)="crearEvento()">Crear Evento<i class="bi bi-plus-lg text-primary ms-1"></i></a>
-          </div>
-          <a href="/profile">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar"
-              class="rounded-circle ms-3" style="width: 40px; height: 40px;">
-          </a>
-    
+
+            <h3 class="navbar-brand">Explorador de Eventos</h3>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <a class="nav-link active" aria-current="page" (click)="misEventos()" style="cursor: pointer;">Mis
+                    Eventos</a>
+                <a class="nav-link active mx-auto ms-3" aria-current="page" style="cursor: pointer;"
+                    (click)="crearEvento()">Crear Evento<i class="bi bi-plus-lg text-primary ms-1"></i></a>
+            </div>
+            <a href="/profile">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                    alt="Avatar" class="rounded-circle ms-3" style="width: 40px; height: 40px;">
+            </a>
+
         </div>
     </nav>
 
     <div class="container mt-5">
         <h3>Eventos Destacados</h3>
-      <div class="row">
-        <div class="col-md-8 mb-4" *ngIf="eventos.length > 0">
-          <div class="card">
-            <img class="card-img-top" [src]="eventos[0].image" alt="Imagen del evento destacado" style="height: 300px; object-fit: cover;">
-            <div class="card-body">
-              <h4 class="card-title">{{ eventos[0].title }}</h4>
-              <p class="card-text">Fecha: {{ eventos[0].date }}</p>
-              <p class="card-text">Evento Destacado</p>
+
+
+        <div class="col-md-4 mb-3 w-100 shadow" *ngFor="let evento of eventos">
+            <div class="card d-flex flex-column" *ngIf="evento.destacado">
+
+                <img class="w-100" [src]="evento.image" alt="Imagen del evento destacado"
+                    style="height: 300px; object-fit: cover;">
+
+                <div class="card-body">
+                    <h5>{{ evento.title | uppercase }}</h5>
+                    <p class="mb-0">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
+                    <small>Evento Destacado</small>
+                </div>
+                <button class="btn btn-primary w-50 mx-auto mb-3" (click)="verEvento(evento.id!)">Obtener</button>
+
             </div>
-          </div>
         </div>
 
-        <div class="col-md-4 mb-3" *ngFor="let evento of eventos.slice(1)">
-          <div class="card">
-            <img class="card-img-top" [src]="evento.image" alt="Imagen del evento">
-            <div class="card-body">
-              <h5 class="card-title">{{ evento.title }}</h5>
-              <p class="card-text">Fecha: {{ evento.date }}</p>
+
+        <h3 class="mt-5">Todos los Eventos</h3>
+        <div class="row">
+            <div class="col-md-4 mb-3" *ngFor="let evento of eventos">
+                <div class="card shadow" *ngIf="!evento.destacado">
+                    <img class="card-img-top" [src]="evento.image" alt="Imagen del evento"
+                        style="height: 200px; object-fit: cover;">
+                    <div class="card-body bg-light">
+                        <h5 class="card-title">{{ evento.title | uppercase }}</h5>
+                        <p class="card-text">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy'}}</p>
+                        <button class="btn btn-primary w-50 mx-auto d-block" (click)="verEvento(evento.id!)">Obtener</button>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-   
+
 
 
 

@@ -1,6 +1,7 @@
 
 
 export interface Evento {
+    destacado: boolean;
     user_id: number;
     id?: number;
     title: string;

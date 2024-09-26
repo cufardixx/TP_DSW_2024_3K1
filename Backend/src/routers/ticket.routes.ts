@@ -8,6 +8,6 @@ import { checkRoleAuth } from "../middlewares/checkRole"
 const router = Router()
 
 //ruta protegida 
-router.post("/buy",checkAuthToken, checkRoleAuth(["user"]), createTicket)
+router.post("/buy/:id",checkAuthToken, checkRoleAuth(["user"]), createTicket)
 
 export default router

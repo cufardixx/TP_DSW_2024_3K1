@@ -53,4 +53,7 @@ export class User extends BaseEntity {
     @OneToMany(() => Event, evento => evento.usuario)
     eventos: Event[];
 
+    @OneToMany(() => Ticket, ticket => ticket.user)
+    tickets: Ticket[];
+
 }

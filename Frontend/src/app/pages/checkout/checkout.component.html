@@ -1,0 +1,79 @@
+<main>
+    <nav class="navbar navbar-expand-lg top-0 w-100" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+
+            <h3 class="navbar-brand">Checkout</h3>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-grid gap-4 d-md-flex justify-content-md-end">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a class="nav-link active me-3" aria-current="page" style="cursor: pointer;" href="/my-events">Mis
+                        Eventos</a>
+                    <a class="nav-link active mx-auto" aria-current="page" style="cursor: pointer;"
+                        (click)="crearEvento()">Crear Evento<i class="bi bi-plus-lg text-primary ms-1"></i></a>
+                </div>
+                <a href="/profile">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                        alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;object-fit: cover;">
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+    <section class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="container" style=" padding: 20px; width: 70%;">
+
+            <div class="d-flex justify-content-center shadow-lg">
+
+                <div class="w-100">
+                    <div class="p-3 border-end border-primary h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Detalles del Evento</h5>
+                            <p class="card-text" style="font-size: 1.25rem;"><strong>{{evento.title | uppercase}}</strong></p>
+                            <p class="card-text text-muted mb-4"><small>{{evento.date | date:'yyyy-MM-dd'}}</small></p>
+                            <img src="{{evento.image}}" alt="{{evento.title}}" class="img-fluid rounded mb-2" style="height: 150px; object-fit: cover;">
+                            <div class="mb-4 ms-3">
+                                <p class="card-text"><i class="bi bi-info-circle me-2 text-primary"></i>{{evento.description}}</p>
+                                <p class="card-text"><i class="bi bi-geo-alt me-2 text-primary"></i>Ubicación {{evento.location}}</p>
+                                <p class="card-text"><i class="bi bi-person me-2 text-primary"></i>Organizador {{evento.organizer}}</p>
+                                <p class="card-text"><i class="bi bi-people me-2 text-primary"></i>Capacidad {{evento.capacity}} personas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-100 d-flex justify-content-center align-items-center">
+                    <div class="p-3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Checkout del Evento</h5>
+
+                            <div class="mb-4">
+                                <label for="ticketQuantity" class="form-label" style="font-weight: 500;">Cantidad de entradas</label>
+                                <input type="number" class="form-control text-center" id="ticketQuantity" 
+                                       [(ngModel)]="ticketQuantity" (ngModelChange)="updateTotal()"
+                                       placeholder="1" style="border-radius: 10px; width: 50%; margin: 0 auto;">
+                            </div>
+
+                            <p class="card-text mb-2" style="font-size: 1.1rem;">Precio por entrada: <strong>${{evento.price}}</strong></p>
+                            <p class="card-text mb-4" style="font-size: 1.1rem;">Total: <strong>${{total}}</strong></p>
+
+                            <button class="btn btn-primary btn-lg" style="width: 70%; border-radius: 10px;" (click)="procederConLaCompra(evento.id)">Proceder con la compra</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+</main>

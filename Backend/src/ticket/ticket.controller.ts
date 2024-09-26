@@ -3,31 +3,50 @@ import { Ticket } from "./ticket.entity";
 import { CustomRequest } from "../middlewares/authToken";
 import { User } from "../user/user.entity";
 import { randomUUID } from "crypto";
-
+import { Event } from "../event/event.entity";
 
 export const createTicket = async (req: CustomRequest, res: Response) => {
   try {
-    const { eventID } = req.body;
-    const codigoQR = randomUUID()
+    const { cantidad } = req.body;
+    const { id: eventID } = req.params;
 
-    const user = await User.findOneBy({ id: req.user!.id });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    // Buscar el evento y el usuario simultáneamente
+    const [user, event] = await Promise.all([
+      User.findOneBy({ id: req.user!.id }),
+      Event.findOneBy({ id: parseInt(eventID) })
+    ]);
 
-  
-    const ticket = new Ticket()
-    
-    
-    //ticket.usuario = user;
-    //ticket.evento= eventID;
-    ticket.codigo_unico= codigoQR
-  
+    if (!event) return res.status(404).json({ message: "Evento no encontrado" });
+    if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
 
-    await ticket.save();
-    console.log(ticket);
+    // Verificar la capacidad disponible
+    const ticketsVendidos = await Ticket.sum('cantidad', {  eventId: event.id });
+    const capacidadDisponible = event.capacity - (ticketsVendidos || 0);
 
-    return res.status(201).json({ message: 'Ticket created successfully' });
+    if (capacidadDisponible < cantidad) {
+      return res.status(400).json({ message: `No hay suficientes boletos disponibles. Quedan ${capacidadDisponible} boletos.` });
+    }
+
+    // Crear múltiples tickets, cada uno con su propio código único
+    const tickets = [];
+    for (let i = 0; i < cantidad; i++) {
+      const ticket = Ticket.create({
+        cantidad: 1,
+        event,
+        user,
+        codigo_unico: randomUUID(),
+        eventId: event.id,
+        userId: user.id
+      });
+      tickets.push(ticket);
+    }
+
+    // Guardar todos los tickets en la base de datos
+    await Ticket.save(tickets);
+
+    return res.status(201).json({ message: `${cantidad} ticket(s) creado(s) exitosamente` });
 
   } catch (error: any) {
-    return res.status(500).json({ message: error.message || 'Internal server error' });
+    return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
   }
 };

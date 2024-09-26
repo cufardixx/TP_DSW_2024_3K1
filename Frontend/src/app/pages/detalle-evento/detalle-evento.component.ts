@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { EventServiceService } from '../../services/event.service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AccesService } from '../../services/acces.service';
 
@@ -14,6 +14,7 @@ import { AccesService } from '../../services/acces.service';
 export class DetalleEventoComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private eventoService = inject(EventServiceService);
   private accesService = inject(AccesService);
   private eventId: string | null = null;
@@ -48,6 +49,10 @@ export class DetalleEventoComponent implements OnInit {
         console.error('Error al obtener la imagen del usuario:', error);
       }
     );
+  }
+
+  reservarEntrada(eventId: number): void {
+    this.router.navigate([`/ticket/${eventId}`]);
   }
  
 }

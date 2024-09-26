@@ -60,7 +60,8 @@ export class Event extends BaseEntity {
     })
     destacado: boolean;
 
- 
+    @OneToMany(() => Ticket, ticket => ticket.event)
+    tickets: Ticket[];
 
 
     //category como una clase? evento nocturno, evento musical, evento deportivo, cumpleaños, etc

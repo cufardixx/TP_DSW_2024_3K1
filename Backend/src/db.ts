@@ -2,6 +2,7 @@ import { DataSource } from "typeorm"
 import { User } from "./user/user.entity"
 import { Event } from "./event/event.entity"
 import { Ticket } from "./ticket/ticket.entity"
+import { Category } from "./category/category.entity"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -10,7 +11,7 @@ export const AppDataSource = new DataSource({
     username: "postgres",
     password: "admin",
     database: "typeormdb",
-    entities: [User, Event, Ticket],
+    entities: [User, Event, Ticket, Category],
     logging: true,
     synchronize: true
 })

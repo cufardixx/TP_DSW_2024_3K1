@@ -25,15 +25,10 @@
           <button class="btn btn-outline-primary" type="submit" (click)="redirectToRegister()">Registrarse</button>
         </ng-container>
 
-
-
         <ng-container *ngIf="isLoggedIn">
           <div class="d-flex align-items-center">
             <a class="nav-link active mx-auto" aria-current="page" style="cursor: pointer;" href="/my-events">Mis Eventos</a>
             <a class="nav-link active mx-auto ms-3" aria-current="page" style="cursor: pointer;" (click)="crearEvento()">Crear Evento<i class="bi bi-plus-lg text-primary ms-1"></i></a>
-            <ng-container *ngIf="isAdmin">
-              <a class="nav-link active mx-auto ms-3" aria-current="page" style="cursor: pointer;" href="/admin/categories">Categorías</a>
-            </ng-container>
           </div>
           <a href="/profile">
               <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;" >

@@ -9,7 +9,7 @@ const router = Router()
 
 //ruta protegida 
 router.put("/profile/:id", schemaValidation(updateUserSchema), updateUser)
-router.get("/profile", checkAuthToken, checkRoleAuth(["user", "admin"]), profile)
+router.get("/profile", checkAuthToken, checkRoleAuth(["user"]), profile)
 
 router.post("/login", schemaValidation(signinUserSchema), signinUser)
 router.post("/register", schemaValidation(signupUserSchema), signupUser)

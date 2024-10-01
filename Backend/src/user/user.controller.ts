@@ -142,7 +142,6 @@ export const profile = async (req: CustomRequest, res: Response) => {
       location: user.location,
       birth: user.birth,
       imgPerfil: user.imgPerfil,
-      rol: user.rol
     });
   } catch (error) {
     return res.status(500).json({ message: 'Internal server error' });

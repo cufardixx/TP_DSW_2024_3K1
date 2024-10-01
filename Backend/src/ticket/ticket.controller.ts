@@ -4,6 +4,19 @@ import { CustomRequest } from "../middlewares/authToken";
 import { User } from "../user/user.entity";
 import { randomUUID } from "crypto";
 import { Event } from "../event/event.entity";
+import QRCode from "qrcode";
+import  enviarCorreoConQR  from "../lib/mailer";
+
+
+async function generarQR(texto: string): Promise<string> {
+    try {
+        const qrCode = await QRCode.toDataURL(texto);
+        return qrCode;
+    } catch (err) {
+        console.error('Error generando QR:', err);
+        throw new Error('No se pudo generar el QR');
+    }
+}
 
 export const createTicket = async (req: CustomRequest, res: Response) => {
     try {
@@ -27,19 +40,32 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
             return res.status(400).json({ message: `No hay suficientes boletos disponibles. Quedan ${capacidadDisponible} boletos.` });
         }
 
-        // Crear múltiples tickets, cada uno con su propio código único
-        const tickets = Array.from({ length: cantidad }, () =>
-            Ticket.create({
-                event,
-                user,
-                codigo_unico: randomUUID(),
-                eventId: event.id,
-                userId: user.id
-            })
-        );
+    
+
+    // Crear múltiples tickets con código QR
+    const tickets = await Promise.all(
+        Array.from({ length: cantidad }, async () => {
+          const qrCode = await generarQR(randomUUID());
+          return Ticket.create({
+            event,
+            user,
+            codigo_unico: randomUUID(),
+            qrCode, // Guardar el QR generado
+            eventId: event.id,
+            userId: user.id
+        });
+        })
+    );
 
         // Guardar todos los tickets en la base de datos
         await Ticket.save(tickets);
+
+        if (user?.email) {
+            await enviarCorreoConQR(user.email, tickets.map(ticket => ticket.qrCode!));
+            console.log('Correo enviado exitosamente');
+        } else {
+            console.log('No se pudo enviar el correo: email de usuario no definido');
+        }
 
         return res.status(201).json({ message: `${cantidad} ticket(s) creado(s) exitosamente` });
 
@@ -47,3 +73,5 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
         return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }
 };
+
+

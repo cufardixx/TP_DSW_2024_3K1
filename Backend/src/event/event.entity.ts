@@ -1,7 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BaseEntity, OneToMany, ManyToOne, ManyToMany, JoinColumn } from "typeorm"
 import { Ticket } from "../ticket/ticket.entity";
 import { User } from "../user/user.entity";
-import { Category } from "../category/category.entity";
 
 @Entity()
 export class Event extends BaseEntity {
@@ -64,9 +63,6 @@ export class Event extends BaseEntity {
     @OneToMany(() => Ticket, ticket => ticket.event)
     tickets: Ticket[];
 
-    @ManyToOne(() => Category, category => category.events)
-    @JoinColumn({name: "category_id"})
-    category: Category;
 
     //category como una clase? evento nocturno, evento musical, evento deportivo, cumpleaños, etc
 

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccesService } from '../../services/acces.service';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +10,7 @@ import { AccesService } from '../../services/acces.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
-    constructor(private router: Router, private accesService: AccesService) { }
+  constructor(private router: Router) { }
 
   redirectToLogin(): void {
     this.router.navigate(['/login']);
@@ -23,21 +21,11 @@ export class HeaderComponent {
   }
 
   isLoggedIn = false;
-  isAdmin = true;
-
 
   ngOnInit(): void {
     if (typeof localStorage !== 'undefined') {
-      const token = localStorage.getItem('token');
-      if (token) {
-        this.isLoggedIn = true;
-        this.accesService.getProfile(token).subscribe({
-          next: (data: any) => {
-            this.isAdmin = data.rol === 'admin';
-          },  
-        });
-      } 
-    }     
+      this.isLoggedIn = localStorage.getItem('token') !== null;
+    }
   }
 
   crearEvento(): void {

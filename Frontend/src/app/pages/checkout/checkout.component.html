@@ -36,36 +36,48 @@
                 <div class="w-100">
                     <div class="p-3 border-end border-primary h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Detalles del Evento</h5>
-                            <p class="card-text" style="font-size: 1.25rem;"><strong>{{evento.title | uppercase}}</strong></p>
+                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Detalles del
+                                Evento</h5>
+                            <p class="card-text" style="font-size: 1.25rem;"><strong>{{evento.title |
+                                    uppercase}}</strong></p>
                             <p class="card-text text-muted mb-4"><small>{{evento.date | date:'yyyy-MM-dd'}}</small></p>
-                            <img src="{{evento.image}}" alt="{{evento.title}}" class="img-fluid rounded mb-2" style="height: 150px; object-fit: cover;">
+                            <img src="{{evento.image}}" alt="{{evento.title}}" class="img-fluid rounded mb-2"
+                                style="height: 150px; object-fit: cover;">
                             <div class="mb-4 ms-3">
-                                <p class="card-text"><i class="bi bi-info-circle me-2 text-primary"></i>{{evento.description}}</p>
-                                <p class="card-text"><i class="bi bi-geo-alt me-2 text-primary"></i>Ubicación {{evento.location}}</p>
-                                <p class="card-text"><i class="bi bi-person me-2 text-primary"></i>Organizador {{evento.organizer}}</p>
-                                <p class="card-text"><i class="bi bi-people me-2 text-primary"></i>Capacidad {{evento.capacity}} personas</p>
+                                <p class="card-text"><i
+                                        class="bi bi-info-circle me-2 text-primary"></i>{{evento.description}}</p>
+                                <p class="card-text"><i class="bi bi-geo-alt me-2 text-primary"></i>Ubicación
+                                    {{evento.location}}</p>
+                                <p class="card-text"><i class="bi bi-person me-2 text-primary"></i>Organizador
+                                    {{evento.organizer}}</p>
+                                <p class="card-text"><i class="bi bi-people me-2 text-primary"></i>Capacidad
+                                    {{evento.capacity}} personas</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="w-100 d-flex justify-content-center align-items-center">
                     <div class="p-3">
                         <div class="card-body text-center">
-                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Checkout del Evento</h5>
+                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Checkout del
+                                Evento</h5>
+                            <form [formGroup]="formCheckout">
+                                <div class="mb-4">
+                                    <label for="ticketQuantity" class="form-label" style="font-weight: 500;">Cantidad de
+                                        entradas</label>
+                                    <input type="number" class="form-control text-center" id="ticketQuantity"
+                                        placeholder="1" formControlName="quantity" style="border-radius: 10px; width: 50%; margin: 0 auto;">
+                                </div>
 
-                            <div class="mb-4">
-                                <label for="ticketQuantity" class="form-label" style="font-weight: 500;">Cantidad de entradas</label>
-                                <input type="number" class="form-control text-center" id="ticketQuantity" 
-                                       [(ngModel)]="ticketQuantity" (ngModelChange)="updateTotal()"
-                                       placeholder="1" style="border-radius: 10px; width: 50%; margin: 0 auto;">
-                            </div>
+                                <p class="card-text mb-2" style="font-size: 1.1rem;">Precio por entrada:
+                                    <strong>${{evento.price}}</strong></p>
+                                <p class="card-text mb-4" style="font-size: 1.1rem;">Total: <strong>${{total}}</strong>
+                                </p>
 
-                            <p class="card-text mb-2" style="font-size: 1.1rem;">Precio por entrada: <strong>${{evento.price}}</strong></p>
-                            <p class="card-text mb-4" style="font-size: 1.1rem;">Total: <strong>${{total}}</strong></p>
-
-                            <button class="btn btn-primary btn-lg" style="width: 70%; border-radius: 10px;" (click)="procederConLaCompra(evento.id)">Proceder con la compra</button>
+                                <button class="btn btn-primary btn-lg" style="width: 70%; border-radius: 10px;"
+                                    (click)="comprarTickets()">Proceder con la compra</button>
+                            </form>
                         </div>
                     </div>
                 </div>

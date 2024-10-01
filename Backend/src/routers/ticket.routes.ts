@@ -5,6 +5,7 @@ import { checkRoleAuth } from "../middlewares/checkRole"
 
 
 
+
 const router = Router()
 
 //ruta protegida 

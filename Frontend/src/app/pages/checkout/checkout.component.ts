@@ -2,26 +2,36 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventServiceService } from '../../services/event.service.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TicketServiceService } from '../../services/ticket.service.service';
+import { Ticket } from '../../interfaces/ticket';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  public formBuild = inject(FormBuilder);
   private eventoService = inject(EventServiceService);
   private ticketService = inject(TicketServiceService);
-  //private accesService = inject(AccesService);
+ 
+
   private eventId: string | null = null;
   evento: any;
   ticketQuantity: number = 1;
   total: number = 0;
+
+
+  public formCheckout: FormGroup = this.formBuild.group({
+    quantity: ['', Validators.required]
+  });
+
+
 
   ngOnInit(): void {
     this.eventId = this.route.snapshot.paramMap.get('id');
@@ -29,14 +39,30 @@ export class CheckoutComponent implements OnInit {
     if (this.eventId) {
       this.eventoService.obtenerEvento(Number(this.eventId)).subscribe((evento) => {
         this.evento = evento;
-        this.updateTotal();
       });
     }
   }
 
-  updateTotal(): void {
-    this.total = this.evento.price * this.ticketQuantity;
+  
+
+  comprarTickets() {
+    const token = localStorage.getItem('token');
+    const cantidadDeTickets = this.formCheckout.value.quantity;
+    if (token && this.eventId) {
+      this.ticketService.comprarTicket({ cantidad: cantidadDeTickets }, Number(this.eventId), token)
+        .subscribe(
+        response => {
+          console.log('Boletos comprados:', response);
+        },
+        error => {
+          console.error('Error al comprar tickets:', error);
+        }
+      );
+    }
   }
+
+  
+
 
   crearEvento(): void {
     const token = localStorage.getItem('token');
@@ -47,23 +73,5 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  procederConLaCompra(eventId: number): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.ticketService.comprarTicket(eventId, token).subscribe(
-        (ticket) => {
-          console.log('Ticket comprado:', ticket);
-          // Lógica adicional después de una compra exitosa
-        },
-        (error) => {
-          console.error('Error al comprar el ticket:', error);
-          // Manejo de errores
-        }
-      );
-    } else {
-      console.error('No hay token disponible');
-      this.router.navigate(['/login']);
-    }
-  }
 
 }

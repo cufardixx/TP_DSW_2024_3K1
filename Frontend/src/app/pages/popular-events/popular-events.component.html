@@ -5,12 +5,12 @@
 
     <!-- Carrusel -->
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="height: 500px;">
-      <div class="carousel-inner">
+      <div class="carousel-inner" style="height: 500px;">
         <div class="carousel-item" *ngFor="let eventGroup of eventGroups; let first = first" [class.active]="first" style="height: 500px;">
           <div class="row justify-content-center">
             <div class="col-md-4" *ngFor="let event of eventGroup">
-              <div class="card shadow-sm h-100">
-                <img class="card-img-top" [src]="event.image" [alt]="'Imagen del Evento ' + event.title">
+              <div class="card shadow-sm" style="height: 400px;">
+                <img class="card-img-top" [src]="event.image" [alt]="'Imagen del Evento ' + event.title" style="height: 200px; object-fit: cover;">
                 <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">{{ event.title }}</h5>
                   <p class="card-text">{{ event.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>

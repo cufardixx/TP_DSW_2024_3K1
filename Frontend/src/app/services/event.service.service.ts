@@ -22,10 +22,14 @@ export class EventServiceService {
   }
 
   obtenerEventosUsuario(): Observable<Evento[]> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('token', `${token}`);
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('token', `${token}`);
 
-    return this.http.get<Evento[]>(`${this.urlBase}`, { headers });
+      return this.http.get<Evento[]>(`${this.urlBase}`, { headers });
+    } else {
+      return new Observable<Evento[]>();
+    }
   }
 
   obtenerEvento(id: number): Observable<Evento> {

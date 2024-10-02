@@ -3,6 +3,7 @@ import { EventServiceService } from '../../services/event.service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AccesService } from '../../services/acces.service';
+import { Evento } from '../../interfaces/event';
 
 @Component({
   selector: 'app-detalle-evento',
@@ -23,6 +24,7 @@ export class DetalleEventoComponent implements OnInit {
   user: any;
   evento: any;
   imgPerfil: string | null = null;
+  loading = true;
 
   ngOnInit(): void {
     if (typeof localStorage !== 'undefined') {
@@ -37,6 +39,19 @@ export class DetalleEventoComponent implements OnInit {
         this.obtenerImagenUsuario(evento.user_id)
       });
     }
+  }
+
+  cargarEvento() {
+    this.eventoService.obtenerEvento(Number(this.eventId)).subscribe(
+      (data : Evento) => {
+        this.evento = data;
+        this.loading = false;
+      },
+      (error: any) => {
+        console.error('Error al cargar el evento', error);
+        this.loading = false;
+      }
+    );
   }
 
   obtenerImagenUsuario(userId: number): void {

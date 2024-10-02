@@ -1,14 +1,28 @@
-import { Component } from '@angular/core';
-
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { EventServiceService } from '../../services/event.service.service';
 @Component({
   selector: 'app-popular-events',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './popular-events.component.html',
   styleUrl: './popular-events.component.css'
 })
 export class PopularEventsComponent {
-  event: any[] = [1, 2, 3]; // Aquí defines los eventos
+  private eventService = inject(EventServiceService);
+  events: any[] = [];
+  eventGroups: any[][] = [];
 
-  constructor() {}
+  ngOnInit(): void {
+    this.eventService.obtenerEventos().subscribe((data) => {
+      this.events = data;
+      this.groupEvents();
+    });
+  }
+
+  groupEvents(): void {
+    for (let i = 0; i < this.events.length; i += 3) {
+      this.eventGroups.push(this.events.slice(i, i + 3));
+    }
+  }
 }

@@ -1,55 +1,40 @@
 <section class="py-5" style="background-color: #e3f2fd;">
   <div class="container">
-    
+
     <h2 class="display-4 font-weight-bold text-center mb-5 text-primary">Eventos Populares</h2>
-    
+
     <!-- Carrusel -->
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="height: 500px;">
       <div class="carousel-inner">
-        <!-- Primer evento activo -->
-        <div class="carousel-item active">
+        <div class="carousel-item" *ngFor="let eventGroup of eventGroups; let first = first" [class.active]="first" style="height: 500px;">
           <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-              <div class="card shadow-sm">
-                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSga6yisHc6htna4rQdhlFyffWiWv1a1bsC9g&s" alt="Imagen del Evento {{ event }}">
-                <div class="card-body text-center">
-                  <h5 class="card-title">Evento  {{ event }}</h5>
-                  <p class="card-text">Fecha: 1 de Enero, 2024</p>
-                  <button class="btn btn-primary btn-lg">Comprar Entradas</button>
+            <div class="col-md-4" *ngFor="let event of eventGroup">
+              <div class="card shadow-sm h-100">
+                <img class="card-img-top" [src]="event.image" [alt]="'Imagen del Evento ' + event.title">
+                <div class="card-body text-center d-flex flex-column">
+                  <h5 class="card-title">{{ event.title }}</h5>
+                  <p class="card-text">{{ event.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
+                  <a class="btn btn-primary btn-lg mt-auto" href="/event/{{event.id}}" role="button">
+                    Comprar Entradas
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Segundo evento -->
-        <div class="carousel-item">
-          <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-              <div class="card shadow-sm">
-                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSga6yisHc6htna4rQdhlFyffWiWv1a1bsC9g&s" alt="Imagen del Evento {{ event }}">
-                <div class="card-body text-center">
-                  <h5 class="card-title">Evento Emocionante {{ event }}</h5>
-                  <p class="card-text">Fecha: 1 de Enero, 2024</p>
-                  <button class="btn btn-primary btn-lg">Comprar Entradas</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Controles del carrusel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
       </div>
-
-      <!-- Controles del carrusel -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
     </div>
   </div>
 </section>
-
-

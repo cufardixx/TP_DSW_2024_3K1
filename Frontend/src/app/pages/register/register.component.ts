@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../interfaces/Usuario';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 
 
 export class RegisterComponent {
+  errorMessages: string[] = [];
   private AccesService = inject(AccesService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
@@ -54,7 +56,7 @@ export class RegisterComponent {
           this.router.navigate(['/login']);
         },
         error: (error) => {
-          console.error('Error al registrar el usuario:', error);
+          this.errorMessages = error;
         }
       });
     } else {

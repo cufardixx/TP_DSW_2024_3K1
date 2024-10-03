@@ -4,7 +4,7 @@ import { User } from "../user/user.entity";
 
 export const verifyToken = async(token : string) => {
     try {
-        return jwt.verify(token, "frasemegasecreta")
+        return jwt.verify(token, process.env.SECRET_KEY!)
     } catch (error) {
         return null
     }
@@ -17,7 +17,7 @@ export const tokenSing = async (user: User) => {
             id: user.id,
             rol: user.rol
         },
-        process.env.SECRET_KEY || 'frasemegasecreta',
+        process.env.SECRET_KEY!,
         
     );
 }

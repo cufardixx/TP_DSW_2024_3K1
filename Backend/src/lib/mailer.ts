@@ -2,12 +2,12 @@ import nodemailer from 'nodemailer'
 
 
 const trasporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
+    host: process.env.MAIL_HOST!,
+    port: Number(process.env.MAIL_PORT!),
     secure: true, // upgrade later with STARTTLS
     auth: {
-        user: "facundopicia@gmail.com",
-        pass: "fancilywwrkiksix",
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASSWORD,
     },
 });
 
@@ -15,7 +15,7 @@ const trasporter = nodemailer.createTransport({
 const enviarCorreoConQR = async (destinatario: string, qrCodes: string[]): Promise<void> => {
     try {
         const mailOptions = {
-            from: 'facundopicia@hotmail.com',
+            from: process.env.MAIL_FROM!,
             to: destinatario,
             subject: 'Tus tickets con QR',
             text: 'Gracias por tu compra. Aquí tienes tus tickets.',

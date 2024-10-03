@@ -7,16 +7,16 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const AppDataSource = new DataSource({
-    type: "mysql",
-    host: "bjcsiaqrnj9kzodturom-mysql.services.clever-cloud.com",
-    port: 3306,
-    username: "uo0w75mbltyxiuiy",
-    password: "Ch69yJ3t3ssRSDfbd8vh",
-    database: "bjcsiaqrnj9kzodturom",
-    synchronize: true,
-    logging: false,
-    entities: [User, Event, Ticket],
-  });
+  type: "mysql",
+  host: process.env.DB_HOST,
+  port: 3306,
+  username: process.env.POSTGRESQL_ADDON_USER,
+  password: process.env.POSTGRESQL_ADDON_PASSWORD,
+  database: process.env.DB_NAME,
+  synchronize: true,
+  logging: false,
+  entities: [User, Event, Ticket],
+});
 
-  export default AppDataSource;
+export default AppDataSource;
 

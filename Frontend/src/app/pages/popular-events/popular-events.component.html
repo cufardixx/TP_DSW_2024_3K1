@@ -1,16 +1,16 @@
-<section class="py-5" style="background-color: #e3f2fd;">
+<section class="py-5" style="background-color: #f8f9fa;">
   <div class="container">
 
-    <h2 class="display-4 font-weight-bold text-center mb-5 text-primary">Eventos Populares</h2>
+    <h2 class="display-4 font-weight-bold text-center mb-5 text-primary">Eventos Populares</h2> 
 
     <!-- Carrusel -->
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="height: 500px;">
-      <div class="carousel-inner" style="height: 500px;">
-        <div class="carousel-item" *ngFor="let eventGroup of eventGroups; let first = first" [class.active]="first" style="height: 500px;">
+    <div id="carouselExampleAutoplaying" class="carousel slide position-relative" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let eventGroup of eventGroups; let first = first" [class.active]="first">
           <div class="row justify-content-center">
             <div class="col-md-4" *ngFor="let event of eventGroup">
-              <div class="card shadow-sm" style="height: 400px;">
-                <img class="card-img-top" [src]="event.image" [alt]="'Imagen del Evento ' + event.title" style="height: 200px; object-fit: cover;">
+              <div class="card shadow-sm event-card">
+                <img class="card-img-top" [src]="event.image" [alt]="'Imagen del Evento ' + event.title">
                 <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">{{ event.title }}</h5>
                   <p class="card-text">{{ event.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
@@ -24,17 +24,17 @@
         </div>
 
         <!-- Controles del carrusel -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Siguiente</span>
-        </button>
-      </div>
+        <button class="carousel-control-prev custom-control" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next custom-control" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
     </div>
   </div>
+</div>
 </section>

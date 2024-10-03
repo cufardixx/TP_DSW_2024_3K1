@@ -1,37 +1,40 @@
-<nav style="background-color: #e3f2fd;" class="navbar navbar-expand-lg border-bottom border-body position-absolute top-0 w-100">
-
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">EventLife</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <a class="navbar-brand text-light font-weight-bold" href="#">EventLife</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
         <li class="nav-item">
           <a class="nav-link" href="#">Tendencia</a>
         </li>
-
         <li class="nav-item">
           <a class="nav-link" href="#">Información</a>
         </li>
-
       </ul>
 
-      <div class="d-grid gap-4 d-md-flex justify-content-md-end">
+      <div class="d-flex">
+        <!-- Si el usuario no está autenticado -->
         <ng-container *ngIf="!isLoggedIn">
-          <button class="btn btn-primary" type="submit" (click)="redirectToLogin()">Iniciar sesión</button>
-          <button class="btn btn-outline-primary" type="submit" (click)="redirectToRegister()">Registrarse</button>
+          <button class="btn btn-primary me-2" (click)="redirectToLogin()">Iniciar sesión</button>
+          <button class="btn btn-outline-light" (click)="redirectToRegister()">Registrarse</button>
         </ng-container>
 
+        <!-- Si el usuario está autenticado -->
         <ng-container *ngIf="isLoggedIn">
           <div class="d-flex align-items-center">
-            <a class="nav-link active mx-auto" aria-current="page" style="cursor: pointer;" href="/my-events">Mis Eventos</a>
-            <a class="nav-link active mx-auto ms-3" aria-current="page" style="cursor: pointer;" (click)="crearEvento()">Crear Evento<i class="bi bi-plus-lg text-primary ms-1"></i></a>
+            <a class="nav-link text-white me-3" href="/my-events">Mis Eventos</a>
+            <a class="nav-link text-white" href="#" (click)="crearEvento()">
+              Crear Evento
+              <i class="bi bi-plus-lg text-primary ms-1"></i>
+            </a>
           </div>
           <a href="/profile">
-              <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;" >
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar" class="rounded-circle ms-3" style="width: 40px; height: 40px;">
           </a>
         </ng-container>
       </div>

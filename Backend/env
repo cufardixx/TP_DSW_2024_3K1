@@ -1,0 +1,17 @@
+MYSQL_ADDON_HOST=bjcsiaqrnj9kzodturom-mysql.services.clever-cloud.com
+DB_NAME=bjcsiaqrnj9kzodturom
+MYSQL_ADDON_USER=uo0w75mbltyxiuiy
+POSTGRESQL_ADDON_PORT=50013
+MYSQL_ADDON_PASSWORD=Ysvr94HAutFylLfdaaz7PrpT34tnsI
+POSTGRESQL_ADDON_URI=postgresql://uxaxhwse5duyhcagcdmh:Ysvr94HAutFylLfdaaz7PrpT34tnsI@b3obda8gnbqpogharqj9-postgresql.services.clever-cloud.com:5432/b3obda8gnbqpogharqj9
+
+
+SECRET_KEY=frasemegasecreta
+
+
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USER=facundopicia@gmail.com
+MAIL_PASSWORD=fancilywwrkiksix
+MAIL_FROM=facundopicia@gmail.com
+

@@ -1,4 +1,45 @@
+/* Sección de bienvenida */
+.hero-section {
+    background-color: #004e92;
+  }
+  
+  .hero-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .hero-section p {
+    font-size: 1.25rem;
+  }
+  
+  .input-group-lg .form-control {
+    font-size: 1.25rem;
+  }
+  
+  .input-group-lg .btn-warning {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
 
+  .events-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  
+
+  .create-ticket-section {
+    background: linear-gradient(90deg, #004e92, #000428);
+    color: #fff;
+  }
+  
+  .create-ticket-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  
 
 
 

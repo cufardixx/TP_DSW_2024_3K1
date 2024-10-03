@@ -8,10 +8,10 @@ dotenv.config();
 
 const AppDataSource = new DataSource({
   type: "mysql",
-  host: process.env.DB_HOST,
+  host: process.env.MYSQL_ADDON_HOST,
   port: 3306,
-  username: process.env.POSTGRESQL_ADDON_USER,
-  password: process.env.POSTGRESQL_ADDON_PASSWORD,
+  username: process.env.MYSQL_ADDON_USER,
+  password: process.env.MYSQL_ADDON_PASSWORD,
   database: process.env.DB_NAME,
   synchronize: true,
   logging: false,

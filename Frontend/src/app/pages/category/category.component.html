@@ -1,0 +1,31 @@
+<main>
+    <form [formGroup]="formCategory">
+        <input type="text" placeholder="Nombre de la categoria"  formControlName="name">
+        <button type="button" (click)="CargarCategoria()">Cargar</button>
+    </form>
+
+    <div *ngIf="categorias && categorias.length > 0">
+        <table class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre Categoría</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let categoria of categorias; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ categoria.name }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm me-2" (click)="eliminarCategoria(categoria.id)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <p *ngIf="categorias && categorias.length === 0">No hay categorías disponibles.</p>
+      
+      
+</main> 

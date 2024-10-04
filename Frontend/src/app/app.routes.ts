@@ -10,10 +10,11 @@ import { EditarEventoComponent } from './pages/editar-evento/editar-evento.compo
 import { DetalleEventoComponent } from './pages/detalle-evento/detalle-evento.component';
 import { ExploradorEventosComponent } from './pages/explorador-eventos/explorador-eventos.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { CategoryComponent } from './pages/category/category.component';
 
 export const routes: Routes = [
-    { path: "", component: LandingComponent , title: 'Home'},
-    { path: "login", component: LoginComponent ,title: 'Login'},
+    { path: "", component: LandingComponent, title: 'Home' },
+    { path: "login", component: LoginComponent, title: 'Login' },
     { path: "register", component: RegisterComponent, title: 'Register' },
     { path: "profile", component: PerfilComponent, title: 'Perfil' },
     { path: "profile/:id", component: PrefilEditComponent, title: 'Perfil' },
@@ -23,5 +24,6 @@ export const routes: Routes = [
     { path: "event/:id", component: DetalleEventoComponent, title: 'Ver Evento' },
     { path: "events", component: ExploradorEventosComponent, title: 'Explorar Eventos' },
     { path: "ticket/:id", component: CheckoutComponent, title: 'Ticket' },
+    { path: "category", component: CategoryComponent, title: 'Categorias Admin' },
     { path: "**", redirectTo: "", pathMatch: "full" }
 ];

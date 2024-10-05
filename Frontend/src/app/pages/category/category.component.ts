@@ -32,9 +32,9 @@ export class CategoryComponent {
 
   ngOnInit(): void {
     this.CategoryService.getCategories().subscribe((categorias) => {
+      console.log(categorias); // Verifica que los datos se reciban correctamente
       this.categorias = categorias;
-      console.log(categorias);
-    })
+    });
   }
 
 
@@ -42,7 +42,6 @@ export class CategoryComponent {
     this.CategoryService.deleteCategory(id).subscribe(
       (response) => {
         console.log('Categoría eliminada:', response);
-        // Actualiza la lista de categorías después de eliminar
         this.categorias = this.categorias.filter(categoria => categoria.id !== id);
       },
       (error) => {
@@ -63,7 +62,7 @@ export class CategoryComponent {
     this.CategoryService.cargarCategoria(objeto!).subscribe({
       next: (response) => {
         console.log('Categoria registrada:', response);
-        // this.router.navigate(['/login']);
+        this.ngOnInit()
       },
       error: (error) => {
         this.errorMessages = error;

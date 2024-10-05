@@ -1,31 +1,60 @@
 <main>
-    <form [formGroup]="formCategory">
-        <input type="text" placeholder="Nombre de la categoria"  formControlName="name">
-        <button type="button" (click)="CargarCategoria()">Cargar</button>
-    </form>
+  <nav class="navbar navbar-expand-lg top-0 w-100" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
 
-    <div *ngIf="categorias && categorias.length > 0">
-        <table class="table">
-          <thead class="table-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nombre Categoría</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let categoria of categorias; let i = index">
-              <th scope="row">{{ i + 1 }}</th>
-              <td>{{ categoria.name }}</td>
-              <td>
-                <button class="btn btn-danger btn-sm me-2" (click)="eliminarCategoria(categoria.id)">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <h3 class="navbar-brand">Detalle del Evento</h3>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>    
       </div>
       
-      <p *ngIf="categorias && categorias.length === 0">No hay categorías disponibles.</p>
-      
-      
-</main> 
+      <div class="d-grid gap-4 d-md-flex justify-content-md-end">
+        <div class="d-flex align-items-center">
+
+            <a class="nav-link active mx-auto" aria-current="page" style="cursor: pointer;" href="/my-events">Mis Eventos</a>
+            </div>
+            <a href="/profile">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;object-fit: cover;" >
+            </a>
+        </div>
+
+    </div>
+  </nav>
+  <section class="container p-3 mt-5">
+  <form [formGroup]="formCategory" class="mb-3 p-3 border rounded">
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Nombre de la categoría" formControlName="name">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="CargarCategoria()">Cargar</button>
+  </form>
+  
+  <div *ngIf="categorias && categorias.length > 0; else noCategorias">
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre Categoría</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categoria of categorias; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ categoria.name }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm me-2" (click)="eliminarCategoria(categoria.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #noCategorias>
+    <p class="text-muted">No hay categorías disponibles.</p>
+  </ng-template>
+</section>
+</main>

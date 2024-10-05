@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Categoria } from '../interfaces/categoria';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +15,27 @@ export class CategoryServiceService {
   constructor() { }
 
   cargarCategoria(objeto: string){
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('token', `${token}`);
-    return this.http.post(`${this.urlBase}new`, objeto, {headers})
+    if (typeof window !== 'undefined' && window.localStorage){
+
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('token', `${token}`);
+      return this.http.post(`${this.urlBase}new`, objeto, {headers})
+    }else{
+      return new Observable<Categoria[]>();
+    }
   }
 
   getCategories(): Observable<Categoria[]> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('token', `${token}`);
-    return this.http.get<Categoria[]>(`${this.urlBase}`, { headers });
+    if (typeof window !== 'undefined' && window.localStorage){
+
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('token', `${token}`);
+      return this.http.get<{ categories: Categoria[] }>(`${this.urlBase}/`,{headers}).pipe(
+        map(response => response.categories) // Asegúrate de acceder a 'categories'
+      );
+    }else{
+      return new Observable<Categoria[]>
+    }
   }
 
   deleteCategory(id: number): Observable<Categoria>{

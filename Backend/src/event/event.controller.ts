@@ -115,7 +115,7 @@ export const getEventByName = async (req: Request, res: Response) => {
     try {
         if (search !== undefined) {
             const events = await Event.createQueryBuilder("event")
-                .where("event.title ILIKE :search", { search: `%${search}%` })
+                .where("event.title LIKE :search", { search: `%${search}%` })
                 .getMany();
 
             if (events.length === 0) {

@@ -3,11 +3,12 @@ import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-mis-eventos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './mis-eventos.component.html',
   styleUrl: './mis-eventos.component.css'
 })

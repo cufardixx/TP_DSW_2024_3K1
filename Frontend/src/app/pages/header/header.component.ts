@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private router: Router) { }
+  private router = inject(Router)
+
 
   redirectToLogin(): void {
     this.router.navigate(['/login']);
@@ -20,13 +21,9 @@ export class HeaderComponent {
     this.router.navigate(['/register']);
   }
 
-  isLoggedIn = false;
 
-  ngOnInit(): void {
-    if (typeof localStorage !== 'undefined') {
-      this.isLoggedIn = localStorage.getItem('token') !== null;
-    }
-  }
+   isLoggedIn = typeof localStorage !== 'undefined' && localStorage.getItem('token') !== null;
+
 
   crearEvento(): void {
     const token = localStorage.getItem('token');
@@ -36,6 +33,7 @@ export class HeaderComponent {
       this.router.navigate(['/login']);
     }
   }
+
 
   
 }

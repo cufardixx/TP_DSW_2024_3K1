@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AccesService } from '../../services/acces.service';
 import { Evento } from '../../interfaces/event';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-detalle-evento',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './detalle-evento.component.html',
   styleUrl: './detalle-evento.component.css'
 })

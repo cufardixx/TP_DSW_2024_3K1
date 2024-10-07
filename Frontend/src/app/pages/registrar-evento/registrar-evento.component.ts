@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event.js';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-registrar-evento',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, HeaderComponent],
   templateUrl: './registrar-evento.component.html',
   styleUrls: ['./registrar-evento.component.css']  // Changed to styleUrls
 })

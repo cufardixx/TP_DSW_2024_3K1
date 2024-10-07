@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-explorador-eventos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './explorador-eventos.component.html',
   styleUrl: './explorador-eventos.component.css'
 })

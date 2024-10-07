@@ -4,11 +4,12 @@ import { AccesService } from '../../services/acces.service';
 import { Router } from '@angular/router';
 import { UsuarioEdit } from '../../interfaces/UsuarioEdit';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-prefil-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,HeaderComponent],
   templateUrl: './prefil-edit.component.html',
   styleUrl: './prefil-edit.component.css'
 })

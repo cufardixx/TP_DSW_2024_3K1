@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TicketServiceService } from '../../services/ticket.service.service';
 import { Ticket } from '../../interfaces/ticket';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })

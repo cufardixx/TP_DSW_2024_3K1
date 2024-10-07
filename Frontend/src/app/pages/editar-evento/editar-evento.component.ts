@@ -4,11 +4,12 @@ import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event.js';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-editar-evento',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, HeaderComponent],
   templateUrl: './editar-evento.component.html',
   styleUrl: './editar-evento.component.css'
 })

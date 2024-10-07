@@ -1,33 +1,8 @@
 <main>
 
-    <nav class="navbar navbar-expand-lg top-0 w-100" style="background-color: #e3f2fd;">
-        <div class="container-fluid">
-    
-          <h3 class="navbar-brand">Detalle del Evento</h3>
-          
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-            </ul>    
-          </div>
-          
-          <div class="d-grid gap-4 d-md-flex justify-content-md-end">
-            <div class="d-flex align-items-center">
-              <ng-container *ngIf="isLoggedIn">
-                <a class="nav-link active mx-auto" aria-current="page" style="cursor: pointer;" href="/my-events">Mis Eventos</a>
-              </ng-container>
-                </div>
-                <a href="/profile">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px;object-fit: cover;" >
-                </a>
-            </div>
+  <app-header></app-header>
 
-        </div>
-      </nav>
-
-      <div class="container py-6 mt-5" style="width: 70%;">
+      <div class="container py-6 d-flex flex-column justify-content-center custom-mobile" style="width: 70%; min-height: 100vh; margin-top: 100px !important;">
         <div class="card">
           <img src="{{ evento.image }}" alt="{{ evento.title }}" class="card-img-top" style="height: 300px; object-fit: cover;" />
           <div class="card-body mt-4">

@@ -44,10 +44,7 @@ export class PerfilComponent implements OnInit {
     this.router.navigate([`/profile/${this.userProfile.id}`]); // Asegúrate de configurar esta ruta en tu router
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/']);
-  }
+  
 
   misEventos() {
     this.eventoService.obtenerEventosUsuario().subscribe(
@@ -75,6 +72,11 @@ export class PerfilComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 
 }

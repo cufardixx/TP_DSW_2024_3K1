@@ -4,11 +4,12 @@ import { CategoryServiceService } from '../../services/category.service.service'
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Categoria } from '../../interfaces/categoria';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, HeaderComponent],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })

@@ -68,7 +68,13 @@ export class DetalleEventoComponent implements OnInit {
   }
 
   reservarEntrada(eventId: number): void {
-    this.router.navigate([`/ticket/${eventId}`]);
+    const token = localStorage.getItem('token');
+    if(token){
+      this.router.navigate([`/ticket/${eventId}`]);
+    }else{
+      this.router.navigate(['/login']);
+    }
+    
   }
  
 }

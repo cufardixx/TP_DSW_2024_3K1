@@ -1,0 +1,29 @@
+nav.navbar {
+    background: linear-gradient(90deg, #004e92, #000428);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .nav-link {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .custom-mobile {
+        margin-top: 70px; /* Espacio superior */
+        width: 100% !important; /* Ancho completo */
+        display: flex; /* Asegúrate de que sea un contenedor flex */
+        flex-direction: column; /* Cambia la dirección a columna */
+        height: auto !important ;
+    }
+   .custom-mobile-1{
+    width: 100% !important;
+    margin-bottom: 20px;
+   }
+}

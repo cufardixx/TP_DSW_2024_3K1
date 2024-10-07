@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { EventServiceService } from '../../services/event.service.service';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   private router = inject(Router)
+  private eventoService = inject(EventServiceService)
 
 
   redirectToLogin(): void {
@@ -33,6 +35,7 @@ export class HeaderComponent {
       this.router.navigate(['/login']);
     }
   }
+
 
 
   

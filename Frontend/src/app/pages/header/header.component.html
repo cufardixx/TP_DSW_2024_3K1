@@ -27,7 +27,7 @@
             </a>
           </div>
           <a href="/profile">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Avatar" class="rounded-circle ms-3" style="width: 40px; height: 40px;">
+            <img [src]="user?.imgPerfil || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" alt="Avatar" class="rounded-circle ms-3" style="width: 40px; height: 40px;">
           </a>
         </ng-container>
       </div>

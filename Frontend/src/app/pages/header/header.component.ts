@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventServiceService } from '../../services/event.service.service';
+import { AccesService } from '../../services/acces.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,25 @@ import { EventServiceService } from '../../services/event.service.service';
 })
 export class HeaderComponent {
   private router = inject(Router)
-  private eventoService = inject(EventServiceService)
+  private accesService = inject(AccesService);
+
+  user: any;
+  evento: any;
+  imgPerfil: string | null = null;
+ 
+
+
+  ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.accesService.getProfile(token).subscribe(
+        (user) => {
+          this.user = user;
+          this.imgPerfil = user?.imgPerfil; // Imagen por defecto si no hay
+        },
+      );
+    } 
+  }
 
 
   redirectToLogin(): void {

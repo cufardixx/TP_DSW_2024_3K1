@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Evento } from '../interfaces/event';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,19 @@ export class EventServiceService {
       const token = localStorage.getItem('token');
       const headers = new HttpHeaders().set('token', `${token}`);
 
-      return this.http.get<Evento[]>(`${this.urlBase}`, { headers });
+      const cachedEvent = localStorage.getItem('cachedEvent');
+      if (cachedEvent) {
+        return new Observable(observer => {
+          observer.next(JSON.parse(cachedEvent));
+          observer.complete();
+        });
+      }
+
+      return this.http.get<Evento[]>(`${this.urlBase}`, { headers }).pipe(
+        tap(event => {
+          localStorage.setItem('cachedEvent', JSON.stringify(event));
+        }) 
+      )
     } else {
       return new Observable<Evento[]>();
     }

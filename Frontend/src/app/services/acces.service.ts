@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Usuario } from '../interfaces/Usuario';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ResponseAcceso } from '../interfaces/ResponseAcceso';
 import { Login } from '../interfaces/Login';
 import { UsuarioEdit } from '../interfaces/UsuarioEdit';
@@ -27,7 +27,20 @@ export class AccesService {
 
   getProfile(token: string): Observable<any> {
     const headers = new HttpHeaders().set('token', `${token}`);
-    return this.http.get(`${this.urlBase}profile`, { headers });
+    // Implementación de caching
+    const cachedProfile = localStorage.getItem('cachedProfile');
+    if (cachedProfile) {
+      return new Observable(observer => {
+        observer.next(JSON.parse(cachedProfile));
+        observer.complete();
+      });
+    }
+    return this.http.get(`${this.urlBase}profile`, { headers }).pipe(
+      tap(profile => {
+        // Guardar en caché
+        localStorage.setItem('cachedProfile', JSON.stringify(profile));
+      })
+    );
   }
 
   obtenerImagenUsuario(id: number): Observable<UsuarioEdit> {

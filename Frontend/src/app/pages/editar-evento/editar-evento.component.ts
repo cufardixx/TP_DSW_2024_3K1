@@ -5,6 +5,8 @@ import { Evento } from '../../interfaces/event.js';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
+import { CategoryServiceService } from '../../services/category.service.service';
+import { Categoria } from '../../interfaces/categoria';
 
 @Component({
   selector: 'app-editar-evento',
@@ -16,12 +18,14 @@ import { HeaderComponent } from '../header/header.component';
 
 
 export class EditarEventoComponent {
+  private categoryService = inject(CategoryServiceService);
   private EventService = inject(EventServiceService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   public formBuild = inject(FormBuilder);
   feedbackMessage: string = '';
   feedbackSuccess: boolean = false;
+  public categories: Categoria[] = [];
 
   private mostrarFeedback(mensaje: string, esExito: boolean) {
     this.feedbackMessage = mensaje;
@@ -47,6 +51,15 @@ export class EditarEventoComponent {
     if (this.eventId) {
       this.cargarDatosEvento();
     }
+
+    this.categoryService.getCategories().subscribe(
+      (data) => {
+        this.categories = data;
+      },
+      (error) => {
+        console.error('Error al obtener las categorías:', error);
+      }
+    );
   }
 
   cargarDatosEvento() {
@@ -69,13 +82,13 @@ export class EditarEventoComponent {
       }
     });
   }
-
   updateEvent() {
     const objeto: Evento = {
       destacado: this.formEditarEvento.value.destacado,
       user_id: this.formEditarEvento.value.user_id,
       title: this.formEditarEvento.value.title,
       description: this.formEditarEvento.value.description,
+      category: this.formEditarEvento.value.category,
       date: this.formEditarEvento.value.date,
       time: this.formEditarEvento.value.time,
       location: this.formEditarEvento.value.location,

@@ -38,6 +38,10 @@ export class CategoryServiceService {
     }
   }
 
+  getCategoryByID(id: number): Observable<Categoria> { // 
+    return this.http.get<Categoria>(`${this.urlBase}/${id}`); 
+  }
+
   deleteCategory(id: number): Observable<Categoria>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('token', `${token}`);

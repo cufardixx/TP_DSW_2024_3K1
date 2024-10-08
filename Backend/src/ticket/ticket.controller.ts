@@ -5,7 +5,7 @@ import { User } from "../user/user.entity";
 import { randomUUID } from "crypto";
 import { Event } from "../event/event.entity";
 import QRCode from "qrcode";
-import  enviarCorreoConQR  from "../lib/mailer";
+import enviarCorreoConQR from "../lib/mailer";
 
 
 async function generarQR(texto: string): Promise<string> {
@@ -40,22 +40,22 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
             return res.status(400).json({ message: `No hay suficientes boletos disponibles. Quedan ${capacidadDisponible} boletos.` });
         }
 
-    
 
-    // Crear múltiples tickets con código QR
-    const tickets = await Promise.all(
-        Array.from({ length: cantidad }, async () => {
-          const qrCode = await generarQR(randomUUID());
-          return Ticket.create({
-            event,
-            user,
-            codigo_unico: randomUUID(),
-            qrCode, // Guardar el QR generado
-            eventId: event.id,
-            userId: user.id
-        });
-        })
-    );
+
+        // Crear múltiples tickets con código QR
+        const tickets = await Promise.all(
+            Array.from({ length: cantidad }, async () => {
+                const qrCode = await generarQR(randomUUID());
+                return Ticket.create({
+                    event,
+                    user,
+                    codigo_unico: randomUUID(),
+                    qrCode, // Guardar el QR generado
+                    eventId: event.id,
+                    userId: user.id
+                });
+            })
+        );
 
         // Guardar todos los tickets en la base de datos
         await Ticket.save(tickets);

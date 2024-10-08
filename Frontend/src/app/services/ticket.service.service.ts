@@ -13,7 +13,7 @@ export class TicketServiceService {
 
   comprarTicket(objeto: { cantidad: number }, eventId: number, token: string): Observable<any> {
     const headers = new HttpHeaders().set('token', token);
-    return this.http.post<any>(`${this.urlBase}/buy/${eventId}`, objeto, { headers });
+    return this.http.post<any>(`${this.urlBase}buy/${eventId}`, objeto, { headers });
   }
   
 }

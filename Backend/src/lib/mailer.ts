@@ -1,9 +1,11 @@
 import nodemailer from 'nodemailer'
+import dotenv from "dotenv";
+dotenv.config()
 
 
 const trasporter = nodemailer.createTransport({
     host: process.env.MAIL_HOST!,
-    port: Number(process.env.MAIL_PORT!),
+    port: 465,
     secure: true, // upgrade later with STARTTLS
     auth: {
         user: process.env.MAIL_USER,

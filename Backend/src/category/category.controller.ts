@@ -26,6 +26,21 @@ export const getCategories = async (req: Request, res: Response) => {
     }
 };
 
+export const getCategoryByID = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const categoria = await Category.findOneBy({ id: parseInt(id) });
+  
+      if (!categoria) return res.status(404).json({ message: "categoria not found" });
+  
+      return res.json(categoria);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      }
+    }
+  };
+
 
 export const deleteCategory = async (req: Request, res: Response) => {
     try {

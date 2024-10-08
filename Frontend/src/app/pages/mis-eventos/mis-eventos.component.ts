@@ -22,6 +22,7 @@ export class MisEventosComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventoService.obtenerEventosUsuario().subscribe(
+      
       (eventos) => {
         this.eventos = eventos;
         this.eventos = this.eventos.map(evento => {

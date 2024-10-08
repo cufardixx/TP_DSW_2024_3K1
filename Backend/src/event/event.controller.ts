@@ -2,15 +2,20 @@ import { Event } from "./event.entity"
 import { Request, Response } from "express"
 import { User } from "../user/user.entity";
 import { CustomRequest } from "../middlewares/authToken";
+import { Category } from "../category/category.entity";
 
 
 
 export const createEvent = async (req: CustomRequest, res: Response) => {
     try {
-        const { title, capacity, date, description, time, price, location, image } = req.body;
+        const { title, capacity, date, description, time, price, location, image, categoryId  } = req.body;
 
         const user = await User.findOneBy({ id: req.user!.id });
-        if (!user) return res.status(404).json({ message: "User not found" });
+        if (!user) return res.status(404).json({ message: "User no encontrado" });
+
+        // Buscar la categoría en la base de datos usando el categoryId
+        const category = await Category.findOneBy({ id: categoryId });
+        if (!category) return res.status(404).json({ message: "Category no encontrada" });
 
         const userName = user.firstname;
         
@@ -18,6 +23,7 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         
 
         const event = new Event();
+        event.category = category
         event.image = image;
         event.location = location;
         event.price = price;
@@ -29,6 +35,7 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         event.usuario = user;
         event.organizer = userName;
         event.user_id = userId;
+    
 
         await event.save();
         return res.status(201).json({ message: 'Evento creado con éxito', event });

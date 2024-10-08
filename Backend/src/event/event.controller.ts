@@ -35,6 +35,7 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         event.usuario = user;
         event.organizer = userName;
         event.user_id = userId;
+        event.categoria_name = category.name
     
 
         await event.save();
@@ -48,10 +49,13 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
 
 export const updateEvent = async (req: Request, res: Response) => {
     try {
-        const { title, capacity, date, description, time, price, location, image } = req.body;
+        const { title, capacity, date, description, time, price, location, image, categoryId } = req.body;
       const event = await Event.findOneBy({ id: parseInt(req.params.id) })
      
       if (!event) return res.status(404).json({ message: "Event does not exist" })
+
+      const category = await Category.findOneBy({ id: categoryId });
+      if (!category) return res.status(404).json({ message: "Category no encontrada" });
 
       event.title = title
       event.capacity = capacity
@@ -61,6 +65,8 @@ export const updateEvent = async (req: Request, res: Response) => {
       event.price = price
       event.location = location
       event.image = image
+      event.category = category
+      event.categoria_name = category.name
   
       await event.save()
   
@@ -107,6 +113,8 @@ export const getEvent = async (req: Request, res: Response) => {
 export const getEvents = async (req: Request, res: Response) => {
     try {
         const events = await Event.find();
+        console.log(events);
+        
         return res.json(events);
     } catch (error) {
         if (error instanceof Error) {

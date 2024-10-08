@@ -68,6 +68,9 @@ export class Event extends BaseEntity {
     @JoinColumn({name: "category_name"})
     category: Category;
 
+    @Column()
+    categoria_name: string;
+
     
     //category como una clase? evento nocturno, evento musical, evento deportivo, cumpleaños, etc
 

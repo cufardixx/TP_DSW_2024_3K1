@@ -32,6 +32,7 @@
                     <div class="card-body bg-light">
                         <h5 class="card-title">{{ evento.title | uppercase }}</h5>
                         <p class="card-text">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy'}}</p>
+                        <i class="bi bi-info-circle-fill text-primary me-2"></i><strong class="text-primary fw-bold">{{evento.categoria_name}}</strong>
                         <button class="btn btn-primary w-50 mx-auto d-block" (click)="verEvento(evento.id!)">Obtener</button>
                     </div>
                 </div>

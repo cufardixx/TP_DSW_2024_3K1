@@ -8,7 +8,8 @@
           <div class="card-body mt-4">
             <div class="d-flex justify-content-between align-items-start">
               <div>
-                <p class="text-muted mb-0">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
+                <p class="text-muted mb-2">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
+                <i class="bi bi-info-circle-fill text-primary me-2"></i><strong class="text-primary fw-bold">{{evento.categoria_name}}</strong>
                 <h1 class="display-5 mb-0 fw-bold ">{{ evento.title | uppercase }}</h1>
                 <h2 class="h5 mt-5">Acerca de este evento</h2>
                 <p class="mt-2">{{ evento.description }}</p>

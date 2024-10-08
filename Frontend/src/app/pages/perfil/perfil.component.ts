@@ -57,6 +57,7 @@ export class PerfilComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('cachedProfile');
     this.router.navigate(['/']);
   }
 

@@ -13,6 +13,7 @@
                     style="height: 300px; object-fit: cover;">
 
                 <div class="card-body">
+                    <div class="rounded-pill text-bg-secondary m-2" style="padding: 2,5px 0px; width: 100px; text-align: center; opacity: 50%;"><strong class="fw-light">{{evento.categoria_name}}</strong></div>
                     <h5>{{ evento.title | uppercase }}</h5>
                     <p class="mb-0">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
                     <small>Evento Destacado</small>

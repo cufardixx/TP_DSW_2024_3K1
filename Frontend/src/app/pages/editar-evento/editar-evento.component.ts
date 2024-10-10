@@ -41,7 +41,8 @@ export class EditarEventoComponent {
     image: [''],
     price: [''],
     organizer: [''], 
-    capacity: ['']   
+    capacity: [''],
+    category: [''],
   });
 
   private eventId: string | null = null;
@@ -83,12 +84,23 @@ export class EditarEventoComponent {
     });
   }
   updateEvent() {
+
+        // Obtiene el id de la categoría desde el formulario
+        const selectedCategoryId = parseInt(this.formEditarEvento.value.category, 10);
+  
+        // Busca la categoría correspondiente en la lista de categorías
+        const selectedCategory = this.categories.find(cat => cat.id === selectedCategoryId);
+      
+        if (!selectedCategory) {
+          console.error('Categoría seleccionada no encontrada.');
+          return;
+        }
+
     const objeto: Evento = {
       destacado: this.formEditarEvento.value.destacado,
       user_id: this.formEditarEvento.value.user_id,
       title: this.formEditarEvento.value.title,
       description: this.formEditarEvento.value.description,
-      category: this.formEditarEvento.value.category,
       date: this.formEditarEvento.value.date,
       time: this.formEditarEvento.value.time,
       location: this.formEditarEvento.value.location,
@@ -96,6 +108,8 @@ export class EditarEventoComponent {
       price: this.formEditarEvento.value.price,
       organizer: this.formEditarEvento.value.organizer,
       capacity: this.formEditarEvento.value.capacity,
+      categoria_name: selectedCategory.name, // Asignamos el nombre de la categoría
+      categoryId: this.formEditarEvento.value.category, 
     };
 
     console.log(objeto);

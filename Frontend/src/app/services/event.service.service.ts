@@ -26,19 +26,7 @@ export class EventServiceService {
       const token = localStorage.getItem('token');
       const headers = new HttpHeaders().set('token', `${token}`);
 
-      const cachedEvent = localStorage.getItem('cachedEvent');
-      if (cachedEvent) {
-        return new Observable(observer => {
-          observer.next(JSON.parse(cachedEvent));
-          observer.complete();
-        });
-      }
-
-      return this.http.get<Evento[]>(`${this.urlBase}`, { headers }).pipe(
-        tap(event => {
-          localStorage.setItem('cachedEvent', JSON.stringify(event));
-        }) 
-      )
+      return this.http.get<Evento[]>(`${this.urlBase}`, { headers })
     } else {
       return new Observable<Evento[]>();
     }

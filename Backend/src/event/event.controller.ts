@@ -3,12 +3,15 @@ import { Request, Response } from "express"
 import { User } from "../user/user.entity";
 import { CustomRequest } from "../middlewares/authToken";
 import { Category } from "../category/category.entity";
+import { log } from "console";
 
 
 
 export const createEvent = async (req: CustomRequest, res: Response) => {
     try {
-        const { title, capacity, date, description, time, price, location, image, categoryId  } = req.body;
+        const { title, capacity, date, description, time, price, location, image, categoryId } = req.body;
+
+        console.log('categoryId recibido:', categoryId);
 
         const user = await User.findOneBy({ id: req.user!.id });
         if (!user) return res.status(404).json({ message: "User no encontrado" });
@@ -16,14 +19,17 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         // Buscar la categoría en la base de datos usando el categoryId
         const category = await Category.findOneBy({ id: categoryId });
         if (!category) return res.status(404).json({ message: "Category no encontrada" });
+        console.log('Categoría encontrada:', category.name);
 
         const userName = user.firstname;
-        
-        const userId  = user.id;
+        const categorName = category.name
+        console.log(categorName);
         
 
+        const userId = user.id;
+
+
         const event = new Event();
-        event.category = category
         event.image = image;
         event.location = location;
         event.price = price;
@@ -35,10 +41,12 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
         event.usuario = user;
         event.organizer = userName;
         event.user_id = userId;
-        event.categoria_name = category.name
-    
+        event.categoria_name = categorName
+
 
         await event.save();
+        console.log(event);
+
         return res.status(201).json({ message: 'Evento creado con éxito', event });
     } catch (error: any) {
         return res.status(500).json({ message: error.message || 'Error interno del servidor' });
@@ -50,32 +58,32 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
 export const updateEvent = async (req: Request, res: Response) => {
     try {
         const { title, capacity, date, description, time, price, location, image, categoryId } = req.body;
-      const event = await Event.findOneBy({ id: parseInt(req.params.id) })
-     
-      if (!event) return res.status(404).json({ message: "Event does not exist" })
+        const event = await Event.findOneBy({ id: parseInt(req.params.id) })
 
-      const category = await Category.findOneBy({ id: categoryId });
-      if (!category) return res.status(404).json({ message: "Category no encontrada" });
+        if (!event) return res.status(404).json({ message: "Event does not exist" })
 
-      event.title = title
-      event.capacity = capacity
-      event.date = date
-      event.description = description
-      event.time = time
-      event.price = price
-      event.location = location
-      event.image = image
-      event.category = category
-      event.categoria_name = category.name
-  
-      await event.save()
-  
-      return res.status(200).json({ message: "Evento actualizado" })
+        const category = await Category.findOneBy({ id: categoryId });
+        if (!category) return res.status(404).json({ message: "Category no encontrada" });
+
+        event.title = title
+        event.capacity = capacity
+        event.date = date
+        event.description = description
+        event.time = time
+        event.price = price
+        event.location = location
+        event.image = image
+        event.category = category
+        event.categoria_name = category.name
+
+        await event.save()
+
+        return res.status(200).json({ message: "Evento actualizado" })
     } catch (error) {
-      if (error instanceof Error) {
-        return res.status(500).json({ message: error.message })
-      }
-      return res.status(500).json({ message: "Error interno del servidor" })
+        if (error instanceof Error) {
+            return res.status(500).json({ message: error.message })
+        }
+        return res.status(500).json({ message: "Error interno del servidor" })
     }
 }
 
@@ -84,9 +92,9 @@ export const getEventsByUser = async (req: CustomRequest, res: Response) => {
     try {
         const user = await User.findOneBy({ id: req.user!.id });
         if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
-        
+
         const eventos = await Event.find({ where: { usuario: { id: user.id } } });
-        
+
         res.json(eventos);
     } catch (error) {
         console.error('Error al obtener eventos:', error);
@@ -114,7 +122,7 @@ export const getEvents = async (req: Request, res: Response) => {
     try {
         const events = await Event.find();
         console.log(events);
-        
+
         return res.json(events);
     } catch (error) {
         if (error instanceof Error) {
@@ -123,7 +131,7 @@ export const getEvents = async (req: Request, res: Response) => {
     }
 }
 
-    
+
 
 export const getEventByName = async (req: Request, res: Response) => {
     const { search } = req.query;

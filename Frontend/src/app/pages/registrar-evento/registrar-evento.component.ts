@@ -29,6 +29,7 @@ export class RegistrarEventoComponent {
     this.categoryService.getCategories().subscribe(
       (data) => {
         this.categories = data;
+        console.log('Categorías cargadas:', this.categories); // Verifica que se cargan correctamente
       },
       (error) => {
         console.error('Error al obtener las categorías:', error);
@@ -37,7 +38,7 @@ export class RegistrarEventoComponent {
   }
 
   public formRegistroEvento: FormGroup = this.formBuild.group({
-    categoryId: ['', Validators.required],
+    category: ['', Validators.required],
     title: ['', Validators.required],
     description: ['', Validators.required],
     date: ['', Validators.required],
@@ -48,11 +49,24 @@ export class RegistrarEventoComponent {
     organizer: ['', Validators.required], 
     capacity: ['', Validators.required]    
   });
+
+
+
   createEvent() {
+    // Obtiene el id de la categoría desde el formulario
+    const selectedCategoryId = parseInt(this.formRegistroEvento.value.category, 10);
+  
+    // Busca la categoría correspondiente en la lista de categorías
+    const selectedCategory = this.categories.find(cat => cat.id === selectedCategoryId);
+  
+    if (!selectedCategory) {
+      console.error('Categoría seleccionada no encontrada.');
+      return;
+    }
+  
     const objeto: Evento = {
-      destacado: this.formRegistroEvento.value.destacado, // Agregado para manejar valor por defecto
-      user_id: this.formRegistroEvento.value.user_id, // Agregado para manejar valor por defecto
-      category: this.formRegistroEvento.value.categoryId, // Asegurarse de incluir la categoría
+      destacado: this.formRegistroEvento.value.destacado,
+      user_id: this.formRegistroEvento.value.user_id,
       title: this.formRegistroEvento.value.title,
       description: this.formRegistroEvento.value.description,
       date: this.formRegistroEvento.value.date,
@@ -62,25 +76,23 @@ export class RegistrarEventoComponent {
       price: this.formRegistroEvento.value.price,
       organizer: this.formRegistroEvento.value.organizer,
       capacity: this.formRegistroEvento.value.capacity,
+      categoria_name: selectedCategory.name, // Asignamos el nombre de la categoría
+      categoryId: this.formRegistroEvento.value.category,  
     };
-
-    console.log(objeto);
-
+  
+    console.log('Evento a crear:', objeto);
+  
     this.EventService.crearEvento(objeto).subscribe({
       next: (resp) => {
-        this.mostrarFeedback('Evento creado con éxito', true);
+        console.log('Evento creado con éxito');
         setTimeout(() => {
           this.router.navigate(['/profile']);
         }, 1050);
       },
       error: (err) => {
-        console.error('Error creating event:', err);
+        console.error('Error creando el evento:', err);
       }
     });
   }
-
-  private mostrarFeedback(mensaje: string, esExito: boolean) {
-    this.feedbackMessage = mensaje;
-    this.feedbackSuccess = esExito;
-  }
+  
 }

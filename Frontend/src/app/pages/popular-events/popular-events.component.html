@@ -11,6 +11,7 @@
             <div class="col-md-4" *ngFor="let event of eventGroup">
               <div class="card shadow-sm event-card">
                 <img class="card-img-top" [src]="event.image" [alt]="'Imagen del Evento ' + event.title">
+                <div class="rounded-pill text-bg-secondary m-2" style="padding: 2,5px 0px; width: 100px; text-align: center; opacity: 50%;"><strong class="fw-light">{{event.categoria_name}}</strong></div>
                 <div class="card-body text-center d-flex flex-column">
                   <h5 class="card-title">{{ event.title }}</h5>
                   <p class="card-text">{{ event.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>

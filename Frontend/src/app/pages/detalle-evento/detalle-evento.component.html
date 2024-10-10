@@ -2,82 +2,82 @@
 
   <app-header></app-header>
 
-      <div class="container py-6 d-flex flex-column justify-content-center custom-mobile" style="width: 70%; min-height: 100vh; margin-top: 100px !important;">
-        <div class="card">
-          <img src="{{ evento.image }}" alt="{{ evento.title }}" class="card-img-top" style="height: 300px; object-fit: cover;" />
-          <div class="card-body mt-4">
-            <div class="d-flex justify-content-between align-items-start">
-              <div>
-                <p class="text-muted mb-2">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
-                <i class="bi bi-info-circle-fill text-primary me-2"></i><strong class="text-primary fw-bold">{{evento.categoria_name}}</strong>
-                <h1 class="display-5 mb-0 fw-bold ">{{ evento.title | uppercase }}</h1>
-                <h2 class="h5 mt-5">Acerca de este evento</h2>
-                <p class="mt-2">{{ evento.description }}</p>
-              </div>
-              <button class="btn btn-primary">Seguir</button>
+  <div class="container py-6 d-flex flex-column justify-content-center custom-mobile"
+    style="width: 70%; min-height: 100vh; margin-top: 100px !important;">
+    <div class="card">
+      <img src="{{ evento.image }}" alt="{{ evento.title }}" class="card-img-top"
+        style="height: 300px; object-fit: cover;" />
+      <div class="card-body mt-4">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <p class="text-muted mb-2">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}</p>
+            <div class="badge bg-primary text-white"><strong class=" fw-bold">{{evento.categoria_name}}</strong></div>
+            <h1 class="display-5 mb-0 fw-bold ">{{ evento.title | uppercase }}</h1>
+            <h2 class="h5 mt-5">Acerca de este evento</h2>
+            <p class="mt-2">{{ evento.description }}</p>
+          </div>
+          <button class="btn btn-primary">Seguir</button>
+        </div>
+
+        <div class="mt-4 rounded p-3" style="background-color: #e3f2fd;">
+          <h2 class="h5 border-bottom pb-2 border-primary">Organizado</h2>
+          <div class="d-flex align-items-center p-2 bg-white rounded shadow-sm">
+
+            <div class="flex-shrink-0">
+              <img
+                [src]="user?.imgPerfil || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'"
+                alt="Organizador" class="rounded-circle me-2" style="width: 50px; height: 50px;">
             </div>
 
-            <div class="mt-4 rounded p-3" style="background-color: #e3f2fd;">
-              <h2 class="h5 border-bottom pb-2 border-primary">Organizado</h2>
-              <div class="d-flex align-items-center p-2 bg-white rounded shadow-sm">
-
-                <div class="flex-shrink-0">
-                <img [src]="user?.imgPerfil || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" alt="Organizador" class="rounded-circle me-2" style="width: 50px; height: 50px;">
-                </div>
-
-                <div class="flex-grow-1 ms-3">
-                  <h6 class="mb-0"><span class="opacity-50">Por</span> {{ evento.organizer }}</h6>
-                </div>
-
-
-
-              </div>
-            </div>
-            
-            <div class="mt-4">
-              <h6 class="h5">Fecha y hora</h6>
-              <div class="d-flex align-items-center mb-3">
-                <i class="bi bi-calendar-event text-primary"></i>
-                <span class="ms-2">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}, - {{ evento.time }} hs</span>
-              </div>
+            <div class="flex-grow-1 ms-3">
+              <h6 class="mb-0"><span class="opacity-50">Por</span> {{ evento.organizer }}</h6>
             </div>
 
-            <div class="mt-4">
-              <h6 class="h5">Ubicación</h6>
-              <div class="d-flex align-items-center mb-3">
-                <i class="bi bi-geo-alt text-primary"></i>
-                <span class="ms-2">{{ evento.location }}</span>
-              </div>
-            </div>
 
-            <div class="mt-4">
-              <h6 class="h5">Capacidad de entradas</h6>
-              <div class="d-flex align-items-center mb-3">
-                <i class="bi bi-people text-primary"></i>
-                <span class="ms-2">{{ evento.capacity }}</span>
-              </div>
-            </div>
 
           </div>
         </div>
-      
-        <div class="card mt-5 mb-5">
-          <div class="card-body">
-            <h2 class="h5 mb-4">Entradas</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <p class="fw-bold">Costo de la entrada</p>
-                <p class="text-muted">{{ evento.price }} $</p>
-              </div>
-            </div>
-            <button class="btn btn-primary w-100 mt-4" (click)="reservarEntrada(evento.id)">Reservar un lugar</button>
+
+        <div class="mt-4">
+          <h6 class="h5">Fecha y hora</h6>
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-calendar-event text-primary"></i>
+            <span class="ms-2">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy' }}, - {{ evento.time }}
+              hs</span>
           </div>
         </div>
+
+        <div class="mt-4">
+          <h6 class="h5">Ubicación</h6>
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-geo-alt text-primary"></i>
+            <span class="ms-2">{{ evento.location }}</span>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h6 class="h5">Capacidad de entradas</h6>
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-people text-primary"></i>
+            <span class="ms-2">{{ evento.capacity }}</span>
+          </div>
+        </div>
+
       </div>
+    </div>
+
+    <div class="card mt-5 mb-5">
+      <div class="card-body">
+        <h2 class="h5 mb-4">Entradas</h2>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <p class="fw-bold">Costo de la entrada</p>
+            <p class="text-muted">{{ evento.price }} $</p>
+          </div>
+        </div>
+        <button class="btn btn-primary w-100 mt-4" (click)="reservarEntrada(evento.id)">Reservar un lugar</button>
+      </div>
+    </div>
+  </div>
 
 </main>
-
-
-
-
-

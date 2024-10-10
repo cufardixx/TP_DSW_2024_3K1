@@ -13,8 +13,9 @@ export interface Evento {
     price: number;
     image: string;  
     time: string,
-    category: string,
+    categoryId?: number,
     categoria_name?: string
+    category?: string
     
 }
 

@@ -30,9 +30,9 @@
                     <img class="card-img-top" [src]="evento.image" alt="Imagen del evento"
                         style="height: 200px; object-fit: cover;">
                     <div class="card-body bg-light">
+                        <div class="rounded-pill text-bg-secondary m-2" style="padding: 2,5px 0px; width: 100px; text-align: center; opacity: 50%;"><strong class="fw-light">{{evento.categoria_name}}</strong></div>
                         <h5 class="card-title">{{ evento.title | uppercase }}</h5>
                         <p class="card-text">{{ evento.date | date: 'EEEE, d \'de\' MMMM \'de\' yyyy'}}</p>
-                        <i class="bi bi-info-circle-fill text-primary me-2"></i><strong class="text-primary fw-bold">{{evento.categoria_name}}</strong>
                         <button class="btn btn-primary w-50 mx-auto d-block" (click)="verEvento(evento.id!)">Obtener</button>
                     </div>
                 </div>

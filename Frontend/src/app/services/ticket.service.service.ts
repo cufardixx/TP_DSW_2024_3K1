@@ -16,5 +16,6 @@ export class TicketServiceService {
     return this.http.post<any>(`${this.urlBase}buy/${eventId}`, objeto, { headers });
   }
   
+
 }
 

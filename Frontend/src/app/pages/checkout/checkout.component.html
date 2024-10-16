@@ -48,8 +48,12 @@
                                 <p class="card-text mb-4" style="font-size: 1.1rem;">Total: <strong>${{total}}</strong>
                                 </p>
 
+                                <div *ngIf="showMessage" class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+
                                 <button class="btn btn-primary btn-lg" style="width: 70%; border-radius: 10px;"
-                                    (click)="comprarTickets()">Proceder con la compra</button>
+                                    (click)="comprarTickets(); mostrarMensaje()">Proceder con la compra</button>
                             </form>
                         </div>
                     </div>

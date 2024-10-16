@@ -12,6 +12,7 @@ import { ExploradorEventosComponent } from './pages/explorador-eventos/explorado
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CategoryComponent } from './pages/category/category.component';
 
+
 export const routes: Routes = [
     { path: "", component: LandingComponent, title: 'Home' },
     { path: "login", component: LoginComponent, title: 'Login' },
@@ -25,5 +26,6 @@ export const routes: Routes = [
     { path: "events", component: ExploradorEventosComponent, title: 'Explorar Eventos' },
     { path: "ticket/:id", component: CheckoutComponent, title: 'Ticket' },
     { path: "category", component: CategoryComponent, title: 'Categorias Admin' },
+
     { path: "**", redirectTo: "", pathMatch: "full" }
 ];

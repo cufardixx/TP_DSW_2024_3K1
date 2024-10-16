@@ -41,8 +41,10 @@ export class PerfilComponent implements OnInit {
   
   
   editProfile() {
-    this.router.navigate([`/profile/${this.userProfile.id}`]); // Asegúrate de configurar esta ruta en tu router
+    this.router.navigate([`/profile/${this.userProfile.id}`]); 
   }
+
+
 
   
 

@@ -32,7 +32,8 @@ export class CheckoutComponent implements OnInit {
     quantity: ['', Validators.required]
   });
 
-
+  showMessage: boolean = false;
+  message: string = '';
 
   ngOnInit(): void {
     this.eventId = this.route.snapshot.paramMap.get('id');
@@ -74,5 +75,11 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-
+  mostrarMensaje() {
+    this.showMessage = true;
+    this.message = '¡Compra realizada con éxito!';
+    setTimeout(() => {
+      this.showMessage = false;
+    }, 5000); 
+  }
 }

@@ -4,28 +4,47 @@ import { EventServiceService } from '../../services/event.service.service';
 import { Evento } from '../../interfaces/event';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
+import {CategoryServiceService} from '../../services/category.service.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-explorador-eventos',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule, HeaderComponent, FormsModule],
   templateUrl: './explorador-eventos.component.html',
   styleUrl: './explorador-eventos.component.css'
 })
 export class ExploradorEventosComponent {
   private router: Router = inject(Router);
   private eventoService: EventServiceService = inject(EventServiceService);
+  private categoryService: CategoryServiceService = inject(CategoryServiceService);
   eventos: Evento[] = [];
+  categorias: string[] = [];
+  eventosFiltrados : Evento[]= [];
+  categoriaSeleccionada: string = '';
 
+  obtenerCategorias(){
+    this.categoryService.getCategories().subscribe((categorias) => {
+      this.categorias = categorias.map(categoria => categoria.name);
+    })
+  }
 
+  filtrarEventos() {
+    if (this.categoriaSeleccionada) {
+      this.eventosFiltrados = this.eventos.filter(evento => evento.categoria_name === this.categoriaSeleccionada);
+    } else {
+      this.eventosFiltrados = this.eventos;
+    }
+  }
 
   ngOnInit(): void {
     this.eventoService.obtenerEventos().subscribe((eventos) => {
       this.eventos = eventos;
     })
-  }
 
-  
+    this.eventosFiltrados = this.eventos;
+    this.obtenerCategorias();
+  }
 
 
 

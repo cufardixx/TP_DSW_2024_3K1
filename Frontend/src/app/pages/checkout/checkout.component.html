@@ -2,66 +2,64 @@
     <app-header></app-header>
 
     <section class="d-flex justify-content-center align-items-center custom-mobile-1" style="height: 80vh;">
-        <div class="container custom-mobile" style=" padding: 20px; width: 70%;">
-
-            <div class="d-flex justify-content-center shadow-lg" style=" margin-top: 170px;">
-
+        <div class="container custom-mobile" style="padding: 20px; width: 70%;">
+    
+            <div class="d-flex justify-content-center shadow-lg" style="margin-top: 170px; border-radius: 15px; overflow: hidden;">
                 <div class="w-100">
-                    <div class="p-3 border-end border-primary h-100">
+                    <div class="p-3 border-end border-primary h-100 bg-light">
                         <div class="card-body text-center">
-                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Detalles del
-                                Evento</h5>
-                            <p class="card-text" style="font-size: 1.25rem;"><strong>{{evento.title |
-                                    uppercase}}</strong></p>
-                            <p class="card-text text-muted mb-4"><small>{{evento.date | date:'yyyy-MM-dd'}}</small></p>
-                            <img src="{{evento.image}}" alt="{{evento.title}}" class="img-fluid rounded mb-2"
-                                style="height: 150px; object-fit: cover;">
-                            <div class="mb-4 ms-3">
-                                <p class="card-text"><i
-                                        class="bi bi-info-circle me-2 text-primary"></i>{{evento.description}}</p>
-                                <p class="card-text"><i class="bi bi-geo-alt me-2 text-primary"></i>Ubicación
-                                    {{evento.location}}</p>
-                                <p class="card-text"><i class="bi bi-person me-2 text-primary"></i>Organizador
-                                    {{evento.organizer}}</p>
-                                <p class="card-text"><i class="bi bi-people me-2 text-primary"></i>Capacidad
-                                    {{evento.capacity}} personas</p>
+                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold; color: #007bff;">Detalles del Evento</h5>
+                            <p class="card-text" style="font-size: 1.25rem;"><strong>{{ evento.title | uppercase }}</strong></p>
+                            <p class="card-text text-muted mb-4"><small>{{ evento.date | date:'yyyy-MM-dd' }}</small></p>
+                            <img src="{{ evento.image }}" alt="{{ evento.title }}" class="img-fluid rounded mb-2" style="height: 150px; object-fit: cover;">
+                            <div class="mb-4 text-start ms-3">
+                                <p class="card-text"><i class="bi bi-info-circle me-2 text-primary"></i>{{ evento.description }}</p>
+                                <p class="card-text"><i class="bi bi-geo-alt me-2 text-primary"></i>Ubicación: {{ evento.location }}</p>
+                                <p class="card-text"><i class="bi bi-person me-2 text-primary"></i>Organizador: {{ evento.organizer }}</p>
+                                <p class="card-text"><i class="bi bi-people me-2 text-primary"></i>Capacidad: {{ evento.capacity }} personas</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
+    
                 <div class="w-100 d-flex justify-content-center align-items-center">
                     <div class="p-3">
                         <div class="card-body text-center">
-                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold;">Checkout del
-                                Evento</h5>
-                            <form [formGroup]="formCheckout">
+                            <h5 class="card-title mb-4" style="font-size: 1.75rem; font-weight: bold; color: #007bff;">Checkout del Evento</h5>
+                            <form [formGroup]="formCheckout" (ngSubmit)="comprarTickets()">
                                 <div class="mb-4">
-                                    <label for="ticketQuantity" class="form-label" style="font-weight: 500;">Cantidad de
-                                        entradas</label>
-                                    <input type="number" class="form-control text-center" id="ticketQuantity"
-                                        placeholder="1" formControlName="quantity" style="border-radius: 10px; width: 50%; margin: 0 auto;">
+                                    <label for="ticketQuantity" class="form-label" style="font-weight: 500;">Cantidad de entradas</label>
+                                    <input (input)="actualizarTotal()" min="1" type="number" class="form-control text-center" id="ticketQuantity" placeholder="1" formControlName="quantity" style="border-radius: 10px; width: 50%; margin: 0 auto;">
+                                    <div *ngIf="formCheckout.controls['quantity'].invalid && formCheckout.controls['quantity'].touched" class="text-danger mt-2">
+                                        <small>Por favor, ingresa una cantidad válida.</small>
+                                    </div>
                                 </div>
-
-                                <p class="card-text mb-2" style="font-size: 1.1rem;">Precio por entrada:
-                                    <strong>${{evento.price}}</strong></p>
-                                <p class="card-text mb-4" style="font-size: 1.1rem;">Total: <strong>${{total}}</strong>
-                                </p>
-
-                                <div *ngIf="showMessage" class="alert alert-success" role="alert">
-                                    {{ message }}
+    
+                                <p class="card-text mb-2" style="font-size: 1.1rem;">Precio por entrada: <strong>${{ evento.price }}</strong></p>
+                                <p class="card-text mb-4" style="font-size: 1.1rem;">Total: <strong>${{ total }}</strong></p>
+    
+                                <!-- Feedback de compra exitosa -->
+                                <div *ngIf="showSuccessMessage" class="alert alert-success fade show mt-3" role="alert">
+                                    Compra realizada con éxito. Revisa tu correo para los detalles.
                                 </div>
-
-                                <button class="btn btn-primary btn-lg" style="width: 70%; border-radius: 10px;"
-                                    (click)="comprarTickets(); mostrarMensaje()">Proceder con la compra</button>
+    
+                                <!-- Feedback de error -->
+                                <div *ngIf="showErrorMessage" class="alert alert-danger fade show mt-3" role="alert">
+                                    Hubo un error en la compra. Por favor, inténtalo nuevamente.
+                                </div>
+    
+                                <button type="submit" class="btn btn-primary btn-lg" style="width: 70%; border-radius: 10px;" [disabled]="loading">
+                                    <span *ngIf="!loading">Proceder con la compra</span>
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                </button>
                             </form>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
+    
 
 
 

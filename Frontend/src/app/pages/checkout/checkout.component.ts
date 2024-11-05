@@ -26,10 +26,13 @@ export class CheckoutComponent implements OnInit {
   evento: any;
   ticketQuantity: number = 1;
   total: number = 0;
+  loading = false;
+  showSuccessMessage = false;
+  showErrorMessage = false;
 
 
   public formCheckout: FormGroup = this.formBuild.group({
-    quantity: ['', Validators.required]
+    quantity: [1, [Validators.required, Validators.min(1)]]
   });
 
   showMessage: boolean = false;
@@ -45,23 +48,50 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  
+  actualizarTotal() {
+    const cantidad = this.formCheckout.value.quantity;
+    this.total = cantidad * this.evento.price
+  }
 
   comprarTickets() {
+    this.showSuccessMessage = false;
+    this.showErrorMessage = false;
+    // Validar si el formulario está completo y si el campo 'quantity' es válido
+    if (!this.formCheckout.valid) {
+        console.error('Formulario incompleto o inválido');
+        return;
+    }
+
+    this.loading = true;
+
     const token = localStorage.getItem('token');
     const cantidadDeTickets = this.formCheckout.value.quantity;
-    if (token && this.eventId) {
+    const cantidadValida = Number.isInteger(cantidadDeTickets) && cantidadDeTickets > 0;
+
+    if (token && this.eventId && cantidadValida) {
       this.ticketService.comprarTicket({ cantidad: cantidadDeTickets }, Number(this.eventId), token)
-        .subscribe(
-        response => {
-          console.log('Boletos comprados:', response);
-        },
-        error => {
-          console.error('Error al comprar tickets:', error);
-        }
-      );
+        .subscribe({
+          next: (response) => {
+            console.log('Boletos comprados:', response);
+            this.showSuccessMessage = true;
+          },
+          error: (error) => {
+            console.error('Error al comprar tickets:', error);
+            this.showErrorMessage = true;
+          },
+          complete: () => {
+            // Finaliza el estado de carga
+            this.loading = false;
+          }
+        });
+    } else {
+      // En caso de que falte token o eventId, termina el loading
+      this.loading = false;
     }
-  }
+
+    
+}
+
 
   
 

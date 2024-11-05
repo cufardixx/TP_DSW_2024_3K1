@@ -15,6 +15,11 @@ export class TicketServiceService {
     const headers = new HttpHeaders().set('token', token);
     return this.http.post<any>(`${this.urlBase}buy/${eventId}`, objeto, { headers });
   }
+
+  getTicketsByUser(token: string, userID : number): Observable<Ticket[]> {
+    const headers = new HttpHeaders().set('token', token);
+    return this.http.get<Ticket[]>(`${this.urlBase}/${userID}`, { headers });
+  }
   
 
 }

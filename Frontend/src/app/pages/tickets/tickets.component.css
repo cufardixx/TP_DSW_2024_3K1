@@ -1,0 +1,13 @@
+.card {
+    border-radius: 10px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-footer img {
+    border-radius: 5px;
+    margin-top: 10px;
+  }

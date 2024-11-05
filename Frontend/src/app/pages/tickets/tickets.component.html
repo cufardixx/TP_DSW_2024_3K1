@@ -1,0 +1,26 @@
+<main>
+    <app-header></app-header>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Mis Tickets</h2>
+        <div *ngIf="tickets.length > 0; else noTickets" class="row">
+          <div *ngFor="let ticket of tickets" class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Ticket ID: {{ ticket.id }}</h5>
+                <p class="card-text"><strong>Código Único:</strong> {{ ticket.codigo_unico }}</p>
+              </div>
+              <div class="card-footer text-center">
+                <img [src]="ticket.qrCode" alt="Código QR del ticket" class="img-fluid" style="max-width: 150px;" />
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <ng-template #noTickets>
+          <p class="text-center text-muted">No tienes tickets disponibles.</p>
+        </ng-template>
+      </div>
+
+</main>
+
+  

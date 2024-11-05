@@ -11,6 +11,7 @@ import { DetalleEventoComponent } from './pages/detalle-evento/detalle-evento.co
 import { ExploradorEventosComponent } from './pages/explorador-eventos/explorador-eventos.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { TicketsComponent } from './pages/tickets/tickets.component';
 
 
 export const routes: Routes = [
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { path: "events", component: ExploradorEventosComponent, title: 'Explorar Eventos' },
     { path: "ticket/:id", component: CheckoutComponent, title: 'Ticket' },
     { path: "category", component: CategoryComponent, title: 'Categorias Admin' },
+    {path: "my-tickets/:id", component: TicketsComponent, title: 'Categorias Admin'},
 
     { path: "**", redirectTo: "", pathMatch: "full" }
 ];

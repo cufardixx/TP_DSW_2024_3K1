@@ -17,7 +17,8 @@
         <p class=""><i class="pe-2 bi bi-person text-primary"></i><strong>Apellido:</strong> {{ userProfile.lastname }}</p>
         <p class=""><i class="pe-2 bi bi-geo-alt text-primary"></i><strong>Dirección:</strong> {{ userProfile.location }}</p>
         <p class=""><i class="pe-2 bi bi-calendar text-primary"></i><strong>Fecha nacimiento:</strong> {{ userProfile.birth }}</p>
- 
+        
+        <button class="btn btn-primary mt-3" (click)="showOrders()">Tickets</button>
         <div class="text-center mt-4 d-flex justify-content-end">
           <button class="btn btn-primary" (click)="editProfile()">Editar Perfil</button>
           <button class="btn btn-outline-primary ms-2" (click)="logout()">Cerrar Sesión</button>

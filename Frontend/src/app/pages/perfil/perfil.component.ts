@@ -44,6 +44,9 @@ export class PerfilComponent implements OnInit {
     this.router.navigate([`/profile/${this.userProfile.id}`]); 
   }
 
+  showOrders(){
+    this.router.navigate(['/my-tickets', this.userProfile.id]);
+  }
 
 
   

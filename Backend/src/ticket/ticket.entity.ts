@@ -26,7 +26,7 @@ export class Ticket extends BaseEntity{
     @Column()
     userId: number;
 
-    @Column()
+    @Column({type: "text"})
     qrCode: string;
 
 

@@ -6,13 +6,17 @@ import { randomUUID } from "crypto";
 import { Event } from "../event/event.entity";
 import QRCode from "qrcode";
 import enviarCorreoConQR from "../lib/mailer";
-import  AppDataSource  from "../db"; // Asegúrate de importar tu AppDataSource correctamente
+import AppDataSource from "../db"; // Asegúrate de importar tu AppDataSource correctamente
+import { log } from "console";
 
-async function generarQR(texto: string): Promise<string> {
+// Nueva función para generar la URL de validación y el QR
+async function generarQRUrl(codigo_unico: string): Promise<string> {
     try {
-        return await QRCode.toDataURL(texto);
+        // Cambia 'https://tusitio.com' por tu dominio y endpoint de validación
+        const urlValidacion = `https://tusitio.com/validar/${codigo_unico}`;
+        return await QRCode.toDataURL(urlValidacion);
     } catch (err) {
-        throw new Error('No se pudo generar el QR');
+        throw new Error("No se pudo generar el QR");
     }
 }
 
@@ -25,7 +29,7 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
         const { cantidad } = req.body;
         const { id: eventID } = req.params;
 
-        
+
         const [user, event] = await Promise.all([
             queryRunner.manager.findOne(User, { where: { id: req.user!.id } }),
             queryRunner.manager.findOne(Event, { where: { id: parseInt(eventID) } })
@@ -34,7 +38,7 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
         if (!event) return res.status(404).json({ message: "Evento no encontrado" });
         if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
 
-        // capacidad disponible?
+        // capacidad disponible
         const ticketsVendidos = await queryRunner.manager.count(Ticket, { where: { eventId: event.id } });
         const capacidadDisponible = event.capacity - ticketsVendidos;
 
@@ -46,17 +50,18 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
         event.capacity -= cantidad;
         await queryRunner.manager.save(event);
 
-        // Crear múltiples tickets con código QR
         const tickets = await Promise.all(
             Array.from({ length: cantidad }, async () => {
-                const qrCode = await generarQR(randomUUID());
+                const codigo_unico = randomUUID();
+                const qrCode = await generarQRUrl(codigo_unico);
+
                 return queryRunner.manager.create(Ticket, {
                     event,
                     user,
                     eventId: event.id, 
                     userId: user.id, 
-                    codigo_unico: randomUUID(),
-                    qrCode
+                    codigo_unico,
+                    qrCode // guardamos solo la URL del QR
                 });
             })
         );
@@ -85,10 +90,13 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
     }
 };
 
-export const getTickets = async (req: Request, res: Response) => {
-    const { id: eventID } = req.params;
-    const tickets = await Ticket.find({ where: { eventId: parseInt(eventID) } });
-    return res.status(200).json(tickets);
-};
 
-
+export const getTickets = async (req: CustomRequest, res: Response) => {
+    try {
+        const { id: eventID } = req.params;
+        const tickets = await Ticket.find({ where: { eventId: parseInt(eventID) } }); // Obtener todos los tickets del evento con el ID proporcionado
+        return res.status(200).json(tickets);
+    } catch (error: any) {
+        return res.status(500).json({ message: 'Error interno del servidor', error: error.message });
+    }
+}

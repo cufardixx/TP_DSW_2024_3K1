@@ -22,6 +22,9 @@ export class Ticket extends BaseEntity{
 
     @Column()
     eventId: number;
+    
+    @Column()
+    titleEvent: string;
 
     @Column()
     userId: number;

@@ -61,7 +61,8 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
                     eventId: event.id, 
                     userId: user.id, 
                     codigo_unico,
-                    qrCode // guardamos solo la URL del QR
+                    qrCode, // guardamos solo la URL del QR
+                    titleEvent: event.title
                 });
             })
         );
@@ -93,8 +94,8 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
 
 export const getTickets = async (req: CustomRequest, res: Response) => {
     try {
-        const { id: eventID } = req.params;
-        const tickets = await Ticket.find({ where: { eventId: parseInt(eventID) } }); // Obtener todos los tickets del evento con el ID proporcionado
+        const { id: userID } = req.params;
+        const tickets = await Ticket.find({ where: { userId: parseInt(userID) } }); // Obtener todos los tickets del evento con el ID proporcionado
         return res.status(200).json(tickets);
     } catch (error: any) {
         return res.status(500).json({ message: 'Error interno del servidor', error: error.message });

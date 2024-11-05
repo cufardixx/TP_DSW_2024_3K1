@@ -8,6 +8,7 @@
               <div class="card-body">
                 <h5 class="card-title">Ticket ID: {{ ticket.id }}</h5>
                 <p class="card-text"><strong>Código Único:</strong> {{ ticket.codigo_unico }}</p>
+                <p class="card-text"><strong></strong> {{ ticket.titleEvent }}</p>
               </div>
               <div class="card-footer text-center">
                 <img [src]="ticket.qrCode" alt="Código QR del ticket" class="img-fluid" style="max-width: 150px;" />

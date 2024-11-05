@@ -11,20 +11,15 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
     try {
         const { title, capacity, date, description, time, price, location, image, categoryId } = req.body;
 
-        console.log('categoryId recibido:', categoryId);
-
         const user = await User.findOneBy({ id: req.user!.id });
         if (!user) return res.status(404).json({ message: "User no encontrado" });
 
         // Buscar la categoría en la base de datos usando el categoryId
         const category = await Category.findOneBy({ id: categoryId });
         if (!category) return res.status(404).json({ message: "Category no encontrada" });
-        console.log('Categoría encontrada:', category.name);
 
         const userName = user.firstname;
         const categorName = category.name
-        console.log(categorName);
-        
 
         const userId = user.id;
 
@@ -45,7 +40,6 @@ export const createEvent = async (req: CustomRequest, res: Response) => {
 
 
         await event.save();
-        console.log(event);
 
         return res.status(201).json({ message: 'Evento creado con éxito', event });
     } catch (error: any) {
@@ -97,7 +91,6 @@ export const getEventsByUser = async (req: CustomRequest, res: Response) => {
 
         res.json(eventos);
     } catch (error) {
-        console.error('Error al obtener eventos:', error);
         res.status(500).json({ message: 'Error al obtener eventos' });
     }
 }
@@ -121,7 +114,6 @@ export const getEvent = async (req: Request, res: Response) => {
 export const getEvents = async (req: Request, res: Response) => {
     try {
         const events = await Event.find();
-        console.log(events);
 
         return res.json(events);
     } catch (error) {

@@ -1,5 +1,5 @@
 import { Router } from "express"
-import {createTicket, getTicketsByUser} from  '../ticket/ticket.controller'
+import {createTicket} from  '../ticket/ticket.controller'
 import { checkAuthToken } from "../middlewares/authToken"
 import { checkRoleAuth } from "../middlewares/checkRole"
 

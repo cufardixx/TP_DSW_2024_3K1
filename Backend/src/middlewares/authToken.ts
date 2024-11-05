@@ -21,9 +21,7 @@ export const checkAuthToken = async (req: CustomRequest, res: Response, next: Ne
         }
 
         const tokenData = await verifyToken(token) as IPayload;
-        console.log(tokenData);
 
-        
         if (!tokenData || !tokenData.id) {
             return res.status(401).json({ message: 'Invalid token data' });
         }

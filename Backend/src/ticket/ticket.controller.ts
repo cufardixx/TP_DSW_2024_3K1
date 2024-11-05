@@ -85,4 +85,10 @@ export const createTicket = async (req: CustomRequest, res: Response) => {
     }
 };
 
+export const getTickets = async (req: Request, res: Response) => {
+    const { id: eventID } = req.params;
+    const tickets = await Ticket.find({ where: { eventId: parseInt(eventID) } });
+    return res.status(200).json(tickets);
+};
+
 

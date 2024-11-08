@@ -1,30 +1,29 @@
-<main >
-
+<main>
   <app-header></app-header>
 
   <div class="container mt-5">
+    <div class="profile-card p-4 text-center bg-light rounded shadow-sm mb-4">
+      <img [src]="userProfile?.imgPerfil" alt="Avatar" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+      <h2 class="text-primary fw-bold">{{ userProfile?.firstname }} {{ userProfile?.lastname }}</h2>
+      <p class="text-muted">{{ userProfile?.email }}</p>
+      <button class="btn btn-outline-primary mt-3" (click)="showOrders()">Mis Tickets</button>
+    </div>
 
-      <div class="p-3 d-flex align-items-center justify-content-center flex-column" >
-        <strong class="ms-2 fs-4 text-primary fw-bold">{{ userProfile.firstname }} {{ userProfile.lastname }}</strong>
-        <img src="{{ userProfile.imgPerfil }}" alt="Avatar" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+    <div class="user-details p-4 bg-white rounded shadow-sm">
+      <h5 class="text-center border-bottom pb-2 text-primary">Detalles del Usuario</h5>
+      <div class="mt-3">
+        <p><i class="bi bi-envelope text-primary pe-2"></i><strong>Email:</strong> {{ userProfile?.email }}</p>
+        <p><i class="bi bi-phone text-primary pe-2"></i><strong>Teléfono:</strong> {{ userProfile?.phone }}</p>
+        <p><i class="bi bi-person text-primary pe-2"></i><strong>Nombre:</strong> {{ userProfile?.firstname }}</p>
+        <p><i class="bi bi-person text-primary pe-2"></i><strong>Apellido:</strong> {{ userProfile?.lastname }}</p>
+        <p><i class="bi bi-geo-alt text-primary pe-2"></i><strong>Dirección:</strong> {{ userProfile?.location }}</p>
+        <p><i class="bi bi-calendar text-primary pe-2"></i><strong>Fecha de Nacimiento:</strong> {{ userProfile?.birth }}</p>
       </div>
-
-      <div class="p-2">
-        <h5 class="border-bottom border-primary text-center">Detalles del Usuario</h5>
-        <p class=""><i class="pe-2 bi bi-envelope text-primary "></i><strong>Email:</strong> {{ userProfile.email }}</p>
-        <p class=""><i class="pe-2 bi bi-phone text-primary"></i><strong>Teléfono:</strong> {{ userProfile.phone }}</p>
-        <p class=""><i class="pe-2 bi bi-person text-primary"></i><strong>Nombre:</strong> {{ userProfile.firstname }}</p>
-        <p class=""><i class="pe-2 bi bi-person text-primary"></i><strong>Apellido:</strong> {{ userProfile.lastname }}</p>
-        <p class=""><i class="pe-2 bi bi-geo-alt text-primary"></i><strong>Dirección:</strong> {{ userProfile.location }}</p>
-        <p class=""><i class="pe-2 bi bi-calendar text-primary"></i><strong>Fecha nacimiento:</strong> {{ userProfile.birth }}</p>
-        
-        <button class="btn btn-primary mt-3" (click)="showOrders()">Tickets</button>
-        <div class="text-center mt-4 d-flex justify-content-end">
-          <button class="btn btn-primary" (click)="editProfile()">Editar Perfil</button>
-          <button class="btn btn-outline-primary ms-2" (click)="logout()">Cerrar Sesión</button>
-        </div>
+      
+      <div class="text-center mt-4 d-flex justify-content-center">
+        <button class="btn btn-primary me-2" (click)="editProfile()">Editar Perfil</button>
+        <button class="btn btn-outline-danger" (click)="logout()">Cerrar Sesión</button>
       </div>
-
+    </div>
   </div>
-
 </main>

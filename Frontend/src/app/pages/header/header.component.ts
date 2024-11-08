@@ -14,7 +14,6 @@ import { AccesService } from '../../services/acces.service';
 export class HeaderComponent {
   private router = inject(Router)
   private accesService = inject(AccesService);
-
   user: any;
   evento: any;
   imgPerfil: string | null = null;
@@ -44,6 +43,7 @@ export class HeaderComponent {
 
 
    isLoggedIn = typeof localStorage !== 'undefined' && localStorage.getItem('token') !== null;
+   showTooltip = false
 
 
   crearEvento(): void {
@@ -51,11 +51,20 @@ export class HeaderComponent {
     if (token) {
       this.router.navigate(['/create-event']);
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/tickets']);
     }
   }
 
+  redirectToProfile() {
+    this.router.navigate(['/profile']);
+  }
 
+
+  redirectToLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('cachedProfile');
+    this.router.navigate(['/']);
+  }
 
   
 }

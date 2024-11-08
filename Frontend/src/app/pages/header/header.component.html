@@ -1,16 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
   <div class="container-fluid">
-
-    <a class="navbar-brand fw-bold " href="#">EventLife</a>
+    <a class="navbar-brand fw-bold" href="#">EventLife</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-
-
       <div class="d-flex">
+        
         <!-- Si el usuario no está autenticado -->
         <ng-container *ngIf="!isLoggedIn">
           <button class="btn btn-primary me-2" (click)="redirectToLogin()">Iniciar sesión</button>
@@ -20,21 +18,34 @@
         <!-- Si el usuario está autenticado -->
         <ng-container *ngIf="isLoggedIn">
           <div class="d-flex align-items-center">
-            <a href="/events" style="cursor: pointer;"><i class="bi bi-bag-plus text-white me-3" style="font-size: 1.5rem;"></i></a>
+            <a href="/events" style="cursor: pointer;">
+              <i class="bi bi-bag-plus text-white me-3" style="font-size: 1.5rem;"></i>
+            </a>
             <a class="nav-link text-white me-3" href="/my-events">Mis Eventos</a>
             <a class="nav-link text-white" style="cursor: pointer;" (click)="crearEvento()">
               Crear Evento
               <i class="bi bi-plus-lg text-primary ms-1" style="font-size: 1rem;"></i>
             </a>
           </div>
-          <a href="/profile">
-            <img [src]="user?.imgPerfil || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" alt="Avatar" class="rounded-circle ms-3" style="width: 40px; height: 40px;">
-          </a>
+
+          <div class="position-relative" (mouseenter)="showTooltip = true" (mouseleave)="showTooltip = false">
+            <img 
+              [src]="user?.imgPerfil || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" 
+              alt="Avatar" 
+              class="rounded-circle ms-3" 
+              style="width: 40px; height: 40px; cursor: pointer;"
+              (click)="redirectToProfile()">
+
+            <div *ngIf="showTooltip" 
+                  class="user-tooltip bg-white text-dark p-3 rounded shadow-lg position-absolute end-0 mt-2" style="width: 200px; z-index: 1000;"
+                  style="top: 35px;">
+              <h6 class="fw-bold">{{ user?.firstname || 'Usuario' }}</h6>
+              <p class="mb-2">{{ user?.email || 'usuario@correo.com' }}</p>
+              <button class="btn btn-danger w-100" (click)="redirectToLogout()">Cerrar cesión</button>
+            </div>
+          </div>
         </ng-container>
       </div>
-
     </div>
-
   </div>
-  
 </nav>

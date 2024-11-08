@@ -12,7 +12,7 @@ import { HeaderComponent } from '../header/header.component';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.css'
+  styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
   private router = inject(Router);
@@ -20,16 +20,14 @@ export class CheckoutComponent implements OnInit {
   public formBuild = inject(FormBuilder);
   private eventoService = inject(EventServiceService);
   private ticketService = inject(TicketServiceService);
- 
 
   private eventId: string | null = null;
   evento: any;
-  ticketQuantity: number = 1;
-  total: number = 0;
+  ticketQuantity: number = 1; // Cantidad inicial
+  total: number = 0; // Total inicial
   loading = false;
   showSuccessMessage = false;
   showErrorMessage = false;
-
 
   public formCheckout: FormGroup = this.formBuild.group({
     quantity: [1, [Validators.required, Validators.min(1)]]
@@ -37,26 +35,49 @@ export class CheckoutComponent implements OnInit {
 
   showMessage: boolean = false;
   message: string = '';
-
+  
   ngOnInit(): void {
     this.eventId = this.route.snapshot.paramMap.get('id');
-
+    
     if (this.eventId) {
       this.eventoService.obtenerEvento(Number(this.eventId)).subscribe((evento) => {
         this.evento = evento;
+        this.calculateTotal(); // Calcula el total al cargar el evento
       });
     }
   }
 
-  actualizarTotal() {
-    const cantidad = this.formCheckout.value.quantity;
-    this.total = cantidad * this.evento.price
+  // Incrementa la cantidad de entradas
+  incrementQuantity() {
+    this.ticketQuantity++;
+    this.calculateTotal();
   }
 
+  // Decrementa la cantidad de entradas (con un límite mínimo de 1)
+  decrementQuantity() {
+    if (this.ticketQuantity > 1) {
+      this.ticketQuantity--;
+      this.calculateTotal();
+    }
+  }
+
+  // Calcula el total basado en `ticketQuantity` y `evento.price`
+  calculateTotal() {
+    this.total = this.ticketQuantity * (this.evento?.price || 0);
+  }
+
+  // Actualiza el total cuando cambia manualmente la cantidad en el formulario
+  actualizarTotal() {
+    const cantidad = this.formCheckout.value.quantity;
+    this.ticketQuantity = cantidad;
+    this.calculateTotal();
+  }
+
+  // Procesa la compra de tickets
   comprarTickets() {
     this.showSuccessMessage = false;
     this.showErrorMessage = false;
-    // Validar si el formulario está completo y si el campo 'quantity' es válido
+
     if (!this.formCheckout.valid) {
         console.error('Formulario incompleto o inválido');
         return;
@@ -65,7 +86,7 @@ export class CheckoutComponent implements OnInit {
     this.loading = true;
 
     const token = localStorage.getItem('token');
-    const cantidadDeTickets = this.formCheckout.value.quantity;
+    const cantidadDeTickets = this.ticketQuantity; // Utiliza `ticketQuantity`
     const cantidadValida = Number.isInteger(cantidadDeTickets) && cantidadDeTickets > 0;
 
     if (token && this.eventId && cantidadValida) {
@@ -80,21 +101,13 @@ export class CheckoutComponent implements OnInit {
             this.showErrorMessage = true;
           },
           complete: () => {
-            // Finaliza el estado de carga
             this.loading = false;
           }
         });
     } else {
-      // En caso de que falte token o eventId, termina el loading
       this.loading = false;
     }
-
-    
-}
-
-
-  
-
+  }
 
   crearEvento(): void {
     const token = localStorage.getItem('token');

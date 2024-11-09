@@ -3,3 +3,8 @@
         margin-top: 50px;
     }
 }
+
+.is-invalid {
+    border-color: #dc3545;
+  }
+

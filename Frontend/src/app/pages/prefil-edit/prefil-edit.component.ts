@@ -83,6 +83,7 @@ export class PrefilEditComponent implements OnInit {
     } else {
       this.mostrarFeedback('Error: ID de usuario no disponible', false);
     }
+    localStorage.removeItem('cachedProfile');
   } 
 
   private mostrarFeedback(mensaje: string, esExito: boolean) {

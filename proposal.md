@@ -12,12 +12,16 @@
 
 ## Tema
 
-La aplicación web ofrece un sistema de compra de entradas para eventos. Los usuarios ingresarán a la aplicaión y deberán registrarse ingresando sus datos personales. En el caso de que ya estén registrados, se loguearán con su usuario ó email y su contraseña. Una vez registrados, deberán seleccionar el evento al que deseen asistir. Además contarán con distintos filtros para visualizar eventos por fecha, lugar o disponibilidad.
-Cada evento contará con diferentes categorias (cumpleaños, casamientos, aniversarios, etc) y podrán realizarse en diferentes ubicaciones (salones, clubes, etc)
-Una vez que el usuario realize la selección y finalize la compra de la entrada, recibirá en su casilla de correo un mensaje de confirmación el cual será utilizado como entrada.
+La aplicación web ofrece un sistema de compra de entradas para eventos. Los usuarios ingresarán a la aplicación y deberán registrarse ingresando sus datos personales. En el caso de que ya estén registrados, iniciarán sesión con su correo electrónico y su contraseña. Una vez registrados, podrán elegir entre crear un evento o adquirir entradas para asistir a uno.
+
+Para la búsqueda, contarán con distintos filtros para visualizar por categoría y con una barra de búsqueda. Cada evento contará con diferentes categorías (cumpleaños, festival, bar nocturno, etc.). Una vez que el usuario realice la selección y finalice la compra de la entrada, recibirá en su casilla de correo un mensaje de confirmación, el cual será utilizado como entrada. Además, cada usuario contará con un apartado dentro de la aplicación para ver todas las entradas que ha adquirido junto con sus códigos QR.
+
+En el caso de la carga de eventos, deberán llenar un formulario con la información del evento. Una vez ingresado, el evento podrá ser accedido por otros usuarios. Los usuarios, además, contarán con un apartado para ver todos los eventos que hayan creado, donde podrán editarlos o eliminarlos. El apartado contará con botones para ordenar los eventos por fecha o por nombre.
+
 
 ### Modelo
-![imagen del modelo de dominio](https://github.com/user-attachments/assets/1a8577ea-ba61-4c32-813a-dde1572c2460)
+![tp-dsw-modelo](https://github.com/user-attachments/assets/d3d93740-65d2-4786-8e4f-14a92e8e169c)
+
 
 ### Reglas de negocio
 
@@ -25,7 +29,7 @@ Una vez que el usuario realize la selección y finalize la compra de la entrada,
 
 Registro y Autenticación:
 -Permitir a los usuarios registrarse y autenticarse de manera segura.
--Permitir a los usuarios elegir una categoria y una ubicación para un evento.
+-Permitir a los usuarios elegir una categoria para un evento.
 
 Gestión de Perfiles de Usuario:
 -Los usuarios pueden ver y editar su perfil.
@@ -43,22 +47,14 @@ Regularidad:
 |Req|Detalle|
 |:-|:-|
 |CRUD simple|1. CRUD usuario<br>2. CRUD evento<br>3. CRUD categoria|
-|CRUD dependiente|1. CRUD ubicacion {depende de} CRUD evento<br>2. CRUD entrada {depende de} CRUD usuario|
-|Listado<br>+<br>detalle| 1. Listado de eventos filtrados por fecha, hora y lugar => detalle CRUD Evento|
+|CRUD dependiente|1. CRUD categoria {depende de} CRUD evento<br>2. CRUD entrada {depende de} CRUD usuario|
+|Listado<br>+<br>detalle| 1. Listado de eventos filtrados por categoria => detalle CRUD Evento|
 |CUU/Epic|1. Comprar una entrada para un evento|
 
 
 Adicionales para Aprobación
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD usuario<br>2. CRUD evento<br>3. CRUD entrada<br>4. CRUD categoria<br>5. CRUD ubicacion|
+|CRUD |1. CRUD usuario<br>2. CRUD evento<br>3. CRUD entrada<br>4. CRUD categoria|
 |CUU/Epic|1. Comprar una entrada para un evento<br>2. Realizar la carga de un evento|
-
-
-### Alcance Adicional Voluntario
-
-|Req|Detalle|
-|:-|:-|
-|Listados |1. Eventos filtrados por disponibilidad <br>2. Eventos a los que asistirá el usuario|
-|CUU/Epic|1. Cancelar una compra|
 

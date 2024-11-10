@@ -40,16 +40,16 @@ export class RegistrarEventoComponent {
   public formRegistroEvento: FormGroup = this.formBuild.group({
     category: ['', Validators.required],
     title: ['', Validators.required],
-    description: ['', Validators.required],
+    description: ['', [Validators.required, Validators.maxLength(500)]], // Permite hasta 500 caracteres
     date: ['', Validators.required],
     time: ['', Validators.required],
     location: ['', Validators.required],
-    image: ['', Validators.required],
-    price: ['', Validators.required],
-    organizer: ['', Validators.required], 
-    capacity: ['', Validators.required]    
+    image: [''],
+    price: ['', [Validators.required, Validators.min(0)]], // Precio debe ser positivo
+    organizer: ['', Validators.required],
+    capacity: ['', [Validators.required, Validators.min(10)]], // Capacidad mínima de 10
   });
-
+  
 
 
   createEvent() {

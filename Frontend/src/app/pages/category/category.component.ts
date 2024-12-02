@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Categoria } from '../../interfaces/categoria';
 import { HeaderComponent } from '../header/header.component';
+import { AccesService } from '../../services/acces.service';
+import { Usuario } from '../../interfaces/Usuario';
 
 @Component({
   selector: 'app-category',
@@ -18,6 +20,7 @@ import { HeaderComponent } from '../header/header.component';
 export class CategoryComponent {
 
   // Injecting services
+  private UserService = inject(AccesService)
   private CategoryService = inject(CategoryServiceService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
@@ -28,13 +31,32 @@ export class CategoryComponent {
   });
   errorMessages: any;
 
-  categorias: Categoria[] = []; 
+  categorias: Categoria[] = [];
+  usuarios: Usuario[] = []
+  userId: any
+  mostrarTabla: boolean = false;
+  mostrarCategory : boolean = false;
 
 
   ngOnInit(): void {
     this.CategoryService.getCategories().subscribe((categorias) => {
       console.log(categorias); // Verifica que los datos se reciban correctamente
       this.categorias = categorias;
+    });
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Token no encontrado en localStorage.');
+      return;
+    }
+    this.UserService.getUsers(token).subscribe({
+      next: (usuarios: Usuario[]) => {
+        console.log('Usuarios:', usuarios);
+        this.usuarios = usuarios;
+      },
+      error: (error: any) => {
+        console.error('Error al obtener usuarios:', error);
+      }
     });
   }
 
@@ -51,11 +73,22 @@ export class CategoryComponent {
     );
   }
 
-  
+  borrarUsuario(userId: any): void {
+    this.UserService.delete(userId).subscribe({
+      next: () => {
+        console.log('Usuario eliminado');
+        this.usuarios = this.usuarios.filter(usuario => usuario.id !== userId);
+      },
+      error: (error: any) => {
+        console.error('Error al eliminar usuario:', error);
+      }
+    });
+  }
+
   CargarCategoria() {
     if (this.formCategory.invalid) return;
 
-    const objeto : any = {
+    const objeto: any = {
       name: this.formCategory.value.name
     };
     console.log(objeto);
@@ -70,4 +103,7 @@ export class CategoryComponent {
       }
     });
   }
+
+
+
 }

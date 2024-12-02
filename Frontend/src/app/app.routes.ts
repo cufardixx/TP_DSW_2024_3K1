@@ -26,7 +26,7 @@ export const routes: Routes = [
     { path: "event/:id", component: DetalleEventoComponent, title: 'Ver Evento' },
     { path: "events", component: ExploradorEventosComponent, title: 'Explorar Eventos' },
     { path: "ticket/:id", component: CheckoutComponent, title: 'Ticket' },
-    { path: "category", component: CategoryComponent, title: 'Categorias Admin' },
+    { path: "admin", component: CategoryComponent, title: 'Categorias Admin' },
     {path: "my-tickets/:id", component: TicketsComponent, title: 'Categorias Admin'},
 
     { path: "**", redirectTo: "", pathMatch: "full" }

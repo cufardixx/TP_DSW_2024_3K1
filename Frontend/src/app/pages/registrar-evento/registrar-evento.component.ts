@@ -84,15 +84,21 @@ export class RegistrarEventoComponent {
   
     this.EventService.crearEvento(objeto).subscribe({
       next: (resp) => {
-        console.log('Evento creado con éxito');
+        this.mostrarFeedback('Evento creado con éxito!', true);
         setTimeout(() => {
           this.router.navigate(['/profile']);
-        }, 1050);
+        }, 1000);
       },
       error: (err) => {
         console.error('Error creando el evento:', err);
+        this.mostrarFeedback('Error al actualizar el perfil', false);
       }
     });
+  }
+
+  private mostrarFeedback(mensaje: string, esExito: boolean) {
+    this.feedbackMessage = mensaje;
+    this.feedbackSuccess = esExito;
   }
   
 }

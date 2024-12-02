@@ -6,15 +6,22 @@
 
     <div class="container">
       <h1 class="display-4 font-weight-bold mb-3">EventLife</h1>
-      <p class="lead mb-4">Crea eventos inolvidables o encuentra las mejores entradas para los eventos más emocionantes.</p>
+      <p class="lead mb-4" style="opacity: 70%;">Crea eventos inolvidables o encuentra las mejores entradas para los eventos más emocionantes.</p>
 
 
       <div class="row justify-content-center ">
         <div class="col-md-8 w-100">
           <div class="input-group input-group-lg">
-            <input  type="text"   class="form-control" placeholder="Buscar eventos" (ngModelChange)="buscarEventos()" [(ngModel)]="src">
+            <input style="box-shadow: 0px 0px 34px -6px rgba(0, 165, 255, 1);"  type="text"   class="form-control mt-3" placeholder="Buscar eventos" (ngModelChange)="buscarEventos()" [(ngModel)]="src">
           </div>
         </div>
+        
+        <a style="cursor: pointer; text-decoration: none;" href="#evento" class="position-absolute bottom-0 start-50 translate-middle-x text-center">
+          <div class="arrow-down">
+            <p class="lead">Encuentra tu Evento</p>
+            <i class="bi bi-caret-down-fill"></i>
+          </div>
+        </a>
       </div>
 
 
@@ -31,14 +38,14 @@
   </section>
 
   <!-- Sección de eventos populares -->
-  <section class="events-section py-5" style="background-color: #f8f9fa;">
+  <section  class="events-section py-5" style="background-color: #f8f9fa;">
     <div class="container">
       <app-popular-events></app-popular-events>
     </div>
   </section>
 
  <!-- Crear evento / Comprar tickets -->
- <section class="create-ticket-section py-5 text-center text-white d-flex align-items-center justify-content-center" style="background: linear-gradient(90deg, #004e92, #000428); height: 100vh;">
+ <section id="evento" class="create-ticket-section py-5 text-center text-white d-flex align-items-center justify-content-center" style="background: linear-gradient(90deg, #004e92, #000428); height: 100vh;">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 mb-4">

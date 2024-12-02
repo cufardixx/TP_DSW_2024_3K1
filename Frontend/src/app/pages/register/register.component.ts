@@ -26,36 +26,39 @@ export class RegisterComponent {
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+    phone: ['', [Validators.required,]],
     location: ['', Validators.required],
     birth: ['', Validators.required],
   });
 
   registrarse() {
-    if (this.formRegistro.valid){
-      
+    if (this.formRegistro.valid) {
+
       if (this.formRegistro.invalid) return;
 
-    const objeto: Usuario = {
-      email: this.formRegistro.value.email,
-      firstname: this.formRegistro.value.firstname,
-      lastname: this.formRegistro.value.lastname,
-      password: this.formRegistro.value.password,
-      phone: this.formRegistro.value.phone.toString(),
-      location: this.formRegistro.value.location,
-      birth: this.formRegistro.value.birth
-    };
+      const objeto: Usuario = {
+        email: this.formRegistro.value.email,
+        firstname: this.formRegistro.value.firstname,
+        lastname: this.formRegistro.value.lastname,
+        password: this.formRegistro.value.password,
+        phone: this.formRegistro.value.phone.toString(),
+        location: this.formRegistro.value.location,
+        birth: this.formRegistro.value.birth
+      };
 
-    console.log(objeto);
-    
-    
+      console.log(objeto);
+
+
 
       this.AccesService.registrarse(objeto).subscribe({
         next: (response) => {
-          console.log('Usuario registrado:', response);
-          this.router.navigate(['/login']);
+          this.mostrarFeedback('Perfil creado con éxito', true);
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 900);
         },
         error: (error) => {
+          this.mostrarFeedback('Error al crear el perfil', false)
           this.errorMessages = error;
         }
       });
@@ -68,4 +71,23 @@ export class RegisterComponent {
       });
     }
   }
+
+  formatPhoneNumber(event: any) {
+    let input = event.target.value.replace(/\D/g, '');
+
+    // Aplica el formato: "XXXX XXXXXXX"
+    if (input.length > 4) {
+      input = `${input.substring(0, 4)}-${input.substring(4, 10)}`;
+    }
+    event.target.value = input;
+  }
+
+  private mostrarFeedback(mensaje: string, esExito: boolean) {
+    this.feedbackMessage = mensaje;
+    this.feedbackSuccess = esExito;
+  }
+  feedbackMessage = '';
+  feedbackSuccess = false;
+
+
 }

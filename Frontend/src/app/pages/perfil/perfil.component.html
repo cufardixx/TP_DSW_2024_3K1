@@ -1,12 +1,14 @@
-<main>
+<main class="d-flex justify-content-center align-items-center vh-100">
   <app-header></app-header>
 
-  <div class="container mt-5">
+  <div class="container">
     <div class="profile-card p-4 text-center bg-light rounded shadow-sm mb-4">
       <img [src]="userProfile?.imgPerfil" alt="Avatar" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
       <h2 class="text-primary fw-bold">{{ userProfile?.firstname }} {{ userProfile?.lastname }}</h2>
       <p class="text-muted">{{ userProfile?.email }}</p>
       <button class="btn btn-outline-primary mt-3" (click)="showOrders()">Mis Tickets</button>
+      <button class="btn btn-outline-primary mt-3 ms-2" *ngIf="tieneEventos" (click)="misEventos()">Eventos creados</button>
+      <button class="btn btn-outline-primary mt-3 ms-2" *ngIf="esAdmin" (click)="panelAdmin()">Panel Admin</button>
     </div>
 
     <div class="user-details p-4 bg-white rounded shadow-sm">
@@ -20,7 +22,7 @@
         <p><i class="bi bi-calendar text-primary pe-2"></i><strong>Fecha de Nacimiento:</strong> {{ userProfile?.birth }}</p>
       </div>
       
-      <div class="text-center mt-4 d-flex justify-content-center">
+      <div class="text-center mt-4 d-flex">
         <button class="btn btn-primary me-2" (click)="editProfile()">Editar Perfil</button>
         <button class="btn btn-outline-danger" (click)="logout()">Cerrar Sesión</button>
       </div>

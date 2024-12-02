@@ -20,7 +20,7 @@ export class LoginComponent {
   private AccesService = inject(AccesService);
   private router = inject(Router);
   public formBuild = inject(FormBuilder);
- 
+
 
   public formLogin: FormGroup = this.formBuild.group({
     email: ['', [Validators.required, Validators.email]],
@@ -36,11 +36,14 @@ export class LoginComponent {
 
       this.AccesService.login(objeto).subscribe({
         next: (response) => {
+          this.mostrarFeedback('Sesión iniciada con éxito!', true);
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 900);
           localStorage.setItem("token", response.token);
-          this.router.navigate(['/profile']);
         },
         error: (error) => {
-          console.error('Error al iniciar sesión:', error);
+          this.mostrarFeedback('Error al iniciar sesión', false)
         }
       });
     } else {
@@ -48,5 +51,12 @@ export class LoginComponent {
     }
   }
 
-  
+  private mostrarFeedback(mensaje: string, esExito: boolean) {
+    this.feedbackMessage = mensaje;
+    this.feedbackSuccess = esExito;
+  }
+  feedbackMessage = '';
+  feedbackSuccess = false;
+
+
 }

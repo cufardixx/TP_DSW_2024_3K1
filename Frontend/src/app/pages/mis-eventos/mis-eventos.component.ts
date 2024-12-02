@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 
+
 @Component({
   selector: 'app-mis-eventos',
   standalone: true,

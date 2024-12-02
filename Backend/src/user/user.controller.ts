@@ -8,7 +8,7 @@ import { CustomRequest } from "../middlewares/authToken";
 
 export const signupUser = async (req: Request, res: Response) => {
   try {
-    const { firstname, lastname, email, password,phone,location,birth } = req.body;
+    const { firstname, lastname, email, password, phone, location, birth } = req.body;
 
     // Encriptar password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -55,9 +55,9 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const { firstname, lastname, email, password, rol, phone, birth, location , imgPerfil } = req.body
+    const { firstname, lastname, email, password, rol, phone, birth, location, imgPerfil } = req.body
     const user = await User.findOneBy({ id: parseInt(req.params.id) })
-   
+
     if (!user) return res.status(404).json({ message: "User does not exist" })
     user.firstname = firstname
     user.phone = phone
@@ -127,8 +127,8 @@ export const signinUser = async (req: Request, res: Response) => {
 export const profile = async (req: CustomRequest, res: Response) => {
   try {
     const id = req.user!.id
-    console.log(id);
-    
+
+
     const user = await User.findOneBy({ id: id });
     if (!user) return res.status(404).json('No User found');
 
@@ -142,6 +142,8 @@ export const profile = async (req: CustomRequest, res: Response) => {
       location: user.location,
       birth: user.birth,
       imgPerfil: user.imgPerfil,
+      rol: user.rol
+
     });
   } catch (error) {
     return res.status(500).json({ message: 'Internal server error' });

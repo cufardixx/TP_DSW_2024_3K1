@@ -18,32 +18,25 @@
         <!-- Si el usuario está autenticado -->
         <ng-container *ngIf="isLoggedIn">
           <div class="d-flex align-items-center">
-            <a href="/events" style="cursor: pointer;">
+            <a href="/events" style="cursor: pointer;" class="nav-link text-white">
+              Eventos
               <i class="bi bi-bag-plus text-white me-3" style="font-size: 1.5rem;"></i>
             </a>
-            <a class="nav-link text-white me-3" href="/my-events">Mis Eventos</a>
             <a class="nav-link text-white" style="cursor: pointer;" (click)="crearEvento()">
               Crear Evento
               <i class="bi bi-plus-lg text-primary ms-1" style="font-size: 1rem;"></i>
             </a>
           </div>
 
-          <div class="position-relative" (mouseenter)="showTooltip = true" (mouseleave)="showTooltip = false">
+          <div class="position-relative">
             <img 
               [src]="user?.imgPerfil || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" 
               alt="Avatar" 
               class="rounded-circle ms-3" 
               style="width: 40px; height: 40px; cursor: pointer;"
               (click)="redirectToProfile()">
-
-            <div *ngIf="showTooltip" 
-                  class="user-tooltip bg-white text-dark p-3 rounded shadow-lg position-absolute end-0 mt-2" style="width: 200px; z-index: 1000;"
-                  style="top: 35px;">
-              <h6 class="fw-bold">{{ user?.firstname || 'Usuario' }}</h6>
-              <p class="mb-2">{{ user?.email || 'usuario@correo.com' }}</p>
-              <button class="btn btn-danger w-100" (click)="redirectToLogout()">Cerrar cesión</button>
-            </div>
           </div>
+
         </ng-container>
       </div>
     </div>

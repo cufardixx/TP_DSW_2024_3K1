@@ -73,7 +73,7 @@ export class PrefilEditComponent implements OnInit {
           this.mostrarFeedback('Perfil actualizado con éxito', true);
           setTimeout(() => {
             this.router.navigate(['/profile']);
-          }, 900);
+          }, 1000);
         },
         error: (error) => {
           this.mostrarFeedback('Error al actualizar el perfil', false);

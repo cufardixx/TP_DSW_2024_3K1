@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Usuario } from '../interfaces/Usuario';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, throwError } from 'rxjs';
 import { ResponseAcceso } from '../interfaces/ResponseAcceso';
 import { Login } from '../interfaces/Login';
 import { UsuarioEdit } from '../interfaces/UsuarioEdit';
@@ -14,10 +14,11 @@ import { UsuarioEdit } from '../interfaces/UsuarioEdit';
 export class AccesService {
 
   private http = inject(HttpClient)
-  private urlBase: string = "http://localhost:3000/api/user/"
+ private urlBase: string = "https://backend-eventlife.onrender.com/api/user/"
+   //private urlBase: string = "http://localhost:3000/api/user/"
   constructor() { }
 
-  registrarse(objeto: Usuario){
+  registrarse(objeto: Usuario) {
     return this.http.post(`${this.urlBase}register`, objeto)
   }
 
@@ -59,6 +60,17 @@ export class AccesService {
     return this.http.get<Usuario>(`${this.urlBase}${id}`, { headers });
   }
 
+  getUsers(token: string): Observable<any> {
+    if (!token) {
+      console.error('Token inválido.');
+      return throwError(() => new Error('Token inválido'));
+    }
+  
+    const headers = new HttpHeaders().set('token', `${token}`);
+    return this.http.get(`${this.urlBase}`, { headers });
+  }
 
-
+  delete(id: number) {
+    return this.http.delete(`${this.urlBase}${id}`)
+  }
 }

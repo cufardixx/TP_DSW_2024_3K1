@@ -6,6 +6,7 @@ import { importProvidersFrom } from '@angular/core'; // Importar esta función
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { routes } from './app.routes';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),

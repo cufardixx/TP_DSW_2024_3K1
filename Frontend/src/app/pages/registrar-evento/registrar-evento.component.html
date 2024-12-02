@@ -1,155 +1,156 @@
 <main>
-    <app-header></app-header>
+  <app-header></app-header>
 
-    <div class="d-flex justify-content-center align-items-center bg-light custom-mobile" style="min-height: 100vh;">
-        <div class="row w-100 justify-content-center">
-            <div class="col-md-6 col-lg-8">
-                <form class="p-4 bg-white" [formGroup]="formRegistroEvento" (ngSubmit)="createEvent()">
-                    <h3 class="mb-4 text-center text-primary">Crea tu Evento</h3>
+  <div class="d-flex justify-content-center align-items-center bg-light custom-mobile" style="min-height: 100vh;">
+    <div class="row w-100 justify-content-center">
+      <div class="col-md-6 col-lg-8">
+        <form class="p-4 bg-white" [formGroup]="formRegistroEvento" (ngSubmit)="createEvent()">
+          <h3 class="mb-4 text-center text-primary">Crea tu Evento</h3>
 
-                    <!-- Agrupación en dos columnas -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Nombre del Evento</label>
-                                <input formControlName="title" type="text" class="form-control" 
-                                       [ngClass]="{'is-invalid': formRegistroEvento.get('title')?.invalid && formRegistroEvento.get('title')?.touched}" 
-                                       required>
-                                <div *ngIf="formRegistroEvento.get('title')?.invalid && formRegistroEvento.get('title')?.touched" 
-                                     class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                                  El nombre del evento es obligatorio.
-                                </div>
-                              </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Descripción</label>
-                                <input formControlName="description" type="text" class="form-control" 
-                                       [ngClass]="{'is-invalid': formRegistroEvento.get('description')?.invalid && formRegistroEvento.get('description')?.touched}" 
-                                       maxlength="500" required>
-                                <div *ngIf="formRegistroEvento.get('description')?.invalid && formRegistroEvento.get('description')?.touched" 
-                                     class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                                  La descripción es obligatoria y debe tener hasta 500 caracteres.
-                                </div>
-                              </div>
-                              
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Categoría Evento</label>
-                            <select formControlName="category" class="form-select"
-                                    [ngClass]="{'is-invalid': formRegistroEvento.get('category')?.invalid && formRegistroEvento.get('category')?.touched}">
-                              <option value="" disabled selected>Selecciona una categoría</option>
-                              <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-                            </select>
-                            <div *ngIf="formRegistroEvento.get('category')?.invalid && formRegistroEvento.get('category')?.touched" 
-                                 class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                              La categoría del evento es obligatoria.
-                            </div>
-                          </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Capacidad</label>
-                                <input formControlName="capacity" type="number" class="form-control"
-                                       [ngClass]="{'is-invalid': formRegistroEvento.get('capacity')?.invalid && formRegistroEvento.get('capacity')?.touched}" 
-                                       required>
-                                <div *ngIf="formRegistroEvento.get('capacity')?.invalid && formRegistroEvento.get('capacity')?.touched" 
-                                     class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                                  La capacidad es obligatoria y debe ser de al menos 10 personas.
-                                </div>
-                              </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                              <label class="form-label">Ubicación</label>
-                              <input formControlName="location" type="text" class="form-control"
-                                     [ngClass]="{'is-invalid': formRegistroEvento.get('location')?.invalid && formRegistroEvento.get('location')?.touched}" 
-                                     required>
-                              <div *ngIf="formRegistroEvento.get('location')?.invalid && formRegistroEvento.get('location')?.touched" 
-                                   class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                                La ubicación es obligatoria.
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                              <label class="form-label">Precio</label>
-                              <input formControlName="price" type="number" class="form-control"
-                                     [ngClass]="{'is-invalid': formRegistroEvento.get('price')?.invalid && formRegistroEvento.get('price')?.touched}" 
-                                     required>
-                              <div *ngIf="formRegistroEvento.get('price')?.invalid && formRegistroEvento.get('price')?.touched" 
-                                   class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                                El precio es obligatorio.
-                              </div>
-                            </div>
-                          </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Imagen</label>
-                                <input formControlName="image" type="text" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label class="form-label">Fecha</label>
-                            <input formControlName="date" type="date" class="form-control"
-                                   [ngClass]="{'is-invalid': formRegistroEvento.get('date')?.invalid && formRegistroEvento.get('date')?.touched}" 
-                                   required>
-                            <div *ngIf="formRegistroEvento.get('date')?.invalid && formRegistroEvento.get('date')?.touched" 
-                                 class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                              La fecha del evento es obligatoria.
-                            </div>
-                          </div>
-                        </div>
-            
-                        <div class="col-md-6">
-                          <div class="mb-3">
-                            <label class="form-label">Hora</label>
-                            <input formControlName="time" type="time" class="form-control"
-                                   [ngClass]="{'is-invalid': formRegistroEvento.get('time')?.invalid && formRegistroEvento.get('time')?.touched}" 
-                                   required>
-                            <div *ngIf="formRegistroEvento.get('time')?.invalid && formRegistroEvento.get('time')?.touched" 
-                                 class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
-                              La hora del evento es obligatoria.
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    <div class="d-flex justify-content-md-end gap-4">
-                        <button type="submit" class="btn btn-primary " style="width: 150px;">Crear</button>
-                        <a type="button" class="btn btn-danger" href="/profile">Cancelar</a>
-                    </div>
-
-                </form>
+          <!-- Agrupación en dos columnas -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Nombre del Evento</label>
+                <input formControlName="title" type="text" class="form-control"
+                  [ngClass]="{'is-invalid': formRegistroEvento.get('title')?.invalid && formRegistroEvento.get('title')?.touched}"
+                  required>
+                <div *ngIf="formRegistroEvento.get('title')?.invalid && formRegistroEvento.get('title')?.touched"
+                  class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                  El nombre del evento es obligatorio.
+                </div>
+              </div>
             </div>
-        </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <input formControlName="description" type="text" class="form-control"
+                  [ngClass]="{'is-invalid': formRegistroEvento.get('description')?.invalid && formRegistroEvento.get('description')?.touched}"
+                  maxlength="500" required>
+                <div
+                  *ngIf="formRegistroEvento.get('description')?.invalid && formRegistroEvento.get('description')?.touched"
+                  class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                  La descripción es obligatoria y debe tener hasta 500 caracteres.
+                </div>
+              </div>
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Categoría Evento</label>
+              <select formControlName="category" class="form-select"
+                [ngClass]="{'is-invalid': formRegistroEvento.get('category')?.invalid && formRegistroEvento.get('category')?.touched}">
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+              </select>
+              <div *ngIf="formRegistroEvento.get('category')?.invalid && formRegistroEvento.get('category')?.touched"
+                class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                La categoría del evento es obligatoria.
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Capacidad</label>
+                <input formControlName="capacity" type="number" class="form-control"
+                  [ngClass]="{'is-invalid': formRegistroEvento.get('capacity')?.invalid && formRegistroEvento.get('capacity')?.touched}"
+                  required min="1">
+                <div *ngIf="formRegistroEvento.get('capacity')?.invalid && formRegistroEvento.get('capacity')?.touched"
+                  class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                  La capacidad es obligatoria y debe ser de al menos 10 personas.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Ubicación</label>
+                <input formControlName="location" type="text" class="form-control"
+                  [ngClass]="{'is-invalid': formRegistroEvento.get('location')?.invalid && formRegistroEvento.get('location')?.touched}"
+                  required>
+                <div *ngIf="formRegistroEvento.get('location')?.invalid && formRegistroEvento.get('location')?.touched"
+                  class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                  La ubicación es obligatoria.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Precio</label>
+                <input formControlName="price" required min="1" type="number" class="form-control"
+                  [ngClass]="{'is-invalid': formRegistroEvento.get('price')?.invalid && formRegistroEvento.get('price')?.touched}"
+                  required>
+                <div *ngIf="formRegistroEvento.get('price')?.invalid && formRegistroEvento.get('price')?.touched"
+                  class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                  El precio es obligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Imagen</label>
+                <input formControlName="image" type="text" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Fecha</label>
+                <input formControlName="date" type="date" class="form-control"
+                  [ngClass]="{'is-invalid': formRegistroEvento.get('date')?.invalid && formRegistroEvento.get('date')?.touched}"
+                  required>
+                <div *ngIf="formRegistroEvento.get('date')?.invalid && formRegistroEvento.get('date')?.touched"
+                  class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                  La fecha del evento es obligatoria.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Hora</label>
+                <input formControlName="time" type="time" class="form-control"
+                  [ngClass]="{'is-invalid': formRegistroEvento.get('time')?.invalid && formRegistroEvento.get('time')?.touched}"
+                  required>
+                <div *ngIf="formRegistroEvento.get('time')?.invalid && formRegistroEvento.get('time')?.touched"
+                  class="text-danger" style="font-size: 0.875rem; margin-top: 4px;">
+                  La hora del evento es obligatoria.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-md-end gap-4">
+            <button type="submit" class="btn btn-primary " style="width: 150px;">Crear</button>
+            <a type="button" class="btn btn-danger" href="/profile">Cancelar</a>
+          </div>
+
+        </form>
+      </div>
     </div>
+  </div>
 
-    <div *ngIf="feedbackMessage" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
-        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header"
-                [ngClass]="{'bg-success text-white': feedbackSuccess, 'bg-danger text-white': !feedbackSuccess}">
-                <strong class="me-auto">Notificación</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
-            </div>
-            <div class="toast-body">
-                {{ feedbackMessage }}
-            </div>
-        </div>
+  <div *ngIf="feedbackMessage" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header"
+        [ngClass]="{'bg-success text-white': feedbackSuccess, 'bg-danger text-white': !feedbackSuccess}">
+        <strong class="me-auto">Notificación</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>
+      <div class="toast-body">
+        {{ feedbackMessage }}
+      </div>
     </div>
+  </div>
 
 </main>

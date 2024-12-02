@@ -10,8 +10,8 @@ import { Observable, tap } from 'rxjs';
 export class EventServiceService {
 
   private http = inject(HttpClient);
-  private urlBase: string = "http://localhost:3000/api/event/";
-
+  private urlBase: string = "https://backend-eventlife.onrender.com/api/event/";
+ // private urlBase: string = "http://localhost:3000/api/event/";
   constructor() { }
 
   crearEvento(objeto: Evento): Observable<Evento> {

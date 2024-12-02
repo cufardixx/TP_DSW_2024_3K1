@@ -20,7 +20,7 @@ export class User extends BaseEntity {
     imgPerfil: string;
 
     @Column()
-    phone: number;
+    phone: string;
 
     @Column()
     location: string;

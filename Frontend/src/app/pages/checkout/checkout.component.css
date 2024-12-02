@@ -1,13 +1,18 @@
 @media (max-width: 768px) {
-    .custom-mobile {
-        margin-top: 50px; /* Espacio superior */
-        width: 100% !important; /* Ancho completo */
-        display: flex; /* Asegúrate de que sea un contenedor flex */
-        flex-direction: column; /* Cambia la dirección a columna */
+    .custom-mobile-1{
+        width: 100% !important;
+        margin: 0 !important; 
     }
-    .custom-mobile-1 {
-        width: 100% !important; /* Ancho completo */
-        display: flex; /* Asegúrate de que sea un contenedor flex */
-        flex-direction: column !important; /* Cambia la dirección a columna */
+
+    .custom-mobile{
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        
     }
-}
+
+    .custom-mobile-2{
+    flex-direction: column-reverse !important;
+    padding-top: 200px !important;
+    }
+ }

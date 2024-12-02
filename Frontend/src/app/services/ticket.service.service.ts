@@ -9,7 +9,8 @@ import { Ticket } from '../interfaces/ticket';
 export class TicketServiceService {
 
   private http = inject(HttpClient);
-  private urlBase: string = "http://localhost:3000/api/ticket/";
+  private urlBase: string = "https://backend-eventlife.onrender.com/api/ticket/";
+  //private urlBase: string = "http://localhost:3000/api/event/";
 
   comprarTicket(objeto: { cantidad: number }, eventId: number, token: string): Observable<any> {
     const headers = new HttpHeaders().set('token', token);

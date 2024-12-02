@@ -3,36 +3,77 @@
   <app-header></app-header>
 
   <section class="container p-3 mt-5 pt-4">
-  <form [formGroup]="formCategory" class="mb-3 p-3 border rounded">
-    <div class="mb-3">
-      <input type="text" class="form-control" placeholder="Nombre de la categoría" formControlName="name">
+
+    <div class="text-center">
+      <h2 class="text-primary">Panel de Administrador</h2>
     </div>
-    <button type="button" class="btn btn-primary" (click)="CargarCategoria()">Cargar</button>
-  </form>
-  
-  <div *ngIf="categorias && categorias.length > 0; else noCategorias">
-    <table class="table table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nombre Categoría</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let categoria of categorias; let i = index">
-          <th scope="row">{{ i + 1 }}</th>
-          <td>{{ categoria.name }}</td>
-          <td>
-            <button class="btn btn-danger btn-sm me-2" (click)="eliminarCategoria(categoria.id)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <ng-template #noCategorias>
-    <p class="text-muted">No hay categorías disponibles.</p>
-  </ng-template>
-</section>
+
+    <button class="btn btn-secondary mb-3 me-3" (click)="mostrarCategory = !mostrarCategory">
+      {{ mostrarCategory ? 'Ocultar Tabla' : 'Cargar categoria' }}
+    </button>
+
+    <div *ngIf="mostrarCategory">
+      <form [formGroup]="formCategory" class="mb-3 p-3 border rounded">
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Nombre de la categoría" formControlName="name">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="CargarCategoria()">Cargar</button>
+      </form>
+
+      <div *ngIf="categorias && categorias.length > 0; else noCategorias">
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre Categoría</th>
+              <th scope="col">Acciones</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let categoria of categorias; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ categoria.name }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm me-2" (click)="eliminarCategoria(categoria.id)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noCategorias>
+        <p class="text-muted">No hay categorías disponibles.</p>
+      </ng-template>
+    </div>
+    <button class="btn btn-secondary mb-3" (click)="mostrarTabla = !mostrarTabla">
+      {{ mostrarTabla ? 'Ocultar Tabla' : 'Tabla usuarios' }}
+    </button>
+
+    <div *ngIf="mostrarTabla" class="table-container">
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Email</th>
+            <th scope="col">ID</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ usuario.firstname }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.id }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm me-2" (click)="borrarUsuario(usuario.id!)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
 </main>

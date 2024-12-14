@@ -136,8 +136,8 @@ git clone https://github.com/cufardixx/TP_DSW_2024_3K1.git
 
 GIFs de algunas duncionalidades
 
-![GIFs](https://event-life.netlify.app](https://github.com/cufardixx/TP_DSW_2024_3K1/blob/main/gifs/inicio%20de%20sesion%20(2).gif))
-![GIFs](https://github.com/cufardixx/TP_DSW_2024_3K1/blob/main/gifs/inicio%20de%20sesion%20(2).gif](https://github.com/cufardixx/TP_DSW_2024_3K1/blob/main/gifs/funcion%20de%20compra.gif))
+![funcion de compra](https://github.com/user-attachments/assets/8b8ab58c-cb85-45e2-af85-b192b3887248)
+![inicio de sesion (2)](https://github.com/user-attachments/assets/3464a6b6-ba78-46a9-b594-2b9a95c90f96)
 
 
 

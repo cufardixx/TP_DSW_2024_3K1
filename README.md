@@ -11,7 +11,7 @@
 
 ## Video de las principales funcionalidades de la aplicación
 
-[Video de demostración](#) *(Enlace al video, si no está disponible, indícalo como "Pendiente")* 📽️🎥
+[Video de demostración](https://www.youtube.com/watch?v=4b8GKbPP0IY) 📽️🎥
 
 ---
 
@@ -62,8 +62,9 @@ EventLife ofrece una experiencia cómoda y centralizada para organizar eventos, 
 
 ### Despliegue
 
-- **Backend:** Render.com 🚀
-- **Frontend:** Netlify 🌍
+- **Frontend:** Netlify 🌍   [Link](https://event-life.netlify.app)
+- **Backend:** Render.com 🚀 [Link](https://backend-eventlife.onrender.com)
+- - **BD:** Clever Cloud 💿  [Link](https://www.clever-cloud.com/)
 
 ---
 
@@ -122,31 +123,7 @@ git clone https://github.com/cufardixx/TP_DSW_2024_3K1.git
 
 ## Endpoints del Backend 🔄🛠️
 
-A continuación, se describen los principales endpoints disponibles en la API REST:
-
-### Autenticación
-
-- **POST /api/auth/register**: Registro de usuarios.
-- **POST /api/auth/login**: Inicio de sesión.
-
-### Eventos
-
-- **GET /api/events**: Obtiene todos los eventos disponibles.
-- **POST /api/events**: Crea un nuevo evento.
-- **PUT /api/events/\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*****:id**: Edita un evento existente.
-- **DELETE /api/events/\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*****:id**: Elimina un evento.
-
-### Tickets
-
-- **POST /api/tickets**: Compra un ticket para un evento.
-- **GET /api/tickets**: Obtiene todos los tickets adquiridos por el usuario.
-
-### Categorías
-
-- **GET /api/categories**: Obtiene todas las categorías disponibles.
-- **POST /api/categories**: Crea una nueva categoría (solo administradores).
-
----
+[Docuemtacion de API (posman)](https://documenter.getpostman.com/view/17463908/2sAYHzF2YC)
 
 
 ## Modelo de Datos 🗂️📝
@@ -157,19 +134,18 @@ A continuación, se describen los principales endpoints disponibles en la API RE
 
 ## Capturas de Pantalla 📸🖼️
 
-Incluye aquí capturas o GIFs que muestren:
+GIFs de algunas duncionalidades
 
-1. Registro e inicio de sesión.
-2. Creación y edición de eventos.
-3. Compra de tickets con confirmación por correo.
+- **Inicio de Sesión** 🧑‍💻   [Link](https://event-life.netlify.app](https://github.com/cufardixx/TP_DSW_2024_3K1/blob/main/gifs/inicio%20de%20sesion%20(2).gif))
+- **Navegación** 🧑‍💻   [Link](https://github.com/cufardixx/TP_DSW_2024_3K1/blob/main/gifs/inicio%20de%20sesion%20(2).gif](https://github.com/cufardixx/TP_DSW_2024_3K1/blob/main/gifs/funcion%20de%20compra.gif))
+
+
 
 ---
 
 ## Próximos Pasos (Roadmap) 🛤️✨
 
-- Implementar autenticación con redes sociales (Google, Facebook).
-- Mejorar la experiencia de usuario en dispositivos móviles.
-- Agregar un sistema de notificaciones.
+
 
 ---
 

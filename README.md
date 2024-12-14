@@ -2,7 +2,7 @@
 
 ## Información del Grupo
 
-**Integrantes del grupo:** Tomas Yasparra (), Facundo Picia (48072)  🎓✨
+**Integrantes del grupo:** Tomas Yasparra (48083), Facundo Picia (48072)  🎓✨
 **Profesores:** Andres Otaduy & Mario Bressano  **Comisión:** 3k01 
 
 ## Repositorio Fullstack

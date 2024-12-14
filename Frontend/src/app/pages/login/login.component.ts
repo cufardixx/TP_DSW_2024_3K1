@@ -5,58 +5,57 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Login } from '../../interfaces/Login';
 import { CommonModule } from '@angular/common';
 
-
-
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'], 
 })
-
-
 export class LoginComponent {
-  private AccesService = inject(AccesService);
+  
+  private accesService = inject(AccesService);
   private router = inject(Router);
-  public formBuild = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
 
-
-  public formLogin: FormGroup = this.formBuild.group({
+  
+  public formLogin: FormGroup = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  iniciarSesion() {
+  
+  public feedbackMessage = '';
+  public feedbackSuccess = false;
+
+  
+  public iniciarSesion(): void {
     if (this.formLogin.valid) {
-      const objeto: Login = {
+      const loginData: Login = {
         email: this.formLogin.value.email,
-        password: this.formLogin.value.password
+        password: this.formLogin.value.password,
       };
 
-      this.AccesService.login(objeto).subscribe({
+      this.accesService.login(loginData).subscribe({
         next: (response) => {
           this.mostrarFeedback('Sesión iniciada con éxito!', true);
+          localStorage.setItem('token', response.token);
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 900);
-          localStorage.setItem("token", response.token);
         },
-        error: (error) => {
-          this.mostrarFeedback('Error al iniciar sesión', false)
-        }
+        error: () => {
+          this.mostrarFeedback('Error al iniciar sesión', false);
+        },
       });
     } else {
       this.formLogin.markAllAsTouched();
     }
   }
 
-  private mostrarFeedback(mensaje: string, esExito: boolean) {
-    this.feedbackMessage = mensaje;
-    this.feedbackSuccess = esExito;
+  
+  public mostrarFeedback(message: string, isSuccess: boolean): void {
+    this.feedbackMessage = message;
+    this.feedbackSuccess = isSuccess;
   }
-  feedbackMessage = '';
-  feedbackSuccess = false;
-
-
 }

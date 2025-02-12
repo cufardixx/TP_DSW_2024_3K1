@@ -20,7 +20,8 @@ En el caso de la carga de eventos, deberán llenar un formulario con la informac
 
 
 ### Modelo
-![tp-dsw-modelo](https://github.com/user-attachments/assets/d3d93740-65d2-4786-8e4f-14a92e8e169c)
+![BD-model](https://github.com/user-attachments/assets/f004f1a1-9bca-4ce0-ae3e-5f1665298992)
+
 
 
 ### Reglas de negocio

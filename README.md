@@ -128,6 +128,7 @@ git clone https://github.com/cufardixx/TP_DSW_2024_3K1.git
 
 ## Modelo de Datos 🗂️📝
 
+![BD-model](https://github.com/user-attachments/assets/b9073a30-146a-48f5-a714-da181598b182)
 
 
 ---
